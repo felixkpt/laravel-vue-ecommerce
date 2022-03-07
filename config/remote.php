@@ -13,16 +13,16 @@ return [
      */
     'hosts' => [
         'default' => [
-            'host' => env('premium238.web-hosting.com'),
+            'host' => 'premium238.web-hosting.com',
 
-            'port' => env('REMOTE_PORT', 21098),
+            'port' => 21098,
 
-            'user' => env('onligfbc'),
+            'user' => 'onligfbc',
 
             /*
              * The package will cd to the given path before executing the given command.
              */
-            'path' => env('shop.onlineserviceslab.com'),
+            'path' => 'shop.onlineserviceslab.com',
         ]
     ],
 ];
