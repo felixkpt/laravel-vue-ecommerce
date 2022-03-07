@@ -14,7 +14,7 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-dd($_SERVER);
+
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 require 'shop.php';
