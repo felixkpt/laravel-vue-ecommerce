@@ -23144,7 +23144,7 @@ var _hoisted_8 = ["value"];
 
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   href: "#",
-  "class": "link-control text-muted"
+  "class": "link-control"
 }, "Product nam...", -1
 /* HOISTED */
 );

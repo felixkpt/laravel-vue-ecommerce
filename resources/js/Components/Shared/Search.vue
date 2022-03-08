@@ -7,7 +7,7 @@
                 <div class="wrap-list-cate">
                     <input type="hidden" name="product_cat" :value="product_cat" id="product-cate">
                     <input type="hidden" name="product_cat_id" :value="product_cat_id" id="product-cate-id">
-                    <a href="#" class="link-control text-muted">Product nam...</a>
+                    <a href="#" class="link-control">Product nam...</a>
                     <ul class="list-cate">
                         <li class="level-0">All Category</li>
                         <li class="level-1" :data-id="category.id" v-for="category in categories" :key="category.id">{{  category.name }}</li>
