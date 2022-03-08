@@ -20,6 +20,7 @@ class HomeController extends Controller
      */
     public function index(Request $request) {
 
+        dd($request);
         $home_sliders = HomeSlider::all();
         $latest_products = Product::orderBy('created_at', 'DESC')->limit(8)->get();
         $category = HomeCategory::where('id', 1)->first();
