@@ -15,9 +15,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function(){
-    echo 333;
-})->name('home');
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 require 'shop.php';
 
