@@ -30651,7 +30651,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         height: "190"
       }, null, 8
       /* PROPS */
-      , _hoisted_28)])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("On Sale"), _ctx.$page.props.on_sale.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_29, [_ctx.$page.props.on_sale_time.status == 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_30, [_hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+      , _hoisted_28)])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("On Sale"), _ctx.$page.props.on_sale_time > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_29, [_ctx.$page.props.on_sale_time.status == 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_30, [_hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
         "class": "wrap-countdown mercado-countdown",
         "data-expire": $options.formatDate(_ctx.$page.props.on_sale_time.sale_date)
       }, null, 8

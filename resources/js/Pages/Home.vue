@@ -47,7 +47,7 @@
                                     </div>
                                     </div>
                         <!--On Sale-->
-                        <div class="wrap-show-advance-info-box style-1 has-countdown" v-if="$page.props.on_sale.length > 0">
+                        <div class="wrap-show-advance-info-box style-1 has-countdown" v-if="$page.props.on_sale_time > 0">
                             <div v-if="$page.props.on_sale_time.status == 1">
                                     <h3 class="title-box">On Sale</h3>
                                 <div class="wrap-countdown mercado-countdown" :data-expire="formatDate($page.props.on_sale_time.sale_date)"></div>
