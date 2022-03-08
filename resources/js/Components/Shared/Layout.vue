@@ -4,7 +4,7 @@
     <Header />
 
     <main>
-        <div class="container-fluid px-1">
+        <div class="container-fluid px-1" style="min-height: 400px;">
             <div class="row">
                 <div class="col-12">
                     <Breadcrumb />

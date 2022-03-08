@@ -1,11 +1,11 @@
 <template #content>
 
-    <li class="menu-item" v-if="!$page.props.user"><Link title="Login" :href="route('login')">Login <span class="fa fa-sign-on" aria-hidden="true"></span></Link></li>
-    <li class="menu-item" v-if="!$page.props.user"><Link title="Register" :href="route('register')">Register <span class="fa fa-sign-up" aria-hidden="true"></span></Link></li>
+    <li class="nav-item" v-if="!$page.props.user"><Link  class="nav-link" title="Login" :href="route('login')">Login <span class="fa fa-sign-on" aria-hidden="true"></span></Link></li>
+    <li class="nav-item" v-if="!$page.props.user"><Link  class="nav-link" title="Register" :href="route('register')">Register <span class="fa fa-sign-up" aria-hidden="true"></span></Link></li>
     <!-- Account Management -->
-    <li class="menu-item" v-if="$page.props.user">
+    <li class="nav-item" v-if="$page.props.user">
         <div class="dropdown">
-            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownAuth" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="#"  class="nav-link dropdown-toggle" id="dropdownAuth" data-bs-toggle="dropdown" aria-expanded="false">
                 Manage Account ({{ $page.props.user.name }})
             </a>
             <ul class="dropdown-menu text-small shadow w-100" aria-labelledby="dropdownAuth" style="">
