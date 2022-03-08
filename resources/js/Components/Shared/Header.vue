@@ -68,8 +68,8 @@
           <div class="text-end">
               <div class="d-flex">
                   
-              <ul class="nav ms-auto">
-                  <li class="nav-item">
+              <ul class="nav ms-auto me-1">
+                <li class="nav-item">
                     <a class="nav-link text-white bg-dark" href="#">
                         <i class="fa fa-heart" aria-hidden="true"></i>
                         <div class="d-inline-block">
