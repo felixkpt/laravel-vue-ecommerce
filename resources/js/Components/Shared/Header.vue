@@ -45,23 +45,9 @@
           <a :href="`${$page.props.url}`" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-decoration-none">
               <h3 class="text-danger ps-2">Quick Shoppers</h3>
           </a>
-          <div class="col-12 col-lg-6 mb-3 mb-lg-0 me-lg-3">
-          <div class="wrap-search center-section d-flex justify-content-center">
-              <div class="wrap-search-form">
-              <form action="http://localhost/laravel8ecommerce/search" id="form-search-top" name="form-search-top">
-                  <input type="text" name="search" placeholder="Search here...">
-                  <button form="form-search-top" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i></button>
-                  <div class="wrap-list-cate">
-                      <input type="hidden" name="product_cat" id="product-cate">
-                      <input type="hidden" name="product_cat_id" id="product-cate-id">
-                      <a href="#" class="link-control">Product nam...</a>
-                      <ul class="list-cate">
-                      <li class="level-0">All Category</li>
-                      </ul>
-                  </div>
-                  </form>
-              </div>
+          <div class="col-12 col-lg-6 me-lg-3">
+          <div class="d-flex justify-content-center">
+              <Search />
           </div>
           </div>
           
@@ -79,7 +65,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white bg-danger" href="http://localhost/laravel8ecommerce/cart">
+                    <a class="nav-link text-white bg-danger" :href="`${this.$page.props.url}cart`">
                     <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                     </a>
                 </li>
