@@ -1,7 +1,7 @@
 <template>
     <div class="wrap-search-form">
-        <form :action="`${$page.props.url}search//`" id="form-search-top" name="form-search-top">
-            <input type="text" name="search" value="" placeholder="Search here...">
+        <form :action="`${$page.props.url}search`" id="form-search-top" name="form-search-top">
+            <input type="text" name="search" value="" placeholder="Search...">
             <button form="form-search-top" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
             <div class="wrap-list-cate">
                 <input type="hidden" name="product_cat" :value="product_cat" id="product-cate">
