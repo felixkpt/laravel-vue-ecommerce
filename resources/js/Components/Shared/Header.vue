@@ -67,7 +67,7 @@
                         <Link :href="route('product.cart')" class="nav-link text-white bg-danger d-flex flex-nowrap">
                             <i class="fa fa-shopping-cart fs-5" aria-hidden="true"></i>
                             <div class="left-info" v-if="cart">
-                                <span class="index px-1"> {{ cart.count }} item<span v-if="cart.count > 1">s</span></span>
+                                <span class="index px-1"> {{ cart.count }} item<span v-if="cart.count != 1">s</span></span>
                                 <span class="title">CART</span>
                             </div>
                         </Link>
