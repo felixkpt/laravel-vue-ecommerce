@@ -45,7 +45,7 @@
           <a :href="`${$page.props.url}`" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-decoration-none">
               <h3 class="text-danger ps-2">Quick Shoppers</h3>
           </a>
-          <div class="col-12 col-lg-6 me-lg-3">
+          <div class="col-12 col-lg-6 mb-2 mb-md-0 me-lg-3">
           <div class="d-flex justify-content-center">
               <Search />
           </div>
@@ -53,27 +53,26 @@
           
           <div class="text-end">
               <div class="d-flex">
-                  
-              <ul class="nav ms-auto me-1">
-                <li class="nav-item">
-                    <a class="nav-link text-white bg-dark" href="#">
-                        <i class="fa fa-heart" aria-hidden="true"></i>
-                        <div class="d-inline-block">
-                            <span class="index">0 item</span>
-                            <span class="title"> Wishlist</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white bg-danger" :href="`${this.$page.props.url}cart`">
-                    <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                  <a class="text-white bg-danger nav-link" href="#">Link
-                  </a>
-                </li>
-              </ul>
+                <ul class="nav ms-auto me-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-white bg-dark d-flex flex-nowrap" href="#">
+                            <i class="fa fa-heart fs-5" aria-hidden="true"></i>
+                            <div class="d-inline-block">
+                                <span class="index"> 0 items </span>
+                                <span class="title"> Wishlist</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <Link :href="route('product.cart')" class="nav-link text-white bg-danger d-flex flex-nowrap">
+                            <i class="fa fa-shopping-cart fs-5" aria-hidden="true"></i>
+                            <div class="left-info" v-if="cart">
+                                <span class="index ps-1"> {{ cart.count }} item<span v-if="cart.count > 1">s</span>&nbsp;</span>
+                                <span class="title">CART</span>
+                            </div>
+                        </Link>
+                    </li>
+                </ul>
               </div>
           </div>
         </div>
