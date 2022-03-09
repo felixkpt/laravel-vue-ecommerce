@@ -22947,7 +22947,7 @@ var _withScopeId = function _withScopeId(n) {
 var _hoisted_1 = {
   "class": "navbar navbar-expand-md navbar-dark bg-dark text-white sticky-md-top",
   style: {
-    "z-index": "1"
+    "z-index": "2"
   },
   "aria-label": "Navbar primary"
 };
