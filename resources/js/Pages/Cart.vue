@@ -6,7 +6,7 @@
                     <div class="main-content-area">
                         <div class="wrap-iten-in-cart">
                             <h3 class="box-title">Products Name</h3>
-                            <div v-if="cart_data">
+                            <div v-if="cart_data.count">
 
                             <ul class="products-cart">
                                 <li class="pr-cart-item" v-for="item in cart_data.cart" :key='item.id'>
@@ -51,7 +51,7 @@
                             </div>
                         </div>
 
-                        <div class="summary" v-if="cart_data">
+                        <div class="summary" v-if="cart_data.count">
                             <div class="order-summary">
                                 <h4 class="title-box">Order Summary</h4>
                                 <p class="summary-info"><span class="title">Subtotal</span><b class="index">${{ $page.props.subtotal }}</b></p>
@@ -154,8 +154,7 @@ export default  {
                 }
             ).then(
                 (json) => {
-                    this.cart_data = json.cart_data ?? null;
-                    // this.navCartCount()
+                    this.cart_data = json.cart_data;
                     this.layoutComponentKey += 1;
                 }
             )
@@ -167,7 +166,7 @@ export default  {
         },
     },
     mounted() {
-    
+    console.log(this.cart_data)
     }
 
 }

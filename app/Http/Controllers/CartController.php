@@ -69,9 +69,8 @@ class CartController extends Controller
         $rowId = $request->post('rowId');
         $rowId = (string) ltrim($rowId, 'id_');
         Cart::remove($rowId);
-       
-        return redirect()->back()->with('successMessage', 'Cart item deleted.');
-
+    
+        return response(['cart_data' => $this->cart()]);
     }
 
     public function destroy() {
