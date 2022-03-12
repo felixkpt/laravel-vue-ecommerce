@@ -17,7 +17,10 @@ class PostController extends Controller
     {
 
         $posts = Post::all();
-        return Inertia::render('Posts/Index', ['posts' => $posts]);
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['posts' => $posts, 'title' => $title, 'description' => $description,];
+        return Inertia::render('Posts/Index', $data);
     }
 
     /**

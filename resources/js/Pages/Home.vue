@@ -216,7 +216,7 @@ export default  {
  
     },
     mounted() {
-        console.log(this.$page.props.on_sale_time)
+        // console.log(this.$page.props.on_sale_time)
     }
 
 }

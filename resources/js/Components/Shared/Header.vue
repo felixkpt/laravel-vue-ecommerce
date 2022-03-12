@@ -64,10 +64,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <Link :href="route('product.cart')" class="nav-link text-white bg-danger d-flex flex-nowrap">
+                        <Link :href="route('shop.cart')" class="nav-link text-white bg-danger d-flex flex-nowrap">
                             <i class="fa fa-shopping-cart fs-5" aria-hidden="true"></i>
-                            <div class="left-info" v-if="cart">
-                                <span class="index px-1"> {{ cart.count }} item<span v-if="cart.count != 1">s</span></span>
+                            <div class="left-info">
+                                <span class="index px-1" id="navCartCount"></span>
                                 <span class="title">CART</span>
                             </div>
                         </Link>
@@ -94,7 +94,7 @@ export default {
     },
     data() {
         return {
-            cart: null
+            cart_data: null
         }
     },
     mathods: {
@@ -107,18 +107,9 @@ export default {
     },
     mounted(){
 
-
-        axios.get(route('product.cart.json')).then(
-            resp => {
-                return resp.data
-            }
-        ).then( data => {
-            // console.log(data)
-            this.cart = data;
-        })
-        // this.cart = {data: 23, };
-        console.log(this.cart)
-
+        this.navCartCount()
+ 
     }
+
 }
 </script>

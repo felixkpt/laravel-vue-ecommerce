@@ -11,7 +11,11 @@ class HomeSliderController extends Controller
 {
     public function index() {
         $home_sliders = HomeSlider::all();
-        return Inertia::render('Admin/HomeSlider', ['home_sliders' => $home_sliders]);
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['home_sliders' => $home_sliders, 'title' => $title, 'description' => $description,];
+    
+        return Inertia::render('Admin/HomeSlider', $data);
     }
     public function delete($id) {
         HomeSlider::where('id', $id)->delete();

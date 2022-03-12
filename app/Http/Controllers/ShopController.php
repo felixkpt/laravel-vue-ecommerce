@@ -19,20 +19,36 @@ class ShopController extends Controller
      * @return \Inertia\Response
      */
     public function index(Request $request) {
-        $products = $this->products();
+        $page_size = $request->page_size ?? 10;
+        $products = $this->products($page_size);
+        
         $categories = Category::all();
-        return Inertia::render('Shop', ['products' => $products, 'categories' => $categories]);
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['products' => $products, 'categories' => $categories, 'title' => $title, 'description' => $description,];
+        return Inertia::render('Shop', $data);
     }
     public function store(Request $request) {
         $product_id = $request->get('id');
         $product_name = $request->get('name');
-        $quantity = 1;
+        $quantity = $request->get('qty') ?? 1;
         $product_price = $request->get('price');
+
+        // Deleting item from cart if exists
+        $asd = Cart::content()->where('id', $product_id);
+        $cart_data = 0;
+        foreach ($asd as $row) {
+        $cart_data = $row;
+        }
+        if ($cart_data) {
+            Cart::remove($cart_data->rowId);
+        }
+
         // var_dump($product_id, $product_name, $quantity, $product_price);die;
         Cart::add($product_id, $product_name, $quantity, $product_price)->associate('App\Models\Product');
         session()->flash('successMessage', 'Item added in Cart');
         // var_dump(Cart::content()[0]);die;
-        return redirect()->route('product.cart');
+        return redirect()->route('shop.cart');
     }
     public function orderby(Request $request) {
         session(['orderby' => $request->get('orderby')]);
@@ -42,8 +58,8 @@ class ShopController extends Controller
         session(['postPerPage' => $request->get('postPerPage')]);
         return redirect()->back();
     }
-    public function products() {
-        $this->orderby = session()->get('orderby');
+    public function products($page_size) {
+        // $this->orderby = session()->get('orderby');
         $this->postPerPage = session()->get('postPerPage');
 
         if ($this->orderby == 'date') {
@@ -53,7 +69,7 @@ class ShopController extends Controller
         }elseif ($this->orderby == 'price-desc') {
             $products = Product::orderby('regular_price', 'DESC')->limit($this->postPerPage)->get();
         }else{
-            $products = Product::where('id', '>', 0)->limit($this->postPerPage)->get();
+            $products = Product::paginate($page_size);
         }
 
         return $products;

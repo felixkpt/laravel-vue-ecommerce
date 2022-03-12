@@ -11,7 +11,11 @@ class CategoryController extends Controller
 {
     public function index() {
         $categories = Category::all();
-        return Inertia::render('Admin/Category', ['categories' => $categories]);
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['categories' => $categories, 'title' => $title, 'description' => $description,];
+        
+        return Inertia::render('Admin/Category', $data);
     }
     public function delete($id) {
         Category::where('id', $id)->delete();

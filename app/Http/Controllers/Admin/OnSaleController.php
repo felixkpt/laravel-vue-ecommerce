@@ -15,7 +15,11 @@ class OnSaleController extends Controller
         $sel_Sale = @explode(',', $home_Sale->Sale);
         $no_of_products = @$home_Sale->no_of_products;
 
-        return Inertia::render('Admin/OnSale', ['sale' => $sale]);
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['sale' => $sale, 'title' => $title, 'description' => $description,];
+
+        return Inertia::render('Admin/OnSale', $data);
     }
     public function store(Request $request) {
 

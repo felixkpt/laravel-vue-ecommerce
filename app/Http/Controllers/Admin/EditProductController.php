@@ -16,7 +16,11 @@ class EditProductController extends Controller
         $product = Product::where('slug', $slug)->first();
         $categories = Category::all();
 
-        return Inertia::render('Admin/EditProduct', ['product' => $product, 'categories' => $categories]);
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['product' => $product, 'categories' => $categories, 'title' => $title, 'description' => $description,];
+    
+        return Inertia::render('Admin/EditProduct', $data);
     }
     public function update(Request $request) {
 

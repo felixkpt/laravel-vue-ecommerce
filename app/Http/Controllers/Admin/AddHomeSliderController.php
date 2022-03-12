@@ -10,7 +10,11 @@ use Inertia\Inertia;
 class AddHomeSliderController extends Controller
 {
     public function index() {
-        return Inertia::render('Admin/AddHomeSlider', []);
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['title' => $title, 'description' => $description,];
+        
+        return Inertia::render('Admin/AddHomeSlider', $data);
     }
     public function  store(Request $request) {
         $rules = [

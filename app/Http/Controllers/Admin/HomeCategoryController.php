@@ -16,7 +16,11 @@ class HomeCategoryController extends Controller
         $sel_categories = @explode(',', $home_categories->categories);
         $no_of_products = @$home_categories->no_of_products;
 
-        return Inertia::render('Admin/HomeCategory', ['categories' => $categories, 'sel_categories' => $sel_categories, 'no_of_products' => $no_of_products]);
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['categories' => $categories, 'sel_categories' => $sel_categories, 'no_of_products' => $no_of_products, 'title' => $title, 'description' => $description,];
+    
+        return Inertia::render('Admin/HomeCategory', $data);
     }
     public function store(Request $request) {
 

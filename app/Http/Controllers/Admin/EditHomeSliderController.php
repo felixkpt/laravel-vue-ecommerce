@@ -13,7 +13,11 @@ class EditHomeSliderController extends Controller
 
         $home_slider = HomeSlider::where('id', $id)->first();
 
-        return Inertia::render('Admin/EditHomeSlider', ['home_slider' => $home_slider]);
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['home_slider' => $home_slider, 'title' => $title, 'description' => $description,];
+     
+        return Inertia::render('Admin/EditHomeSlider', $data);
     }
 
     public function  update(Request $request) {

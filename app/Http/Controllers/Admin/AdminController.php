@@ -14,6 +14,10 @@ class AdminController extends Controller
      * @return \Inertia\Response
      */
     public function index(){
-        return Inertia::render('Admin/Index');
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['title' => $title, 'description' => $description,];
+       
+        return Inertia::render('Admin/Index', $data);
     }
 }

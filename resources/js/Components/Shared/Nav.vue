@@ -12,7 +12,7 @@
                         <a :href="`${this.$page.props.url}`" class="nav-link"><i class="fa fa-home" aria-hidden="true"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a :href="`${this.$page.props.url}about-us`" class="nav-link">About</a>
+                        <a :href="`${this.$page.props.url}#about-us`" class="nav-link">About</a>
                     </li>
                     <li class="nav-item">
                         <a :href="`${this.$page.props.url}shop`" class="nav-link">Shop</a>

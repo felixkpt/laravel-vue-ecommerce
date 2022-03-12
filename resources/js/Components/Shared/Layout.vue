@@ -1,5 +1,5 @@
 <template>
-    <Head title="Welcome --- up" description="Some desc" />
+    <Head :title="$page.props.title" description="Some desc" />
 
     <Header />
 
@@ -7,7 +7,7 @@
         <div class="container-fluid px-1" style="min-height: 400px;">
             <div class="row">
                 <div class="col-12">
-                    <Breadcrumb />
+                    <Breadcrumb @ww="zz" />
                     <Notification />
                 </div>
                 <div class="col-12">

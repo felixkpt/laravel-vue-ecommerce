@@ -37,7 +37,7 @@ class HomeController extends Controller
                unset($category['products']);
                $category['products'] = $products;
 
-               $new_categories[] = array_merge($category, ['products' => $products]);
+               $new_categories[] = array_merge($category);
 
        }
        $categories = $new_categories;
@@ -45,14 +45,16 @@ class HomeController extends Controller
        
         $on_sale = Product::where('sale_price', '>', 0)->inRandomOrder()->limit(8)->get();
 //        var_dump(count($on_sale));die;
-        return Inertia::render('Home', [
-                'home_sliders' => $home_sliders,
-                'latest_products' => $latest_products,
-                'categories' => $categories,
-                'on_sale' => $on_sale,
-                'on_sale_time' => $on_sale_time,
-//                'canLogin' => Route::has('login'),
-//                'canRegister' => Route::has('register'),
-            ]);
+
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['home_sliders' => $home_sliders,
+        'latest_products' => $latest_products,
+        'categories' => $categories,
+        'on_sale' => $on_sale,
+        'on_sale_time' => $on_sale_time,
+         'title' => $title, 'description' => $description,];
+
+        return Inertia::render('Home', $data);
     }
 }

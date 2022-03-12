@@ -14,7 +14,11 @@ class EditCategoryController extends Controller
 
         $category = Category::where('slug', $slug)->first();
 
-        return Inertia::render('Admin/EditCategory', ['category' => $category]);
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['category' => $category, 'title' => $title, 'description' => $description,];
+        
+        return Inertia::render('Admin/EditCategory', $data);
     }
     public function update(Request $request) {
 

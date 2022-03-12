@@ -21,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
         Inertia::share('current_url', url()->current());
         Inertia::share('asset', asset(''));
 
+        Inertia::share('reload', function(){
+            return session()->get('reload') ? session()->get('reload') : null;
+        });
         Inertia::share('successMessage', function(){
             return session()->get('successMessage') ? session()->get('successMessage') : null;
         });

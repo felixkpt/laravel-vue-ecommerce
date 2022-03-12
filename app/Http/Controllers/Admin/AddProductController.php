@@ -15,7 +15,11 @@ class AddProductController extends Controller
 
         $categories = Category::all();
 
-        return Inertia::render('Admin/AddProduct', ['categories' => $categories]);
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['categories' => $categories, 'title' => $title, 'description' => $description,];
+        
+        return Inertia::render('Admin/AddProduct', $data);
     }
     public function  store(Request $request) {
 

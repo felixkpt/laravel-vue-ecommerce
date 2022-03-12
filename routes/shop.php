@@ -17,12 +17,12 @@ Route::post('/shop/cart', [ShopController::class, 'store']);
 Route::post('/shop/orderby', [ShopController::class, 'orderby']);
 Route::post('/shop/post-per-page', [ShopController::class, 'postPerPage']);
 
-Route::get('/cart', [CartController::class, 'index'])->name('product.cart');
-Route::get('/cart/json', [CartController::class, 'json'])->name('product.cart.json');
-Route::post('/cart/increase', [CartController::class, 'increaseQuantity'])->name('product.cart.increase');
-Route::post('/cart/decrease', [CartController::class, 'decreaseQuantity'])->name('product.cart.decrease');
-Route::post('/cart/remove', [CartController::class, 'remove'])->name('product.cart.remove');
-Route::post('/cart/destroy', [CartController::class, 'destroy'])->name('product.cart.destroy');
+Route::get('/cart', [CartController::class, 'index'])->name('shop.cart');
+Route::post('/cart/json', [CartController::class, 'json'])->name('shop.cart.json');
+Route::post('/cart/increase', [CartController::class, 'increaseQuantity'])->name('shop.cart.increase');
+Route::post('/cart/decrease', [CartController::class, 'decreaseQuantity'])->name('shop.cart.decrease');
+Route::post('/cart/remove', [CartController::class, 'remove'])->name('shop.cart.remove');
+Route::post('/cart/destroy', [CartController::class, 'destroy'])->name('shop.cart.destroy');
 
 Route::get('/checkout', [CheckoutController::class, 'index']);
 Route::get('/product/{slug}', [DetailsController::class, 'index'])->name('product.details');

@@ -21,7 +21,10 @@ class CategoryController extends Controller
     public function index($slug, Request $request) {
         $category = Category::where('slug', $slug)->first();
         $products = $this->products($category->id);
-        return Inertia::render('Category', ['category' => $category, 'products' => $products]);
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['category' => $category, 'products' => $products, 'title' => $title, 'description' => $description,];
+        return Inertia::render('Category', $data);
     }
     public function store(Request $request) {
         $category_id = $request->get('id');

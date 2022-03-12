@@ -47,14 +47,14 @@
                             <div class="quantity">
                                 <span>Quantity:</span>
                                 <div class="quantity-input">
-                                    <input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*" >
+                                    <input type="text" v-model="form.qty" data-max="120" pattern="[0-9]*" >
 
-                                    <a class="btn btn-reduce" href="#"></a>
-                                    <a class="btn btn-increase" href="#"></a>
+                                    <a class="btn btn-reduce" href="#" @click.prevent="decreaseQuantity"></a>
+                                    <a class="btn btn-increase" href="#" @click.prevent="increaseQuantity"></a>
                                 </div>
                             </div>
                             <div class="wrap-butons">
-                                <button class="btn add-to-cart" @click.prevent="store(product.id, product.name,product.regular_price)">Add to Cart</button>
+                                <button class="btn add-to-cart" @click.prevent="store(product.id, product.name,product.regular_price, form.qty)">Add to Cart</button>
                                 <div class="wrap-btn">
                                     <a href="#" class="btn btn-compare">Add Compare</a>
                                     <a href="#" class="btn btn-wishlist">Add Wishlist</a>
@@ -83,17 +83,31 @@ export default  {
                 id: '',
                 name: '',
                 price: '',
+                qty: this.$page.props.cart_data.qty ?? 1,
 
             }
         }
     },
     methods: {
-        store(id, name, price) {
+        store(id, name, price, qty) {
             this.form.id = id;
             this.form.name = name;
             this.form.price = price;
+            this.form.quantity = qty;
             this.$inertia.post(`${this.$page.props.url}shop/cart`, this.form);
-        }
+        },
+        increaseQuantity() {
+         this.form.qty ++;   
+        },
+        decreaseQuantity() {
+            this.form.qty --;
+            if (this.form.qty < 1){
+                this.form.qty = 1;
+            }
+        },
+    },
+    mounted() {
+        // console.log(this.$page.props.cart_data)
     }
 }
 </script>

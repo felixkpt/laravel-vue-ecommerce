@@ -13,14 +13,18 @@ class CartController extends Controller
      *
      * @return \Inertia\Response
      */
-    public function index(){
+    public function index(Request $request){
 
-        $data = $this->cart();
+        $reload = false;
+        $cart_data = $this->cart();
         $products = Product::where('id', '>', 0)->limit(10)->get();
-       
-//var_dump($tax);die;
-        return Inertia::render('Cart', ['cart' => $data, 'most_viewed' => $products]);
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['cart_data' => $cart_data, 'most_viewed' => $products, 'reload' => $reload, 'title' => $title, 'description' => $description,];
+    //  dd($cart_data->count);
+        return Inertia::render('Cart', $data);
     }
+    
     public function cart() {
         $cart = json_decode(Cart::content());
         $subtotal = Cart::subtotal();
@@ -30,19 +34,18 @@ class CartController extends Controller
         return ['cart' => $cart, 'subtotal' => $subtotal, 'tax' => $tax, 'total' => $total, 'count' => $count];
     }
 
-    public function json(){
-        return json_encode($this->cart());
-    }
-
     public function increaseQuantity(Request $request) {
             $rowId = $request->post('rowId');
             $rowId = trim($rowId, 'id_');
             $product = Cart::get($rowId);
             $qty = $product->qty + 1;
             Cart::update($rowId, $qty);
-            $msg = ['successMessage' => 'Cart quantity updated.', 'qty' => $qty];
-            return json_encode($msg);
-    }
+
+            $cart_data = $this->cart();
+            $data = ['successMessage' => 'Cart quantity updated.', 'cart_data' => $cart_data];
+
+            return response(['cart_data' => $cart_data]);
+        }
 
     public function decreaseQuantity(Request $request) {
         $rowId = $request->post('rowId');
@@ -51,19 +54,26 @@ class CartController extends Controller
         $qty = $product->qty - 1;
         $qty = $qty > 0 ? $qty : 1;
         Cart::update($rowId, $qty);
-        $msg = ['successMessage' => 'Cart quantity updated.', 'qty' => $qty];
-        return json_encode($msg);
+        
+        $cart_data = $this->cart();
+        $data = ['successMessage' => 'Cart quantity updated.', 'cart_data' => $cart_data];
 
+        return response(['cart_data' => $cart_data]);
+    }
+
+    public function json(){
+        return response(['cart_data' => $this->cart()]);
     }
 
     public function remove(Request $request) {
         $rowId = $request->post('rowId');
-        $rowId = trim($rowId, 'id_');
+        $rowId = (string) ltrim($rowId, 'id_');
         Cart::remove($rowId);
-        $msg = ['successMessage' => 'Cart item deleted.'];
-        return redirect()->route('product.cart')->with($msg);
+       
+        return redirect()->back()->with('successMessage', 'Cart item deleted.');
 
     }
+
     public function destroy() {
         Cart::destroy();
         $msg = ['successMessage' => 'Cart has been emptied.'];

@@ -37,7 +37,7 @@
 
                     <div class="col-12">
                         <div class="row justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 p-1 w-100 h-100">
-                            <div class="col mb-1" v-for="product in products" :key="product.id">
+                            <div class="col mb-1" v-for="product in products.data" :key="product.id">
                                 <div class="product product-style-3 equal-elem ">
                                     <div class="product-thumnail">
                                         <Link :href="`${$page.props.url}product/${product.slug}`" :title="product.name">
@@ -52,6 +52,7 @@
                                 </div>
                             </div>
                         </div>
+                        <PaginationLinks :links="links" />
 
                     </div>
                 </div>
@@ -63,10 +64,12 @@
 <script>
 import Layout from '@/Components/Shared/Layout';
 import Sidebar from '@/Components/Shared/Sidebar';
+import PaginationLinks from '@/Components/Shared/PaginationLinks';
 export default  {
     components: {
        Layout,
        Sidebar,
+       PaginationLinks,
     },
     props: ['products'],
     data() {
@@ -78,7 +81,8 @@ export default  {
                 name: '',
                 price: '',
 
-            }
+            },
+            links: this.$page.props.products,
         }
     },
     methods: {
@@ -97,6 +101,9 @@ export default  {
          let postPerPage = event.target.value;
             this.$inertia.post(`${this.$page.props.url}shop/post-per-page`, {postPerPage: postPerPage})
         },
+    },
+    mounted() {
+        console.log(this.products)
     }
 
 }

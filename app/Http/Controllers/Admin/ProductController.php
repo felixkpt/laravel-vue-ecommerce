@@ -11,8 +11,12 @@ class ProductController extends Controller
 {
     public function index() {
         $products = Product::with('category')->get();
-//        var_dump($products);die;
-        return Inertia::render('Admin/Product', ['products' => $products]);
+
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['products' => $products, 'title' => $title, 'description' => $description,];
+        
+        return Inertia::render('Admin/Product', $products);
     }
     public function delete($id) {
         Product::where('id', $id)->delete();

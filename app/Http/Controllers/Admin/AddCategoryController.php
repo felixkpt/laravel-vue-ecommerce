@@ -12,7 +12,11 @@ class AddCategoryController extends Controller
 {
     public function index() {
 
-        return Inertia::render('Admin/AddCategory', []);
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['title' => $title, 'description' => $description,];
+        
+        return Inertia::render('Admin/AddCategory', $data);
     }
     public function  store(Request $request) {
 

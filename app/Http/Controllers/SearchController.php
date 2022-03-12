@@ -24,7 +24,10 @@ class SearchController extends Controller
     public function index(Request $request) {
         $products = $this->products($request);
         $categories = Category::all();
-        return Inertia::render('Search', ['products' => $products, 'categories' => $categories]);
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['products' => $products, 'categories' => $categories, 'title' => $title, 'description' => $description,];
+        return Inertia::render('Search', $data);
     }
     public function store(Request $request) {
         $product_id = $request->get('id');

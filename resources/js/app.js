@@ -4,6 +4,7 @@ require('./bootstrap');
 import { createApp, h } from 'vue';
 import {createInertiaApp, Head, Link} from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
+import axios from 'axios';
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 // console.log('Still working well without duplicating url.....')
@@ -16,15 +17,31 @@ createInertiaApp({
 
         // Creating an istance of Vue.js app
         
-        console.log(props.initialPage.url);
+        // console.log(props.initialPage.url);
         // props.initialPage.url = '/laravel/test?ssds=sdssd';
         // console.log(props.initialPage.url);
+        
         
         return createApp({ render: () => h(app, props) })
             .use(plugin)
             .component('Link', Link)
             .component('Head', Head)
-            .mixin({ methods: { route } })
+            .mixin({ 
+                methods: { 
+                    route,
+                    navCartCount() {
+                      
+                        axios.post(route('shop.cart.json')).then(
+                            resp => {
+                                return resp.data
+                            }
+                        ).then( json => {
+                            let cart_data = (json.cart_data)
+                            document.getElementById('navCartCount').innerHTML = `${cart_data.count} items`;
+                        })
+                    },
+                } 
+            })
             .mount(el);
 
     },
