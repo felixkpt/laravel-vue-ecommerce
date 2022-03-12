@@ -37,7 +37,8 @@ createInertiaApp({
                             }
                         ).then( json => {
                             let cart_data = (json.cart_data)
-                            document.getElementById('navCartCount').innerHTML = `${cart_data.count} items`;
+                            let count = cart_data.count ?? 0;
+                            document.getElementById('navCartCount').innerHTML = `${count} items`;
                         })
                     },
                 } 

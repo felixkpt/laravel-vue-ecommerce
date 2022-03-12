@@ -1,12 +1,12 @@
 <template>
-    <Layout>
+    <Layout :key="layoutComponentKey">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-8 col-lg-9">
                     <div class="main-content-area">
                         <div class="wrap-iten-in-cart">
                             <h3 class="box-title">Products Name</h3>
-                            <div v-if="cart_data.count">
+                            <div v-if="cart_data">
 
                             <ul class="products-cart">
                                 <li class="pr-cart-item" v-for="item in cart_data.cart" :key='item.id'>
@@ -51,7 +51,7 @@
                             </div>
                         </div>
 
-                        <div class="summary" v-if="cart_data.count">
+                        <div class="summary" v-if="cart_data">
                             <div class="order-summary">
                                 <h4 class="title-box">Order Summary</h4>
                                 <p class="summary-info"><span class="title">Subtotal</span><b class="index">${{ $page.props.subtotal }}</b></p>
@@ -123,6 +123,7 @@ export default  {
     },
     data() {
         return {
+        layoutComponentKey: 1,
         qty: 999,
         cart_data: this.$page.props.cart_data,
         }
@@ -154,7 +155,8 @@ export default  {
             ).then(
                 (json) => {
                     this.cart_data = json.cart_data ?? null;
-                    this.navCartCount()
+                    // this.navCartCount()
+                    this.layoutComponentKey += 1;
                 }
             )
                 .catch(
