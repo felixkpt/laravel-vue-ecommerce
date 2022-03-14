@@ -3,26 +3,29 @@
             <div class="container-fluid">
 
                 <div class="row">
-                    <div class="card">
-                        <div class="card-header">
-                            Add Home Slider
+                    <Sidebar />
+                    <Content>
+                        <div class="card">
+                            <div class="card-header">
+                                Add Home Category
+                            </div>
+                            <div class="card-body">
+                                <form @submit.prevent="handleFormSubmit">
+                                    <div class="form-group">
+                                        <label for="item" class="form-label">Choose categories: </label>
+                                        <select name="categories[]" id="item" v-model="form.categories" multiple="multiple">
+                                            <option v-for="category in $page.props.categories" :value="category.id" :key="category.id">{{ category.name }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="noP">No of Products</label>
+                                        <input type="number" id="noP" class="form-control" v-model="form.no_of_products">
+                                    </div>
+                                    <button type="submit" class="mt-3 btn btn-primary">Submit</button>
+                                </form>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <form @submit.prevent="handleFormSubmit">
-                                <div class="form-group">
-                                    <label for="item" class="form-label">Choose categories: </label>
-                                    <select name="categories[]" id="item" v-model="form.categories" multiple="multiple">
-                                        <option v-for="category in $page.props.categories" :value="category.id">{{ category.name }}</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="noP">No of Products</label>
-                                    <input type="number" id="noP" class="form-control" v-model="form.no_of_products">
-                                </div>
-                                <button type="submit" class="mt-3 btn btn-primary">Submit</button>
-                            </form>
-                        </div>
-                    </div>
+                    </Content>
                 </div><!--end row-->
 
             </div><!--end container-->
@@ -32,12 +35,14 @@
 </template>
 
 <script>
-import Layout from '@/Components/Shared/Layout';
-import Sidebar from '@/Components/Shared/Sidebar';
+import Layout from '@/Components/Admin/Shared/Layout';
+import Sidebar from '@/Components/Admin/Shared/Sidebar';
+import Content from '@/Components/Admin/Shared/Content';
 export default  {
     components: {
        Layout,
        Sidebar,
+       Content,
     },
     data() {
         return {

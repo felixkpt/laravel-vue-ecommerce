@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\HomeCategory;
 use App\Models\Category;
 use App\Models\HomeSlider;
+use App\Models\HomeProduct;
 use App\Models\Product;
 use App\Models\Sale;
 use Illuminate\Http\Request;
@@ -20,8 +21,12 @@ class HomeController extends Controller
      */
     public function index(Request $request) {
 
-        $home_sliders = HomeSlider::all();
-        $latest_products = Product::orderBy('created_at', 'DESC')->limit(8)->get();
+        $products = HomeProduct::where('id', 1)->first();
+        $prods = @explode(',', $products->products);
+        $no_of_products_limit = @$products->no_of_products <= 3 ? $products->no_of_products : 3;
+        $home_sliders = Product::whereIn('id', $prods)->limit($no_of_products_limit)->get()->toArray();
+        
+        $latest_products = Product::orderBy('created_at', 'DESC')->limit(14)->get();
         $category = HomeCategory::where('id', 1)->first();
         $cats = @explode(',', $category->categories);
         $no_of_products_limit = @$category->no_of_products;
@@ -31,7 +36,7 @@ class HomeController extends Controller
         $new_categories = [];
        foreach ($categories as $category) {
                $products = $category['products'];
-              $limit = $no_of_products_limit - 1;
+              $limit = $no_of_products_limit;
                $products = array_slice($products, 0, $limit > 0 ? $limit : 1);
                
                unset($category['products']);
@@ -44,7 +49,7 @@ class HomeController extends Controller
        
        
         $on_sale = Product::where('sale_price', '>', 0)->inRandomOrder()->limit(8)->get();
-//        var_dump(count($on_sale));die;
+    //    var_dump($on_sale);die;
 
         $title = 'Welcome to quick shoppers';
         $description = '';

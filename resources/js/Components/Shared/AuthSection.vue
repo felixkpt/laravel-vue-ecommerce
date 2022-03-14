@@ -11,7 +11,7 @@
             <ul class="dropdown-menu text-small shadow w-100" aria-labelledby="dropdownAuth" style="">
                 <li class="dropdown-item"><Link class="w-100" :href="`${this.$page.props.url}profile`">My Profile</Link></li>
                 <li><hr class="dropdown-divider"></li>
-                <li class="dropdown-item" v-if="this.$page.props.user.role == 'admin'"><Link class="w-100" :href="`${this.$page.props.url}admin/dashboard`">Dashboard</Link></li>
+                <li class="dropdown-item" v-if="this.$page.props.user.role == 'admin'"><Link class="w-100" :href="`${this.$page.props.url}admin`">Dashboard</Link></li>
                 <li><hr class="dropdown-divider"></li>
                 <li class="dropdown-item"><Link class="w-100" @click="logout">Logout <span class="fa fa-sign-out-alt" aria-hidden="true"></span></Link></li>
             </ul>

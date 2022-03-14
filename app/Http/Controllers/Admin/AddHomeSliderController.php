@@ -3,45 +3,39 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\HomeSlider;
+use App\Models\Product;
+use App\Models\HomeProduct;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class AddHomeSliderController extends Controller
 {
     public function index() {
+        $products = Product::all();
+        $home_products = HomeProduct::first();
+        $sel_products = @explode(',', $home_products->products);
+        $no_of_products = @$home_products->no_of_products;
+
         $title = 'Welcome to quick shoppers';
         $description = '';
-        $data = ['title' => $title, 'description' => $description,];
-        
+        $data = ['products' => $products, 'sel_products' => $sel_products, 'no_of_products' => $no_of_products, 'title' => $title, 'description' => $description,];
+    
         return Inertia::render('Admin/AddHomeSlider', $data);
     }
-    public function  store(Request $request) {
-        $rules = [
-            'title' => 'required|min:3|max:30|unique:home_sliders,title',
-            'subtitle' => 'required|min:3|max:50|unique:home_sliders,subtitle',
-            'price' => 'required|numeric',
-            'link' => 'required|url|min:8',
-//            'image' => 'image',
-        ];
+    public function store(Request $request) {
 
-        $this->validate($request, $rules);
-
-        $image_name = 'default.jpg';
         $data = [
-            'title' => $request->get('title'),
-            'subtitle' => $request->get('subtitle'),
-            'price' => $request->get('price'),
-            'link' => $request->get('link'),
-            'image' => $image_name,
-            'status' => $request->get('status'),
+            'products' => implode(',', $request->get('products')),
+            'no_of_products' => (int) $request->get('no_of_products')
         ];
 
-//        var_dump($data);die;
-        HomeSlider::create($data);
-        return redirect()->route('admin.home-sliders')->with('successMessage', 'Added Home Slider.');
-
+//        Update or Insert
+        $exists = HomeProduct::find(1);
+        if ($exists) {
+            HomeProduct::where('id', 1)->update($data);
+        }else{
+            HomeProduct::create($data);
+        }
+        return redirect()->route('admin.home-sliders')->with('successMessage', 'Home Products updated.');
     }
-
-
-    }
+}

@@ -85,7 +85,7 @@ import axios from 'axios';
 import Nav from './Nav';
 import AuthSection from './AuthSection';
 import Search from './Search';
-
+import 'vueperslides/dist/vueperslides.css'
 export default {
     components: {
         Nav,

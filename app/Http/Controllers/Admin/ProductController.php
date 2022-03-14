@@ -10,13 +10,13 @@ use Inertia\Inertia;
 class ProductController extends Controller
 {
     public function index() {
-        $products = Product::with('category')->get();
-
+        $products = Product::with('category')->paginate(50);
+        
         $title = 'Welcome to quick shoppers';
         $description = '';
         $data = ['products' => $products, 'title' => $title, 'description' => $description,];
         
-        return Inertia::render('Admin/Product', $products);
+        return Inertia::render('Admin/Product', $data);
     }
     public function delete($id) {
         Product::where('id', $id)->delete();

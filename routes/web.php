@@ -30,7 +30,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
 //For Admin
 include "admin.php";
 
-Route::inertia('/test', 'Test');
+// Route::get('/test', function() {
+//     return view('test');
+// });
 
 
 Route::get('/test-post', [App\Http\Controllers\TestController::class, 'index']);

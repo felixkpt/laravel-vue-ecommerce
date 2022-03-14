@@ -1603,9 +1603,8 @@ li.menu-item .nav-label.sale-label::before{
 }
 .wrap-product-tab.tab-style-1{
     display: block;
-    margin-top: 10px;
+    margin: 4px;
     border: 1px solid #e6e6e6;
-    font-size: 0;
 }
 .tab-style-1 .tab-control{
     display: inline-block;
@@ -1632,11 +1631,6 @@ li.menu-item .nav-label.sale-label::before{
     border-right-color: transparent;
     color: #222222;
 }
-.wrap-product-tab .tab-contents{
-    position: relative;
-    display: inline-block;
-    width: 100%;
-}
 .tab-contents .tab-content-item{
     position: absolute;
     width: 100%;
@@ -1650,7 +1644,7 @@ li.menu-item .nav-label.sale-label::before{
     -webkit-transition: all ease 0.5s 0s;
     -moz-transition: all ease 0.5s 0s;
     -o-transition: all ease 0.5s 0s;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 .tab-contents .tab-content-item.active{
     position: static;
@@ -1713,7 +1707,7 @@ li.menu-item .nav-label.sale-label::before{
 .product-style-2{
     display: inline-block;
     padding: 19px 9px 13px 9px;
-    border: 1px solid transparent;
+    border: 1px solid lightgray;
     margin-bottom: 9px;
     -webkit-transition: all 0.5s ease 0s;
     -moz-transition: all 0.5s ease 0s;
@@ -6544,8 +6538,9 @@ background-color: #888888;
         background: rgba(255,255,255,0.6);
         padding: 10px
     }
+    .wrap-main-slide .slide-carousel .slide-info.slide-4,
     .wrap-main-slide .slide-carousel .slide-info.slide-1{
-        top: 13%;
+        top: 5%;
         left: 10%;
         background: rgba(255,255,255,0.6);
         padding: 10px

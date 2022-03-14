@@ -7,7 +7,7 @@
                         <div class="wrap-iten-in-cart">
                             <h3 class="box-title">Products Name</h3>
                             <div v-if="cart_data.count">
-
+                                
                             <ul class="products-cart">
                                 <li class="pr-cart-item" v-for="item in cart_data.cart" :key='item.id'>
                                     <div class="product-image" v-if="item.model">
@@ -16,7 +16,7 @@
                                     <div class="product-name">
                                         <Link class="link-to-product" :href="`${$page.props.url}product/${item.model.slug}`">{{ item.name }}</Link>
                                     </div>
-                                    <div class="price-field produtc-price"><p class="price">{{ item.price }}</p></div>
+                                    <div class="price-field produtc-price"><p class="price">${{ item.price }}</p></div>
                                     <div class="quantity">
                                         <div class="quantity-input py-2">
 
@@ -34,7 +34,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="price-field sub-total"><p class="price">{{ item.subtotal }}</p></div>
+                                    <div class="price-field sub-total"><p class="price">${{ item.subtotal }}</p></div>
                                     <div class="">
                                         <button class="btn btn-close" style="width: 30px; height: 30px" @click="remove(`id_${item.rowId}`)">
                                         </button>
@@ -54,10 +54,10 @@
                         <div class="summary" v-if="cart_data.count">
                             <div class="order-summary">
                                 <h4 class="title-box">Order Summary</h4>
-                                <p class="summary-info"><span class="title">Subtotal</span><b class="index">${{ $page.props.subtotal }}</b></p>
-                                <p class="summary-info"><span class="title">Tax</span><b class="index">${{ $page.props.tax }}</b></p>
+                                <p class="summary-info"><span class="title">Subtotal</span><b class="index">${{ $page.props.cart_data.subtotal }}</b></p>
+                                <p class="summary-info"><span class="title">Tax</span><b class="index">${{ $page.props.cart_data.tax }}</b></p>
                                 <p class="summary-info"><span class="title">Shipping</span><b class="index">Free Shipping</b></p>
-                                <p class="summary-info total-info "><span class="title">Total</span><b class="index">${{ $page.props.total }}</b></p>
+                                <p class="summary-info total-info "><span class="title">Total</span><b class="index">${{ $page.props.cart_data.total }}</b></p>
                             </div>
                             <div class="checkout-info">
                                 <label class="checkbox-field">
@@ -72,38 +72,51 @@
                             </div>
                         </div>
 
-                        <div class="wrap-show-advance-info-box style-1 box-in-site">
+                        <div class="row">
                             <h3 class="title-box">Most Viewed Products</h3>
-                            <div class="wrap-products">
-                                <div class="products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"3"},"1200":{"items":"5"}}' >
+                            <div class="col px-4">
+                                <vueper-slides class="no-shadow" 
+                                :visible-slides="5"
+                                slide-multiple
+                                :gap="1"
+                                :slide-ratio="1 / 3"
+                                fixed-height="true"
+                                autoplay
+                                :dragging-distance="200"
+                                :breakpoints="{ 920: { visibleSlides: 2, slideMultiple: 2 } }">
 
-                                    <div class="product product-style-2 equal-elem" v-for="product in $page.props.most_viewed" :key="product.id">
-                                        <div class="product-thumnail">
-                                            <a :href="`${$page.props.url}product/${product.slug}`" :title="product.name">
-                                                <figure><img :src="`${$page.props.asset}uploads/${product.image}`" width="214" height="214" :alt="product.name"></figure>
-                                            </a>
-                                            <div class="group-flash">
-                                                <span class="flash-item new-label">new</span>
+                                    <vueper-slide class=""  v-for="product in $page.props.most_viewed" :key="product.id" :title="product.name.toString()">
+                                        <template #content>
+                                            <div class="product product-style-2 px-1 mb-2 h-100">
+                                                <div class="product-thumnail">
+                                                    <a :href="`${$page.props.url}product/${product.slug}`" :title="product.name">
+                                                        <figure><img :src="`${$page.props.asset}uploads/${product.image}`" width="214" height="214" :alt="product.name"></figure>
+                                                    </a>
+                                                    <div class="group-flash">
+                                                        <span class="flash-item new-label">new</span>
+                                                    </div>
+                                                    <div class="wrap-btn">
+                                                        <a href="#" class="function-link">quick view</a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-info">
+                                                    <a :href="`${$page.props.url}product/${product.slug}`" class="product-name"><span>{{ product.name }}</span></a>
+                                                    <div class="wrap-price">
+                                                        <ins>
+                                                            <span class="product-price" v-if="product.sale_price">{{ product.sale_price }}</span>
+                                                            <span class="product-price" v-else>{{ product.regular_price }}</span>
+                                                        </ins>
+                                                        <del v-if="product.sale_price">
+                                                            <span class="product-price regular-price">{{ product.regular_price }}</span>
+                                                        </del>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="wrap-btn">
-                                                <a href="#" class="function-link">quick view</a>
-                                            </div>
-                                        </div>
-                                        <div class="product-info">
-                                            <a :href="`${$page.props.url}product/${product.slug}`" class="product-name"><span>{{ product.name }}</span></a>
-                                            <div class="wrap-price">
-                                                <ins>
-                                                    <span class="product-price" v-if="product.sale_price">{{ product.sale_price }}</span>
-                                                    <span class="product-price" v-else>{{ product.regular_price }}</span>
-                                                </ins>
-                                                <del v-if="product.sale_price">
-                                                    <span class="product-price regular-price">{{ product.regular_price }}</span>
-                                                </del>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        </template>
+                                    </vueper-slide>
 
-                                </div>
+                                </vueper-slides>
+                                
                             </div><!--End wrap-products-->
                         </div>
                     </div>
@@ -116,22 +129,23 @@
 <script>
 import Layout from '@/Components/Shared/Layout';
 import Sidebar from '@/Components/Shared/Sidebar';
+import { VueperSlides, VueperSlide } from 'vueperslides'
 export default  {
     components: {
        Layout,
        Sidebar,
+       VueperSlides, VueperSlide
     },
     data() {
         return {
-        layoutComponentKey: 1,
-        qty: 999,
-        cart_data: this.$page.props.cart_data,
+            layoutComponentKey: 1,
+            qty: 999,
+            cart_data: this.$page.props.cart_data,
         }
     },
     methods: {
         increaseQuantity(rowId) {
             this.action(rowId, 'increase');
-
         },
         decreaseQuantity(rowId) {
             this.action(rowId, 'decrease');
@@ -166,7 +180,7 @@ export default  {
         },
     },
     mounted() {
-    console.log(this.cart_data)
+    // console.log(this.cart_data)
     }
 
 }

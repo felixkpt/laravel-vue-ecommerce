@@ -1,5 +1,5 @@
 <template>
-    <div class="col-12 col-md-4 col-lg-3">
+    <div class="col-12 col-md-4 col-lg-3 mt-4 mt-md-0">
         <div class="widget mercado-widget categories-widget">
             <h2 class="widget-title">All Categories</h2>
             <div class="widget-content">

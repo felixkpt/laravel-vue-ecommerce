@@ -19,9 +19,11 @@ use App\Http\Controllers\Admin\HomeCategoryController;
 
 use App\Http\Controllers\Admin\OnSaleController;
 
+use App\Http\Controllers\Admin\ReportController;
+
 Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function (){
 
-    Route::get('/admin/dashboard',[AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin',[AdminController::class, 'index'])->name('admin.index');
 
 
     $subject = 'categories';
@@ -55,6 +57,10 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function (){
 
     $subject = 'on-sale';
     Route::get('/admin/'.$subject, [OnSaleController::class, 'index'])->name('admin.'.$subject);
+    Route::post('/admin/'.$subject, [OnSaleController::class, 'store'])->name('admin.'.$subject.'.store');
+
+    $subject = 'reports';
+    Route::get('/admin/'.$subject, [ReportController::class, 'index'])->name('admin.'.$subject);
     Route::post('/admin/'.$subject, [OnSaleController::class, 'store'])->name('admin.'.$subject.'.store');
 
 

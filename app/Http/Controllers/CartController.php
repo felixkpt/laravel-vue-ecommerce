@@ -17,7 +17,7 @@ class CartController extends Controller
 
         $reload = false;
         $cart_data = $this->cart();
-        $products = Product::where('id', '>', 0)->limit(10)->get();
+        $products = Product::where('id', '>', 0)->limit(15)->get();
         $title = 'Welcome to quick shoppers';
         $description = '';
         $data = ['cart_data' => $cart_data, 'most_viewed' => $products, 'reload' => $reload, 'title' => $title, 'description' => $description,];
