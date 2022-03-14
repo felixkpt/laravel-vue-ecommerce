@@ -23,7 +23,7 @@ class HomeController extends Controller
 
         $products = HomeProduct::where('id', 1)->first();
         $prods = @explode(',', $products->products);
-        $no_of_products_limit = @$products->no_of_products <= 3 ? $products->no_of_products : 3;
+        $no_of_products_limit = @$products->no_of_products <= 3 ? @$products->no_of_products : 3;
         $home_sliders = Product::whereIn('id', $prods)->limit($no_of_products_limit)->get()->toArray();
         
         $latest_products = Product::orderBy('created_at', 'DESC')->limit(14)->get();
