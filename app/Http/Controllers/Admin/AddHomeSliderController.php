@@ -11,7 +11,7 @@ use Inertia\Inertia;
 class AddHomeSliderController extends Controller
 {
     public function index() {
-        $products = Product::all();
+        $products = Product::where('sale_price', '>', 0)->get();
         $home_products = HomeProduct::first();
         $sel_products = @explode(',', $home_products->products);
         $no_of_products = @$home_products->no_of_products;

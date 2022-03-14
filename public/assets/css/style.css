@@ -1056,13 +1056,20 @@ li.menu-item .nav-label.sale-label::before{
     margin-top: 6px;
     margin-bottom: 19px;
 }
+
 .wrap-main-slide .slide-1 .sale-info .price{
     font-weight: 700;
     color: #ff2832;
     font-size: 24px;
 }
-.wrap-main-slide .slide-3 .btn-link,
-.wrap-main-slide .slide-1 .btn-link{
+.wrap-main-slide .slide-2 .sale-info .price{
+    font-weight: 700;
+    color: #ff2832;
+    font-size: 24px;
+}
+.wrap-main-slide .slide-1 .btn-link,
+.wrap-main-slide .slide-2 .btn-link,
+.wrap-main-slide .slide-3 .btn-link{
     font-size: 14px;
     line-height: 24px;
     font-weight: 600;
@@ -1072,19 +1079,20 @@ li.menu-item .nav-label.sale-label::before{
     padding: 7.5px 22px;
     display: inline-block;
 }
-.wrap-main-slide .slide-3 .btn-link:hover,
-.wrap-main-slide .slide-1 .btn-link:hover{
+.wrap-main-slide .slide-1 .btn-link:hover,
+.wrap-main-slide .slide-2 .btn-link:hover,
+.wrap-main-slide .slide-3 .btn-link:hover{
     text-decoration: none;
     background-color: #333333;
 }
 .wrap-main-slide .slide-2 .f-title{
-    font-size: 40px;
+    font-size: 26px;
     line-height: 35px;
     color: #ff2832;
     font-weight: 700;
-    display: inline-block;
+    /* display: inline-block; */
     text-transform: uppercase;
-    max-width: 172px;
+    max-width: 472px;
 }
 .wrap-main-slide .slide-2 .f-subtitle{
     font-size: 18px;
@@ -1159,7 +1167,7 @@ li.menu-item .nav-label.sale-label::before{
 }
 
 /* main slide's animate */
-.wrap-main-slide .active .slide-1 .f-title{
+.wrap-main-slide .vueperslide--active .slide-1 .f-title{
     animation-duration: 1.6s;
     -webkit-animation-duration: 1.6s;
     animation-fill-mode: both;
@@ -1171,7 +1179,7 @@ li.menu-item .nav-label.sale-label::before{
     -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
 }
-.wrap-main-slide .active .slide-1 .subtitle{
+.wrap-main-slide .vueperslide--active .slide-1 .subtitle{
     animation-duration: 1.6s;
     -webkit-animation-duration: 1.6s;
     animation-fill-mode: both;
@@ -1183,7 +1191,7 @@ li.menu-item .nav-label.sale-label::before{
     -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
 }
-.wrap-main-slide .active .slide-1 .sale-info{
+.wrap-main-slide .vueperslide--active .slide-1 .sale-info{
      animation-duration: 1s;
     -webkit-animation-duration: 1s;
     animation-fill-mode: both;
@@ -1195,8 +1203,9 @@ li.menu-item .nav-label.sale-label::before{
     -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
 }
-.wrap-main-slide .active .slide-3 .btn-link,
-.wrap-main-slide .active .slide-1 .btn-link{
+.wrap-main-slide .vueperslide--active .slide-1 .btn-link,
+.wrap-main-slide .vueperslide--active .slide-2 .btn-link,
+.wrap-main-slide .vueperslide--active .slide-3 .btn-link{
     animation-duration: 1.6s;
     -webkit-animation-duration: 1.6s;
     animation-fill-mode: both;
@@ -1208,7 +1217,7 @@ li.menu-item .nav-label.sale-label::before{
     -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
 }
-.wrap-main-slide .active .slide-2 .f-title{
+.wrap-main-slide .vueperslide--active .slide-2 .f-title{
     animation-duration: 0.5s;
     -webkit-animation-duration: 0.5s;
     animation-fill-mode: both;
@@ -1220,7 +1229,7 @@ li.menu-item .nav-label.sale-label::before{
     -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
 }
-.wrap-main-slide .active .slide-2 .f-subtitle{
+.wrap-main-slide .vueperslide--active .slide-2 .f-subtitle{
     animation-duration: 0.5s;
     -webkit-animation-duration: 0.5s;
     animation-fill-mode: both;
@@ -1232,7 +1241,7 @@ li.menu-item .nav-label.sale-label::before{
     -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
 }
-.wrap-main-slide .active .slide-2 .discount-code{
+.wrap-main-slide .vueperslide--active .slide-2 .discount-code{
     animation-duration: 1s;
     -webkit-animation-duration: 1s;
     animation-fill-mode: both;
@@ -1244,7 +1253,7 @@ li.menu-item .nav-label.sale-label::before{
     -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
 }
-.wrap-main-slide .active .slide-2 .s-title{
+.wrap-main-slide .vueperslide--active .slide-2 .s-title{
     animation-duration: 0.9s;
     -webkit-animation-duration: 0.9s;
     animation-fill-mode: both;
@@ -1256,7 +1265,7 @@ li.menu-item .nav-label.sale-label::before{
     -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
 }
-.wrap-main-slide .active .slide-2 .s-subtitle{
+.wrap-main-slide .vueperslide--active .slide-2 .s-subtitle{
     animation-duration: 1s;
     -webkit-animation-duration: 1s;
     animation-fill-mode: both;
@@ -1268,7 +1277,7 @@ li.menu-item .nav-label.sale-label::before{
     -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
 }
-.wrap-main-slide .active .slide-3 .f-title{
+.wrap-main-slide .vueperslide--active .slide-3 .f-title{
     animation-duration: 1s;
     -webkit-animation-duration: 1s;
     animation-fill-mode: both;
@@ -1280,7 +1289,7 @@ li.menu-item .nav-label.sale-label::before{
     -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
 }
-.wrap-main-slide .active .slide-3 .f-subtitle{
+.wrap-main-slide .vueperslide--active .slide-3 .f-subtitle{
     animation-duration: 1s;
     -webkit-animation-duration: 1s;
     animation-fill-mode: both;
@@ -1292,7 +1301,7 @@ li.menu-item .nav-label.sale-label::before{
     -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
 }
-.wrap-main-slide .active .slide-3 .sale-info{
+.wrap-main-slide .vueperslide--active .slide-3 .sale-info{
     animation-duration: 0.9s;
     -webkit-animation-duration: 0.9s;
     animation-fill-mode: both;

@@ -6,11 +6,10 @@
                     <div class="wrap-main-slide">
                         <!-- MAIN SLIDE -->
                         <vueper-slides autoplay>
-                            <vueper-slide v-for="(product, index) in $page.props.home_sliders" :key="product.id"
-                            :style="''">
+                            <vueper-slide v-for="(product, index) in $page.props.home_sliders" :key="product.id">
                                 <template #content>
                                     <div class="slide-carousel">
-                                        <img :src="`${$page.props.asset}uploads/images/home-sliders/blog-article-${index + 1}.jpg`" alt="" class="img-slide">
+                                        <img :src="`${$page.props.asset}uploads/images/home-sliders/blog-article-${index + 1}.jpg`" alt="" class="w-100">
                                         <div :class="`slide-info slide-${index + 1}`">
                                             <h2 class="f-title">{{ product.name }}</h2>
                                             <span class="subtitle">{{ product.description.length > 50 ? product.description.substring(0, 50) + '...' : product.description }}</span>
