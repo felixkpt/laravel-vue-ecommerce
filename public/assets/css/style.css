@@ -7162,3 +7162,9 @@ background-color: #888888;
 	margin-bottom: 65px;
 	padding-left: 40px;
 }
+@media(max-width: 574px) {
+    .vueperslides__arrow svg {
+    fill: #2d2d2d!important;
+    padding: 14px!important;
+    }
+}

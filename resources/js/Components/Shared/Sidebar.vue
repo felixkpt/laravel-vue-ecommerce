@@ -38,14 +38,9 @@
         </div><!-- brand widget-->
 
         <div class="widget mercado-widget filter-widget price-filter">
-            <h2 class="widget-title">Price</h2>
+            <h2 class="widget-title">Price Range</h2>
             <div class="widget-content">
-                <div id="slider-range"></div>
-                <p>
-                    <label for="amount">Price:</label>
-                    <input type="text" id="amount" readonly>
-                    <button class="filter-submit">Filter</button>
-                </p>
+                <RangeSlider />
             </div>
         </div><!-- Price-->
 
@@ -144,3 +139,11 @@
 
     </div><!--end sidebar-->
 </template>
+<script>
+import RangeSlider from '@/Components/Shared/RangeSlider'
+export default {
+    components: {
+        RangeSlider
+    }
+}
+</script>

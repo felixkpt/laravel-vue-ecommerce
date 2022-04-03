@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 px-4">
-                                    <vueper-slides class="no-shadow" 
+                                    <vueper-slides class="no-shadow text-center" 
                                     :visible-slides="5"
                                     slide-multiple
                                     :gap="1"
@@ -54,7 +54,7 @@
                                     fixed-height="true"
                                     autoplay
                                     :dragging-distance="200"
-                                    :breakpoints="{ 920: { visibleSlides: 2, slideMultiple: 2 } }">
+                                    :breakpoints="{ 992: { visibleSlides: 3, slideMultiple: 1 }, 768: { visibleSlides: 2, slideMultiple: 1 }, 574: { visibleSlides: 1, slideMultiple: 1 } }">
 
                                         <vueper-slide class=""  v-for="product in $page.props.on_sale" :key="product.id" :title="product.name.toString()">
                                             <template #content>
@@ -102,7 +102,7 @@
                             </div>
                         </div>
                         <div class="col-12 px-4">
-                            <vueper-slides class="no-shadow" 
+                            <vueper-slides class="no-shadow text-center" 
                             :visible-slides="5"
                             slide-multiple
                             :gap="1"
@@ -111,7 +111,7 @@
                             fade
                             autoplay
                             :dragging-distance="200"
-                            :breakpoints="{ 920: { visibleSlides: 2, slideMultiple: 2 } }">
+                            :breakpoints="{ 992: { visibleSlides: 3, slideMultiple: 1 }, 768: { visibleSlides: 2, slideMultiple: 1 }, 574: { visibleSlides: 1, slideMultiple: 1 } }">
 
                                 <vueper-slide class="" v-for="product in $page.props.latest_products" :key="product.id">
                                     <template #content>
@@ -165,14 +165,14 @@
                                 <div class="row">
                                     
                                     <div class="col-12 px-4">
-                                        <vueper-slides class="no-shadow" 
+                                        <vueper-slides class="no-shadow text-center" 
                                         :visible-slides="5"
                                         slide-multiple
                                         :gap="1"
                                         :slide-ratio="1 / 3"
                                         fixed-height="true"
                                         :dragging-distance="200"
-                                        :breakpoints="{ 920: { visibleSlides: 2, slideMultiple: 2 } }">
+                                        :breakpoints="{ 992: { visibleSlides: 3, slideMultiple: 1 }, 768: { visibleSlides: 2, slideMultiple: 1 }, 574: { visibleSlides: 1, slideMultiple: 1 } }">
 
                                             <vueper-slide v-for="product in $page.props.categories[index].products" :key="product.id">
                                                 <template #content>

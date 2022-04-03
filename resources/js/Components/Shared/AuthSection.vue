@@ -8,7 +8,7 @@
             <a href="#"  class="nav-link dropdown-toggle" id="dropdownAuth" data-bs-toggle="dropdown" aria-expanded="false">
                 Manage Account ({{ $page.props.user.name }})
             </a>
-            <ul class="dropdown-menu text-small shadow w-100" aria-labelledby="dropdownAuth" style="">
+            <ul class="dropdown-menu position-absolute text-small shadow w-100" aria-labelledby="dropdownAuth" style="">
                 <li class="dropdown-item"><Link class="w-100" :href="`${this.$page.props.url}profile`">My Profile</Link></li>
                 <li><hr class="dropdown-divider"></li>
                 <li class="dropdown-item" v-if="this.$page.props.user.role == 'admin'"><Link class="w-100" :href="`${this.$page.props.url}admin`">Dashboard</Link></li>

@@ -94,7 +94,6 @@
             canResetPassword: Boolean,
             status: String
         },
-
         data() {
             return {
                 form: this.$inertia.form({
@@ -104,7 +103,6 @@
                 })
             }
         },
-
         methods: {
             submit() {
                 this.form

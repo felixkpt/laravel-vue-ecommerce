@@ -12,8 +12,8 @@
                 :aria-current="{page: key + 1 == links.current_page}" 
                 :key="key">
                     <a class="page-link" :href="link.url">
-                        <span class="active" v-if="key + 1 == links.current_page">{{ link.label }}</span>
-                        <span v-else>{{ link.label }}</span>
+                        <span class="active" v-if="key + 1 == links.current_page" v-html="link.label"></span>
+                        <span v-else v-html="link.label"></span>
                     </a>
                 </li>
                 <li :class="{'page-item': true, 'disabled': links.current_page == links.last_page}" :aria-disabled="{'true': links.current_page == links.last_page}">

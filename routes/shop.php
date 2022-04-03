@@ -15,7 +15,8 @@ use App\Http\Controllers\SearchController;
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::post('/shop/cart', [ShopController::class, 'store']);
 Route::post('/shop/orderby', [ShopController::class, 'orderby']);
-Route::post('/shop/post-per-page', [ShopController::class, 'postPerPage']);
+Route::post('/shop/per-page', [ShopController::class, 'perPage']);
+Route::post('/shop/price-sort', [ShopController::class, 'priceSort']);
 
 Route::get('/cart', [CartController::class, 'index'])->name('shop.cart');
 Route::post('/cart/json', [CartController::class, 'json'])->name('shop.cart.json');

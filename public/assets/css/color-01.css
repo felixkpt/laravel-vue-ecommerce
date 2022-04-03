@@ -24,7 +24,7 @@
 .product-style-1 .product-info .wrap-btn a,
 .wrap-breadcrumb ul a:hover,
 .center-section .wrap-search-form .wrap-list-cate .list-cate li:not(.level-0):hover{
-	color: #ff2832;
+	color: #ff7007;
 }
 
 .widget a:hover,
@@ -91,7 +91,7 @@
 .choose-payment-methods .payment-method input[type=radio]:checked + span::before,
 .wrap-demo-item-1:hover img,
 .center-section .wrap-search-form{
-	border-color: #ff2832;
+	border-color: #ff7007;
 }
 .widget.widget-tag-clouds ul li a:hover,
 .product-list-style .advance-info .add-to-cart:hover,
@@ -103,7 +103,7 @@
 .aboutus-info.style-small-left .list-showups label input[type="radio"]:checked + span.check-box,
 .wrap-articles article .info a.btn-to-post:hover,
 .wrap-footer-content .wrap-function-info .fc-info-item{
-	border-color: #ff3c45 !important;
+	border-color: #ff7007 !important;
 }
 .wrap-footer-content .wrap-function-info .fc-info-item .wrap-left-info .fc-desc{
 	color: #ffc2c4 !important;

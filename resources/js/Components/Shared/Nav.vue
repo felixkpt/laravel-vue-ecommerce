@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark text-white sticky-md-top" style="z-index: 5;" aria-label="Navbar primary">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-primary" aria-controls="navbar-primary" aria-expanded="false" aria-label="Toggle primary navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="fa fa-align-justify"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbar-primary">

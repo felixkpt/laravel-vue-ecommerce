@@ -38,7 +38,7 @@ createInertiaApp({
                         ).then( json => {
                             let cart_data = (json.cart_data)
                             let count = cart_data.count ?? 0;
-                            document.getElementById('navCartCount').innerHTML = `${count} items`;
+                            document.getElementById('navCartCount').innerHTML = `${count}`;
                         })
                     },
                 } 
@@ -48,4 +48,4 @@ createInertiaApp({
     },
 });
 
-InertiaProgress.init({ color: 'red' });
+InertiaProgress.init({ color: '#ff7007' });

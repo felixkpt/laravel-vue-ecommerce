@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap-search center-section w-100 text-center">
+    <div class="wrap-search center-section w-100">
         <div class="wrap-search-form">
             <form :action="`${$page.props.url}search`" id="form-search-top" name="form-search-top">
                 <input type="text" name="search" value="" placeholder="Search...">

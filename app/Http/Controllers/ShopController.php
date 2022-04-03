@@ -6,12 +6,22 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Product;
-use Cart;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class ShopController extends Controller
 {
     protected $orderby;
-    protected $postPerPage;
+    protected $perPage;
+    protected $min_price = 1;
+    protected $max_price = 1000;
+    public function mount()
+    {
+        $this->orderby = session()->get('orderby');
+        $this->perPage = session()->get('perPage');
+        $this->min_price = session()->get('min_price') ?? $this->min_price;
+        $this->max_price = session()->get('max_price') ?? $this->max_price;
+
+    }
 //sitejaba trustpilot
     /**
      * Display a listing of the resource.
@@ -19,13 +29,18 @@ class ShopController extends Controller
      * @return \Inertia\Response
      */
     public function index(Request $request) {
-        $page_size = $request->page_size ?? 10;
-        $products = $this->products($page_size);
+        $this->mount();
+        $perPage = $this->perPage ?? $request->perPage;
+        
+        $sortings = ['perPage' => $perPage, 'orderby' => $this->orderby];
+        
+        $products = $this->products($perPage);
         
         $categories = Category::all();
         $title = 'Welcome to quick shoppers';
         $description = '';
         $data = ['products' => $products, 'categories' => $categories, 'title' => $title, 'description' => $description,];
+        $data = array_merge($data, $sortings);
         return Inertia::render('Shop', $data);
     }
     public function store(Request $request) {
@@ -51,26 +66,41 @@ class ShopController extends Controller
         return redirect()->route('shop.cart');
     }
     public function orderby(Request $request) {
-        session(['orderby' => $request->get('orderby')]);
-        return redirect()->back();
-    }
-    public function postPerPage(Request $request) {
-        session(['postPerPage' => $request->get('postPerPage')]);
-        return redirect()->back();
-    }
-    public function products($page_size) {
-        // $this->orderby = session()->get('orderby');
-        $this->postPerPage = session()->get('postPerPage');
-
-        if ($this->orderby == 'date') {
-            $products = Product::orderby('created_at', 'DESC')->limit($this->postPerPage)->get();
-        }elseif ($this->orderby == 'price') {
-            $products = Product::orderby('regular_price', 'ASC')->limit($this->postPerPage)->get();
-        }elseif ($this->orderby == 'price-desc') {
-            $products = Product::orderby('regular_price', 'DESC')->limit($this->postPerPage)->get();
-        }else{
-            $products = Product::paginate($page_size);
+        if ($request->get('get') != 'true') {
+            session(['orderby' => $request->get('orderby')]);
         }
+        $this->mount();
+        return response(['orderby' => $this->orderby], 201);
+    }   
+    public function perPage(Request $request) {
+        if ($request->get('get') != 'true') {
+            session(['perPage' => (int) $request->get('perPage')]);
+        }
+        $this->mount();
+        return response(['perPage' => $this->perPage], 201);
+    }
+
+    public function priceSort(Request $request) {
+        if ($request->get('get') != 'true') {
+            session(['min_price' => (int) $request->get('min_price'), 'max_price' => (int) $request->get('max_price')]);
+        }
+        $this->mount();
+       return response(['min_price' => $this->min_price, 'max_price' => $this->max_price], 201);
+    }
+    
+    public function products() {
+        $this->mount();
+        $products = Product::where([['regular_price', '>=', $this->min_price], ['regular_price', '<=', $this->max_price]]);
+        if ($this->orderby == 'date') {
+            $products = $products->orderby('created_at', 'DESC');
+        }elseif ($this->orderby == 'price') {
+            $products = $products->orderby('regular_price', 'ASC');
+        }elseif ($this->orderby == 'price-desc') {
+            $products = $products->orderby('regular_price', 'DESC');
+        }
+
+        $products = $products->paginate($this->perPage);
+        // dd($products);
 
         return $products;
     }
