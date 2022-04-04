@@ -28,9 +28,11 @@ All products have descriptions that include information about size, material, co
 
 Similar items sections to product pages have been categorized so that customers may find additional products that are tailored to their preferences and needs.
 
+Here is the link to the shop: [Link to server](https://shop.onlineserviceslab.com) <---
+
+![Product example](https://shop.onlineserviceslab.com/public/uploads/images/home-sliders/blog-article-2.jpg)
+
 ## License
 
 The this application is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-![Product example](https://shop.onlineserviceslab.com/public/uploads/images/home-sliders/blog-article-2.jpg)
-[Link to server](https://shop.onlineserviceslab.com)
