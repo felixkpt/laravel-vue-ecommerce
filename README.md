@@ -32,4 +32,5 @@ Similar items sections to product pages have been categorized so that customers 
 
 The this application is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-![Link website](https://shop.onlineserviceslab.com)
+![Product example](https://shop.onlineserviceslab.com/public/uploads/images/home-sliders/blog-article-2.jpg)
+[Link to server](https://shop.onlineserviceslab.com)
