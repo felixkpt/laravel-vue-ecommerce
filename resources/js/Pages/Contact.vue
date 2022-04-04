@@ -8,6 +8,7 @@
                         <div>
                             Write an email to: <span class="fw-bold text-decoration-underline"><a href="mailto:support@onlineserviceslab.com">Our Support</a></span>
                         </div>
+                        <hr class="my-3">
                         <p>
                             Let the buying spree begin...
                         </p>

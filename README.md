@@ -29,7 +29,7 @@ All products have descriptions that include information about size, material, co
 Similar items sections to product pages have been categorized so that customers may find additional products that are tailored to their preferences and needs.
 ### Reliable internet security program.
 Our shop is operated on HTTPS protocal which is secure, 
-We use an efficient internet security program as this is the best way to be secure online. Shopping is no different. Instead, as the number of products and data traded online grows, security measures such as real-time anti-phishing and identity theft protection for instance we filter any.exe files, and also discard any malicious emails, while also filtering unwanted spam email into a separate folder.
+We use an efficient internet security program as this is the best way to be secured online. Shopping is no different. Instead, as the number of products and data traded online grows, security measures such as real-time anti-phishing and identity theft protection are deployed, for instance we filter any.exe files, and also discard any malicious emails, while also filtering unwanted spam email into a separate folder.
 
 Let the buying spree begin...
 
