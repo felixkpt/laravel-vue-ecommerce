@@ -1,38 +1,43 @@
 # Quick shoppers is Powerful Laravel 8 e-commerce
 ## About Us
+This application is an electronic commerce application that can be run on a browers, It is powered by Laravel 8, Sanctum Middleware, Inertia.js, Vue.js, & Bootstrap 5.1.3 is developed and maintained by @felixkpt. 
+## Features
+### User Experience
+Utilizing Vue 3 smooth transitions, with Bootstrap stylings, the application was carefully designed for ensuring good user experience. 
+Our clients need to be able to find their way around our website so as the will likely make purchases effortlessly.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-    `php
-    php artisan migrate
-    `
+The homepage is high-quality, simple, straightforward that is bundled with a search bar.
+The side navigation aids users easily navigate to different categories.
+Responsiveness of the website has been verified accross many platforms and devices.
 
-## Learning Laravel
+### Multiple payments
+Implementation of multi-vendor payments methods is underway and the customers abandoning their carts will drop after the completion of this feature as is often a big issue for online retailers when there's a limited option for the client to use in the checkout. 
+We will also incoporate credit and debit cards options inline with top payment providers like PayPal or Stripe.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 24/7 Customer Service
+We providing helpful, accessible customer service as it is an important aspect of a good client experience. Clients regard customer service to be a critical factor in determining whether or not to buy from a business. Chat with us at any time and we will respond as soon as possible.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Extensive product information
+Although shopping online has become increasingly popular, many customers remain wary of making purchases online, particularly from smaller firms with whom they are unfamiliar.
 
-## Laravel Sponsors
+Consumers who buy online face the drawback of not being able to view or sample the goods before making a purchase.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+We have made sure that we include as much product information as possible for our buyers to know that our products is of good quality and worth their money.
 
-### Premium Partners
+All products have descriptions that include information about size, material, color, ingredients, and origin. We also have provided high-resolution product photos that show the product from all sides. Photographs of a model wearing the item if it's apparel can also be found.
 
+Similar items sections to product pages have been categorized so that customers may find additional products that are tailored to their preferences and needs.
+### Reliable internet security program.
+Our shop is operated on HTTPS protocal which is secure, 
+We use an efficient internet security program as this is the best way to be secure online. Shopping is no different. Instead, as the number of products and data traded online grows, security measures such as real-time anti-phishing and identity theft protection for instance we filter any.exe files, and also discard any malicious emails, while also filtering unwanted spam email into a separate folder.
 
-## Contributing
+Let the buying spree begin...
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Here is the link to the shop: [Link to server](https://shop.onlineserviceslab.com) <---
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+![Product example](https://shop.onlineserviceslab.com/public/uploads/images/home-sliders/blog-article-2.jpg)
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The this application is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-![Link to my drick website](http://localhost/laravel8ecommerce/public/assets/images/home-1-banner-1.jpg)
