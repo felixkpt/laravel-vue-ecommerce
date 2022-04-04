@@ -1,9 +1,7 @@
 <template>
     <Head :title="$page.props.title" description="Some desc" />
-
-    <Header />
-
-    <main :id="mainKey">
+    <Header :cartUpdated="cartUpdated"/>
+    <main>
         <div class="container-fluid px-1" style="min-height: 400px;">
             <div class="row">
                 <div class="col-12">
@@ -17,9 +15,7 @@
         </div>
         <Footer />
     </main>
-
 </template>
-
 <script>
 import Header from './Header';
 import Breadcrumb from './Breadcrumb';
@@ -32,11 +28,9 @@ export default {
         Notification,
         Footer,
     },
-    data() {
-        return {
-            mainKey: (Math.random() * 1000000)
-        }
-    }
-
+    props: {
+        cartUpdated: {type: Number}
+    },
+    
 }
 </script>

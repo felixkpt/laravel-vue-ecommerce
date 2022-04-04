@@ -8,7 +8,7 @@
                         <div class="wrap-right">
                             <div classs="sort-item orderby">
                                 <select v-model="orderby" @change="orderbyUpdate($event)">
-                                    <option value="menu_order">Default sorting</option>
+                                    <option value="default">Default sorting</option>
                                     <option value="date">Sort by newness</option>
                                     <option value="price">Sort by price: low to high</option>
                                     <option value="price-desc">Sort by price: high to low</option>
@@ -17,7 +17,7 @@
 
                             <div class="sort-item product-per-page">
                                 <select v-model="perPage" @change="perPageUpdate($event)">
-                                    <option value="menu_order">Per Page</option>
+                                    <option value="15">Per Page</option>
                                     <option value="4">4 per page</option>
                                     <option value="12">12 per page</option>
                                     <option value="24">24 per page</option>
@@ -81,11 +81,11 @@ export default  {
         }, 
         orderby: {
             type: String,
-            default: 'menu_order'
+            default: 'default'
         },
         perPage: {
             type: Number,
-            default: 'menu_order'
+            default: 15
         },
         },
     data() {

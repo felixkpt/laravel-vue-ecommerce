@@ -10,14 +10,14 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class ShopController extends Controller
 {
-    protected $orderby;
-    protected $perPage;
+    protected $orderby = 'default';
+    protected $perPage = 12;
     protected $min_price = 1;
     protected $max_price = 1000;
     public function mount()
     {
-        $this->orderby = session()->get('orderby');
-        $this->perPage = session()->get('perPage');
+        $this->orderby = session()->get('orderby') ?? $this->orderby;
+        $this->perPage = session()->get('perPage') ?? $this->perPage;
         $this->min_price = session()->get('min_price') ?? $this->min_price;
         $this->max_price = session()->get('max_price') ?? $this->max_price;
 

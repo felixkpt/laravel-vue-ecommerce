@@ -1,5 +1,5 @@
 <template>
-    <Layout :key="layoutComponentKey">
+    <Layout :cartUpdated="cartUpdated">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-8 col-lg-9">
@@ -138,7 +138,7 @@ export default  {
     },
     data() {
         return {
-            layoutComponentKey: 1,
+            cartUpdated: Number,
             qty: 999,
             cart_data: this.$page.props.cart_data,
         }
@@ -156,6 +156,7 @@ export default  {
         destroy() {
             if (confirm('Are you sure you want to empty your cart?')) {
                 this.$inertia.post(`${this.$page.props.url}cart/destroy`);
+                this.cartUpdated = Math.round(Math.random() * 100000000);
             }
         },
         update() {
@@ -169,7 +170,7 @@ export default  {
             ).then(
                 (json) => {
                     this.cart_data = json.cart_data;
-                    this.layoutComponentKey += 1;
+                    this.cartUpdated = Math.round(Math.random() * 100000000);
                 }
             )
                 .catch(
@@ -179,9 +180,6 @@ export default  {
                 )
         },
     },
-    mounted() {
-    // console.log(this.cart_data)
-    }
 
 }
 </script>

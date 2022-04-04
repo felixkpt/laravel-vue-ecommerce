@@ -78,7 +78,7 @@
             </div>
         </div>
     </header>
-    <Nav /> 
+    <Nav/> 
 </template>
 <script>
 import axios from 'axios';
@@ -92,24 +92,24 @@ export default {
         AuthSection,
         Search,
     },
+    props: {
+        cartUpdated: {type: Number}
+    },
     data() {
         return {
-            cart_data: null
+            cart_data: null,
+            refresh: true,
         }
     },
-    mathods: {
-        getCartContent(){
-
-        }
-    },
-    computed: {
-
+    watch: { 
+      	cartUpdated: function(newVal, oldVal) { // watch it
+              this.navCartCount()
+        },
+      	
     },
     mounted(){
-
         this.navCartCount()
- 
-    }
+     }
 
 }
 </script>
