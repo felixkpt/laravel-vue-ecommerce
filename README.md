@@ -27,6 +27,11 @@ We have made sure that we include as much product information as possible for ou
 All products have descriptions that include information about size, material, color, ingredients, and origin. We also have provided high-resolution product photos that show the product from all sides. Photographs of a model wearing the item if it's apparel can also be found.
 
 Similar items sections to product pages have been categorized so that customers may find additional products that are tailored to their preferences and needs.
+### Reliable internet security program.
+Our shop is operated on HTTPS protocal which is secure, 
+We use an efficient internet security program as this is the best way to be secure online. Shopping is no different. Instead, as the number of products and data traded online grows, security measures such as real-time anti-phishing and identity theft protection for instance we filter any.exe files, and also discard any malicious emails, while also filtering unwanted spam email into a separate folder.
+
+Let the buying spree begin...
 
 Here is the link to the shop: [Link to server](https://shop.onlineserviceslab.com) <---
 
