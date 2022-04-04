@@ -62,4 +62,10 @@ class HomeController extends Controller
 
         return Inertia::render('Home', $data);
     }
+    public function about() {
+        return Inertia::render('About', []);
+    }
+    public function contact() {
+        return Inertia::render('Contact', []);
+    }
 }
