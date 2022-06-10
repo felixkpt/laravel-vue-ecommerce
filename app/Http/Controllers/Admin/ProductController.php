@@ -10,7 +10,7 @@ use Inertia\Inertia;
 class ProductController extends Controller
 {
     public function index() {
-        $products = Product::with('category')->paginate(50);
+        $products = Product::with('category')->paginate(30);
         
         $title = 'Welcome to quick shoppers';
         $description = '';

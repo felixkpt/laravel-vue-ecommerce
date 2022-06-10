@@ -37,7 +37,7 @@
                                     </div>
                                     </div>
                             <!--On Sale-->
-                            <div class="row style-1" v-if="$page.props.on_sale_time.status == 1 && $page.props.on_sale_time">
+                            <div class="row style-1" v-if="$page.props.on_sale_time !== null && $page.props.on_sale_time.status == 1 && $page.props.on_sale_time">
                                 <div class="col-12 wrap-show-advance-info-box has-countdown">
                                     <h3 class="title-box">On Sale</h3>
                                     <div class="px-4 wrap-countdown mercado-countdown" :data-expire="formatDate($page.props.on_sale_time.sale_date)">
@@ -92,7 +92,7 @@
                         </div>
                     </div>
                     <!--Latest Products-->
-                   <div class="row style-1" v-if="$page.props.on_sale_time.status == 1 && $page.props.on_sale_time">
+                   <div class="row style-1" v-if="$page.props.on_sale_time !== null && $page.props.on_sale_time.status == 1 && $page.props.on_sale_time">
                         <div class="col-12 wrap-show-advance-info-box has-countdown">
                             <h3 class="title-box">Latest Products</h3>
                             <div class="wrap-top-banner">

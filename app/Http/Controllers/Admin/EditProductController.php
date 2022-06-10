@@ -11,6 +11,10 @@ use App\Models\Product;
 
 class EditProductController extends Controller
 {
+    
+    private $max_words_des = 100;
+    private $max_words = 1000;
+
     public function index(Request $request, $slug) {
 
         $product = Product::where('slug', $slug)->first();
@@ -30,8 +34,17 @@ class EditProductController extends Controller
         $request->merge(['slug' => $slug]);
 
         $rules = [
-            'name' => 'required|min:3|max:30|unique:products,name,'.$id.',id',
-            'slug' => 'required|min:3|max:50|unique:products,slug,'.$id.',id',
+            'name' => 'required|min:3|max:100|unique:products,name,'.$id.',id',
+            'slug' => 'required|min:3|max:120|unique:products,slug,'.$id.',id',
+
+            'short_description' => ['required', 'string', 
+                function ($attribute, $value, $fail) { if (str_word_count($value) <= 1) { $fail(ucfirst($attribute).' is less than 1 word'); }},
+                function ($attribute, $value, $fail) { if (str_word_count($value) >= $this->max_words_des) { $fail(ucfirst($attribute).' is more than '.$this->max_words_des.' words'); }},
+            ],
+            'description' => ['required', 'string', 
+                function ($attribute, $value, $fail) { if (str_word_count($value) <= 1) { $fail(ucfirst($attribute).' is less than 1 word'); }},
+                function ($attribute, $value, $fail) { if (str_word_count($value) >= $this->max_words) { $fail(ucfirst($attribute).' is more than '.$this->max_words.' words'); }},
+            ],
 
         ];
         $image_name = 'default.jpg';

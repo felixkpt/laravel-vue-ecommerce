@@ -11,6 +11,10 @@ use Inertia\Inertia;
 
 class AddProductController extends Controller
 {
+
+    private $max_words_des = 100;
+    private $max_words = 1000;
+
     public function index() {
 
         $categories = Category::all();
@@ -27,10 +31,16 @@ class AddProductController extends Controller
         $request->merge(['slug' => $slug]);
 
         $rules = [
-            'name' => 'required|min:3|max:30|unique:products,name',
-            'slug' => 'required|min:3|max:50|unique:products,slug',
-            'short_description' => 'required|min:10|max:150',
-            'description' => 'required|min:10',
+            'name' => 'required|min:3|max:100|unique:products,name',
+            'slug' => 'required|min:3|max:120|unique:products,slug',
+            'short_description' => ['required', 'string', 
+                function ($attribute, $value, $fail) { if (str_word_count($value) <= 1) { $fail(ucfirst($attribute).' is less than 1 word'); }},
+                function ($attribute, $value, $fail) { if (str_word_count($value) >= $this->max_words_des) { $fail(ucfirst($attribute).' is more than '.$this->max_words_des.' words'); }},
+            ],
+            'description' => ['required', 'string', 
+                function ($attribute, $value, $fail) { if (str_word_count($value) <= 1) { $fail(ucfirst($attribute).' is less than 1 word'); }},
+                function ($attribute, $value, $fail) { if (str_word_count($value) >= $this->max_words) { $fail(ucfirst($attribute).' is more than '.$this->max_words.' words'); }},
+            ],
             'regular_price' => 'required|min:1',
             'sale_price' => 'required|min:1',
             'SKU' => 'required|min:1',
