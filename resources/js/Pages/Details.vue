@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="description">
                             <h3>Product Description</h3>
                             <p v-html="product.description"></p>
                         </div>
