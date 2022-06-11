@@ -11,7 +11,7 @@
                             <ul class="products-cart">
                                 <li class="pr-cart-item" v-for="item in cart_data.cart" :key='item.id'>
                                     <div class="product-image" v-if="item.model">
-                                        <figure><img :src="`${$page.props.asset}uploads/${item.model.image}`" alt=""></figure>
+                                        <figure><img :src="`${item.model.image}`" alt=""></figure>
                                     </div>
                                     <div class="product-name">
                                         <Link class="link-to-product" :href="`${$page.props.url}product/${item.model.slug}`">{{ item.name }}</Link>
