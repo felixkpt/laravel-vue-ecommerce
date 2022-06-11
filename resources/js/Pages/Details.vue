@@ -61,8 +61,12 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-12">
+                            <h3>Product Description</h3>
+                            <p>{{ product.description }}</p>
+                        </div>
                     </div>
-                </div><!--end main products area-->
+                </div><!--end main product area-->
                 <Sidebar />
             </div><!--end row-->
         </div><!-- end .container-fluid -->

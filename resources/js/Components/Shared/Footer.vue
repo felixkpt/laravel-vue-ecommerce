@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col">
                             <ul class="list-unstyled">
-                                <li><a class="text-white-50 text-decoration-none" href="#about-us">About us</a></li>
+                                <li><a class="text-white-50 text-decoration-none" :href="`${$page.props.url}about-us`">About us</a></li>
                                 <li><a class="text-white-50 text-decoration-none" href="#contact-us">Contact us</a></li>
                                 <li><a class="text-white-50 text-decoration-none" href="#privacy-policy">Privacy policy</a></li>
                                 <li><a class="text-white-50 text-decoration-none" href="#terms-and-conditions">Terms &amp; Conditions</a></li>
