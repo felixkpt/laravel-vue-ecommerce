@@ -3,38 +3,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-8 col-lg-9">
-                    <div class="wrap-shop-control">
-                        <h1 class="shop-title">Digital & Electronics</h1>
-                        <div class="wrap-right">
-                            <div classs="sort-item orderby">
-                                <select v-model="orderby" @change="orderbyUpdate($event)">
-                                    <option value="default">Default sorting</option>
-                                    <option value="date">Sort by newness</option>
-                                    <option value="price">Sort by price: low to high</option>
-                                    <option value="price-desc">Sort by price: high to low</option>
-                                </select>
-                            </div>
-
-                            <div class="sort-item product-per-page">
-                                <select v-model="perPage" @change="perPageUpdate($event)">
-                                    <option value="15">Per Page</option>
-                                    <option value="4">4 per page</option>
-                                    <option value="12">12 per page</option>
-                                    <option value="24">24 per page</option>
-                                    <option value="36">36 per page</option>
-                                    <option value="48">48 per page</option>
-                                </select>
-                            </div>
-
-                            <div class="change-display-mode">
-                                <a href="#" class="grid-mode display-mode active"><i class="fa fa-th"></i>Grid</a>
-                                <a href="list.html" class="list-mode display-mode"><i class="fa fa-th-list"></i>List</a>
-                            </div>
-
-                        </div>
-
-                    </div><!--end wrap shop control-->
-
+                    <ShopControl />
                     <div class="col-12">
                         <div class="row justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 p-1 w-100 h-100">
                             <div class="col pb-1" v-for="product in products.data" :key="product.id">
@@ -64,29 +33,22 @@
     </Layout>
 </template>
 <script>
-import axios from 'axios';
 import Layout from '@/Components/Shared/Layout';
 import Sidebar from '@/Components/Shared/Sidebar';
 import PaginationLinks from '@/Components/Shared/PaginationLinks';
+import ShopControl from '@/Components/Shared/ShopControl';
 export default  {
     components: {
-       Layout,
-       Sidebar,
-       PaginationLinks,
+        Layout,
+        Sidebar,
+        PaginationLinks,
+        ShopControl,
     },
     props: {
         products: {
             type: Object,
             default: {},
         }, 
-        orderby: {
-            type: String,
-            default: 'default'
-        },
-        perPage: {
-            type: Number,
-            default: 15
-        },
         },
     data() {
         return {
@@ -106,25 +68,7 @@ export default  {
             this.form.price = price;
             this.$inertia.post(`${this.$page.props.url}shop/cart`, this.form);
         },
-        async orderbyUpdate(event, get = false) {
-            let orderby = event ? event.target.value : null;
-            await axios.post(`${this.$page.props.url}shop/orderby`, {orderby: orderby, get: get})
-                .then((resp) => {
-                        this.$inertia.reload()
-                }).catch(() => {
-                    alert('Whoops! But there was an error.');
-                });
-        },
-        async perPageUpdate(event, get = false) {
-            let perPage =  event ? event.target.value : null;
-            await axios.post(`${this.$page.props.url}shop/per-page`, {perPage: perPage, get: get})
-                .then((resp) => {
-                        this.$inertia.visit('shop');
-                }).catch((err) => {
-                    console.log(err)
-                    alert('Whoops! But there was an error.');
-                });
-        },
+        
     },
     computed: {
         links() {

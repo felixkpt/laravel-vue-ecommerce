@@ -15,10 +15,10 @@
                                 <span><img :src="`${$page.props.asset}images/lang-en.png`" alt="lang-en"></span>English
                             </a>
                             <ul class="dropdown-menu position-absolute" aria-labelledby="dropdown-language">
-                                <li class="dropdown-item"><a title="hungary" href="#"><span class="img label-before"><img :src="`${$page.props.asset}uploads/images/lang-hun.png`" alt="lang-hun"></span>Hungary</a></li>
-                                <li class="dropdown-item"><a title="german" href="#"><span class="img label-before"><img :src="`${$page.props.asset}uploads/images/lang-ger.png`" alt="lang-ger" ></span>German</a></li>
-                                <li class="dropdown-item"><a title="french" href="#"><span class="img label-before"><img :src="`${$page.props.asset}uploads/images/lang-fra.png`" alt="lang-fre"></span>French</a></li>
-                                <li class="dropdown-item"><a title="canada" href="#"><span class="img label-before"><img :src="`${$page.props.asset}uploads/images/lang-can.png`" alt="lang-can"></span>Canada</a></li>
+                                <li class="dropdown-item"><a title="hungary" href="#"><span class="img label-before"><img :src="`${$page.props.asset}images/lang-hun.png`" alt="lang-hun"></span>Hungary</a></li>
+                                <li class="dropdown-item"><a title="german" href="#"><span class="img label-before"><img :src="`${$page.props.asset}images/lang-ger.png`" alt="lang-ger" ></span>German</a></li>
+                                <li class="dropdown-item"><a title="french" href="#"><span class="img label-before"><img :src="`${$page.props.asset}images/lang-fra.png`" alt="lang-fre"></span>French</a></li>
+                                <li class="dropdown-item"><a title="canada" href="#"><span class="img label-before"><img :src="`${$page.props.asset}images/lang-can.png`" alt="lang-can"></span>Canada</a></li>
                             </ul>
                         </li>      
                         <li class="nav-item dropdown">

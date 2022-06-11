@@ -2275,9 +2275,9 @@ li.menu-item .nav-label.sale-label::before{
     text-transform: uppercase;
 }
 .wrap-shop-control{
-    padding: 4.5px 0;
+    padding: 5.5px 0;
     background: #f5f5f5;
-    margin-top: 33px;
+    margin-top: 30px;
 }
 .wrap-shop-control .shop-title{
     display: inline-block;
@@ -2302,7 +2302,8 @@ li.menu-item .nav-label.sale-label::before{
     margin-top: 1.5px;
 }
 .wrap-shop-control .wrap-right{
-    display: block;
+    display: flex;
+    align-items: center;
     float: right;
 }
 .wrap-shop-control .chosen-container .chosen-single{
@@ -6753,6 +6754,11 @@ background-color: #888888;
     .style-nav-1 .owl-nav{
         display: none;
     }
+
+    .wrap-shop-control .wrap-right{ 
+        flex-direction: column;
+    }
+
 }
 
 @media (max-width: 550px) {
