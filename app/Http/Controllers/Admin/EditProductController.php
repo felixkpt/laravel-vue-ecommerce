@@ -69,10 +69,12 @@ class EditProductController extends Controller
             'category_id' => $request->get('category_id'),
         ];
         if ($request->hasFile('image')) {
-            $data = array_merge($data, ['image' => $image_name]);
+            $data = array_merge($data, ['image' => asset('uploads/'.$image_name)]);
         }
 
-        $Product = Product::where('id', $id)->update($data);
+        // var_dump($data);die;
+
+        Product::where('id', $id)->update($data);
         return redirect()->route('admin.products')->with('successMessage', 'Updated Product.');
 
     }

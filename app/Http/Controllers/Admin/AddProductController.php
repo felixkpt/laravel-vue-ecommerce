@@ -49,12 +49,14 @@ class AddProductController extends Controller
             'image' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
         ];
 
-        $this->validate($request, $rules);
-
         $image_name = 'default.jpg';
         if ($request->hasFile('image')) {
+            $rules = array_merge($rules, ['image' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048']);
             $image_name = $request->file('image')->store('images/products', 'public');
         }
+
+        $this->validate($request, $rules);
+
         $data = [
             'name' => $request->get('name'),
             'slug' => $request->get('slug'),
@@ -65,11 +67,15 @@ class AddProductController extends Controller
             'SKU' => $request->get('SKU'),
             'stock_status' => $request->get('stock_status'),
             'quantity' => $request->get('quantity'),
-            'image' => $image_name,
             'category_id' => $request->get('category_id'),
         ];
 
-//        var_dump($data);die;
+        if ($request->hasFile('image')) {
+            $data = array_merge($data, ['image' => asset('uploads/'.$image_name)]);
+        }
+
+        // var_dump($data);die;
+        
         Product::create($data);
         return redirect()->route('admin.products')->with('successMessage', 'Added Product.');
 

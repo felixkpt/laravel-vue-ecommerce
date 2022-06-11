@@ -9,7 +9,7 @@
                             <vueper-slide v-for="(product, index) in $page.props.home_sliders" :key="product.id">
                                 <template #content>
                                     <div class="slide-carousel">
-                                        <img :src="`${$page.props.asset}uploads/images/home-sliders/blog-article-${index + 1}.jpg`" alt="" class="w-100">
+                                        <img :src="`${$page.props.asset}images/home-sliders/blog-article-${index + 1}.jpg`" alt="" class="w-100">
                                         <div :class="`slide-info slide-${index + 1}`">
                                             <h2 class="f-title">{{ product.name }}</h2>
                                             <span class="subtitle">{{ product.description.length > 50 ? product.description.substring(0, 50) + '...' : product.description }}</span>
@@ -27,12 +27,12 @@
                                 <div class="wrap-banner style-twin-default">
                                     <div class="banner-item">
                                         <a href="#" class="link-banner banner-effect-1">
-                                            <figure><img :src="`${$page.props.asset}uploads/images/home-1-banner-1.jpg`" alt="" width="580" height="190"></figure>
+                                            <figure><img :src="`${$page.props.asset}images/home-1-banner-1.jpg`" alt="" width="580" height="190"></figure>
                                         </a> 
                                     </div>
                                     <div class="banner-item">
                                         <a href="#" class="link-banner banner-effect-1">
-                                            <figure><img :src="`${$page.props.asset}uploads/images/home-1-banner-2.jpg`" alt="" width="580" height="190"></figure>
+                                            <figure><img :src="`${$page.props.asset}images/home-1-banner-2.jpg`" alt="" width="580" height="190"></figure>
                                         </a> 
                                     </div>
                                     </div>
@@ -61,7 +61,7 @@
                                                 <div class="product product-style-2 px-1 mb-2 h-100">
                                                     <div class="product-thumnail">
                                                         <Link :href="`${$page.props.url}product/${product.slug}`" :title="product.name">
-                                                            <figure><img :src="`${$page.props.asset}uploads/${product.image}`" width="214" height="214" :alt="product.name"></figure>
+                                                            <figure><img :src="`${product.image}`" width="214" height="214" :alt="product.name"></figure>
                                                         </Link> 
                                                         <div class="group-flash">
                                                             <span class="flash-item sale-label">Sale</span>
@@ -97,7 +97,7 @@
                             <h3 class="title-box">Latest Products</h3>
                             <div class="wrap-top-banner">
                                 <a href="#" class="link-banner banner-effect-2">
-                                    <figure><img :src="`${$page.props.asset}uploads/images/digital-electronic-banner.jpg`" width="1170" height="240" alt=""></figure>
+                                    <figure><img :src="`${$page.props.asset}images/digital-electronic-banner.jpg`" width="1170" height="240" alt=""></figure>
                                 </a> 
                             </div>
                         </div>
@@ -118,7 +118,7 @@
                                         <div class="product product-style-2 px-1 mb-2 h-100">
                                             <div class="product-thumnail">
                                                 <Link :href="`${$page.props.url}product/${product.slug}`" :title="product.name">
-                                                    <figure><img :src="`${$page.props.asset}uploads/${product.image}`" width="214" height="214" :alt="product.name"></figure>
+                                                    <figure><img :src="`${product.image}`" width="214" height="214" :alt="product.name"></figure>
                                                 </Link> 
                                                 <div class="group-flash">
                                                     <span class="flash-item new-label">New</span>
@@ -151,7 +151,7 @@
                         <h3 class="title-box">Product Categories</h3>
                         <div class="wrap-top-banner">
                         <a href="#" class="link-banner banner-effect-2">
-                            <figure><img :src="`${$page.props.asset}uploads/images/fashion-accesories-banner.jpg`" width="1170" height="240" alt=""></figure>
+                            <figure><img :src="`${$page.props.asset}images/fashion-accesories-banner.jpg`" width="1170" height="240" alt=""></figure>
                         </a> 
                         </div>
                     </div>
@@ -179,7 +179,7 @@
                                                     <div class="product product-style-2 px-1 mb-2 h-100">
                                                         <div class="product-thumnail">
                                                             <Link :href="`${$page.props.url}product/${product.slug}`" :title="product.name">
-                                                                <figure><img :src="`${$page.props.asset}uploads/${product.image}`" width="214" height="214" :alt="product.name"></figure>
+                                                                <figure><img :src="`${product.image}`" width="214" height="214" :alt="product.name"></figure>
                                                             </Link> 
                                                             <div class="group-flash">
                                                                 <!-- <span class="flash-item new-label">New</span> -->

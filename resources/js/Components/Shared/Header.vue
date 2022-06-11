@@ -12,7 +12,7 @@
                         <AuthSection />
                         <li class="nav-item dropdown">
                             <a title="English" class="nav-link dropdown-toggle" href="#" id="dropdown-language" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span><img :src="`${$page.props.asset}uploads/images/lang-en.png`" alt="lang-en"></span>English
+                                <span><img :src="`${$page.props.asset}images/lang-en.png`" alt="lang-en"></span>English
                             </a>
                             <ul class="dropdown-menu position-absolute" aria-labelledby="dropdown-language">
                                 <li class="dropdown-item"><a title="hungary" href="#"><span class="img label-before"><img :src="`${$page.props.asset}uploads/images/lang-hun.png`" alt="lang-hun"></span>Hungary</a></li>

@@ -34,7 +34,7 @@
                                     <tbody>
                                     <tr v-for="(product, index) in $page.props.products.data" :key="product.id">
                                         <td>{{ (index + 1) }}</td>
-                                        <td><img :src="`${$page.props.asset}uploads/${product.image}`" style="height:40px; width: 40px" alt=""></td>
+                                        <td><img :src="`${product.image}`" style="height:40px; width: 40px" alt=""></td>
                                         <td>{{ product.name }}</td><td>{{ product.stock_status }}</td>
                                         <td>{{ product.regular_price }}</td>
                                         <td>{{ product.sale_price }}</td>

@@ -42,7 +42,7 @@
                                 <div class="product product-style-3 equal-elem ">
                                     <div class="product-thumnail">
                                         <Link :href="`${$page.props.url}product/${product.slug}`" :title="product.name">
-                                            <figure><img :src="`${$page.props.asset}uploads/${product.image}`" :alt="product.name"></figure>
+                                            <figure><img :src="`${product.image}`" :alt="product.name"></figure>
                                         </Link>
                                     </div>
                                     <div class="product-info">

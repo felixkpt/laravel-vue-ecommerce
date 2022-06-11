@@ -4,7 +4,7 @@
             <h2 class="widget-title">All Categories</h2>
             <div class="widget-content">
                 <ul class="list-category">
-                    <li class="category-item has-child-cate" v-for="category in $page.props.categories" :key="category.id">
+                    <li class="category-item has-child-cate" v-for="category in categories" :key="category.id">
                         <Link :href="`${$page.props.url}product-category/${category.slug}`" class="cate-link">{{  category.name }}</Link>
                         <span class="toggle-control">+</span>
                         <ul class="sub-cate">
@@ -17,25 +17,6 @@
                 </ul>
             </div>
         </div><!-- Categories widget-->
-
-        <div class="widget mercado-widget filter-widget brand-widget">
-            <h2 class="widget-title">Brand</h2>
-            <div class="widget-content">
-                <ul class="list-style vertical-list list-limited" data-show="6">
-                    <li class="list-item"><a class="filter-link active" href="#">Fashion Clothings</a></li>
-                    <li class="list-item"><a class="filter-link " href="#">Laptop Batteries</a></li>
-                    <li class="list-item"><a class="filter-link " href="#">Printer & Ink</a></li>
-                    <li class="list-item"><a class="filter-link " href="#">CPUs & Prosecsors</a></li>
-                    <li class="list-item"><a class="filter-link " href="#">Sound & Speaker</a></li>
-                    <li class="list-item"><a class="filter-link " href="#">Shop Smartphone & Tablets</a></li>
-                    <li class="list-item default-hiden"><a class="filter-link " href="#">Printer & Ink</a></li>
-                    <li class="list-item default-hiden"><a class="filter-link " href="#">CPUs & Prosecsors</a></li>
-                    <li class="list-item default-hiden"><a class="filter-link " href="#">Sound & Speaker</a></li>
-                    <li class="list-item default-hiden"><a class="filter-link " href="#">Shop Smartphone & Tablets</a></li>
-                    <li class="list-item"><a data-label='Show less<i class="fa fa-angle-up" aria-hidden="true"></i>' class="btn-control control-show-more" href="#">Show more<i class="fa fa-angle-down" aria-hidden="true"></i></a></li>
-                </ul>
-            </div>
-        </div><!-- brand widget-->
 
         <div class="widget mercado-widget filter-widget price-filter">
             <h2 class="widget-title">Price Range</h2>
@@ -68,7 +49,7 @@
                     <li class="list-item"><a class="filter-link " href="#">xl</a></li>
                 </ul>
                 <div class="widget-banner">
-                    <figure><img :src="`${$page.props.asset}uploads/images/size-banner-widget.jpg`" width="270" height="331" alt=""></figure>
+                    <figure><img :src="`${$page.props.asset}images/size-banner-widget.jpg`" width="270" height="331" alt=""></figure>
                 </div>
             </div>
         </div><!-- Size -->
@@ -77,58 +58,16 @@
             <h2 class="widget-title">Popular Products</h2>
             <div class="widget-content">
                 <ul class="products">
-                    <li class="product-item">
+                    <li class="product-item" v-for="product in popular" :key="product.id">
                         <div class="product product-widget-style">
                             <div class="thumbnnail">
-                                <a href="detail.html" title="Radiant-360 R6 Wireless Omnidirectional Speaker [White]">
-                                    <figure><img :src="`${$page.props.asset}uploads/images/products/digital_1.jpg`" alt=""></figure>
+                                <a :href="`${$page.props.url}product/${product.slug}`" :title="product.name">
+                                    <figure><img :src="product.image" alt=""></figure>
                                 </a>
                             </div>
                             <div class="product-info">
-                                <a href="#" class="product-name"><span>Radiant-360 R6 Wireless Omnidirectional Speaker...</span></a>
-                                <div class="wrap-price"><span class="product-price">$168.00</span></div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="product-item">
-                        <div class="product product-widget-style">
-                            <div class="thumbnnail">
-                                <a href="detail.html" title="Radiant-360 R6 Wireless Omnidirectional Speaker [White]">
-                                    <figure><img :src="`${$page.props.asset}uploads/images/products/digital_17.jpg`" alt=""></figure>
-                                </a>
-                            </div>
-                            <div class="product-info">
-                                <a href="#" class="product-name"><span>Radiant-360 R6 Wireless Omnidirectional Speaker...</span></a>
-                                <div class="wrap-price"><span class="product-price">$168.00</span></div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="product-item">
-                        <div class="product product-widget-style">
-                            <div class="thumbnnail">
-                                <a href="detail.html" title="Radiant-360 R6 Wireless Omnidirectional Speaker [White]">
-                                    <figure><img :src="`${$page.props.asset}uploads/images/products/digital_18.jpg`" alt=""></figure>
-                                </a>
-                            </div>
-                            <div class="product-info">
-                                <a href="#" class="product-name"><span>Radiant-360 R6 Wireless Omnidirectional Speaker...</span></a>
-                                <div class="wrap-price"><span class="product-price">$168.00</span></div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="product-item">
-                        <div class="product product-widget-style">
-                            <div class="thumbnnail">
-                                <a href="detail.html" title="Radiant-360 R6 Wireless Omnidirectional Speaker [White]">
-                                    <figure><img :src="`${$page.props.asset}uploads/images/products/digital_20.jpg`" alt=""></figure>
-                                </a>
-                            </div>
-                            <div class="product-info">
-                                <a href="#" class="product-name"><span>Radiant-360 R6 Wireless Omnidirectional Speaker...</span></a>
-                                <div class="wrap-price"><span class="product-price">$168.00</span></div>
+                                <a :href="`${$page.props.url}product/${product.slug}`" class="product-name"><span>{{ product.name }}</span></a>
+                                <div class="wrap-price"><span class="product-price">{{ product.price }}</span></div>
                             </div>
                         </div>
                     </li>
@@ -141,9 +80,36 @@
 </template>
 <script>
 import RangeSlider from '@/Components/Shared/RangeSlider'
+import axios from 'axios';
 export default {
     components: {
         RangeSlider
+    },
+    data() {
+        return {
+            popular: null,
+            categories: null,
+        }
+    },
+    mounted() {
+        this.getPopular()
+        this.getCategories()
+    },
+    methods: {
+        async getCategories() {
+            const resp = await axios.get(`${this.$page.props.url}api/categories/list`)
+            if (resp.status == 200) {
+                const data = await resp.data
+                this.categories = data
+            }
+        },
+        async getPopular() {
+            const resp = await axios.get(`${this.$page.props.url}api/products/popular`)
+            if (resp.status == 200) {
+                const data = await resp.data
+                this.popular = data
+            }
+        }
     }
 }
 </script>

@@ -90,7 +90,7 @@
                                             <div class="product product-style-2 px-1 mb-2 h-100">
                                                 <div class="product-thumnail">
                                                     <a :href="`${$page.props.url}product/${product.slug}`" :title="product.name">
-                                                        <figure><img :src="`${$page.props.asset}uploads/${product.image}`" width="214" height="214" :alt="product.name"></figure>
+                                                        <figure><img :src="`${product.image}`" width="214" height="214" :alt="product.name"></figure>
                                                     </a>
                                                     <div class="group-flash">
                                                         <span class="flash-item new-label">new</span>

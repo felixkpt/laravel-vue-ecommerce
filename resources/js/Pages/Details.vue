@@ -8,8 +8,8 @@
                             <div class="product-gallery">
                                 <ul class="slides">
 
-                                    <li :data-thumb="`${$page.props.asset}uploads/${product.image}`">
-                                        <img :src="`${$page.props.asset}uploads/${product.image}`" :alt="product.name" />
+                                    <li :data-thumb="`${product.image}`">
+                                        <img :src="`${product.image}`" :alt="product.name" />
                                     </li>
 
                                 </ul>
