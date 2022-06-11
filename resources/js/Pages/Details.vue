@@ -9,7 +9,9 @@
                                 <ul class="slides">
 
                                     <li :data-thumb="`${product.image}`">
-                                        <img :src="`${product.image}`" :alt="product.name" />
+                                        <div style="max-width:300px;max-height:300px">
+                                            <img style="max-width:300px;max-height:300px" :src="`${product.image}`" :alt="product.name" />
+                                        </div>
                                     </li>
 
                                 </ul>
@@ -22,12 +24,9 @@
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 <i class="fa fa-star" aria-hidden="true"></i>
-                                <a href="#" class="count-review">(05 review)</a>
+                                <a href="#" class="count-review"> (5 review)</a>
                             </div>
                             <h2 class="product-name">{{ product.name }}</h2>
-                            <div class="short-desc">
-                                {{ product.name }}
-                            </div>
                             <div class="wrap-social">
                                 <a class="link-socail" href="#"><img :src="`${$page.props.url}/public/assets/images/social-list.png`" alt=""></a>
                             </div>

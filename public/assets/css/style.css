@@ -4267,7 +4267,7 @@ article.single-post blockquote p:last-child::after{
     width: 45.9770114943%;
     float: left;
     padding-left: 30px;
-    padding-top: 30px;
+    padding-top: 10px;
 }
 .wrap-product-detail .advance-info{
     display: block;
