@@ -9,8 +9,8 @@
                                 <ul class="slides">
 
                                     <li :data-thumb="`${product.image}`">
-                                        <div style="max-width:300px;max-height:300px">
-                                            <img style="max-width:300px;max-height:300px" :src="`${product.image}`" :alt="product.name" />
+                                        <div class="mx-auto" style="max-width:300px;max-height:300px">
+                                            <img class="mx-auto" style="max-width:300px;max-height:300px" :src="`${product.image}`" :alt="product.name" />
                                         </div>
                                     </li>
 
