@@ -16,7 +16,7 @@
                                     <input id="lname" type="text" name="lname" value="" placeholder="Your last name">
                                 </p>
                                 <p class="row-in-form">
-                                    <label for="email">Email Addreess:</label>
+                                    <label for="email">Email Address:</label>
                                     <input id="email" type="email" name="email" value="" placeholder="Type your email">
                                 </p>
                                 <p class="row-in-form">
@@ -75,7 +75,7 @@
                                     </label>
                                 </div>
                                 <p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price">${{ cart_data.subtotal }}</span></p>
-                                <a href="thankyou.html" class="btn btn-medium">Place order now</a>
+                                <a href="#thank-you" class="btn btn-medium">Place order now</a>
                             </div>
                             <div class="summary-item shipping-method">
                                 <h4 class="title-box f-title">Shipping method</h4>
