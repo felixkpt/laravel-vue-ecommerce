@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div>
                             <h3>Product Description</h3>
                             <p v-html="product.description"></p>
                         </div>
