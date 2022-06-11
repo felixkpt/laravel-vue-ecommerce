@@ -24,7 +24,7 @@
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 <i class="fa fa-star" aria-hidden="true"></i>
-                                <a href="#" class="count-review"> (5 review)</a>
+                                <a href="#" class="count-review"> (5 reviews)</a>
                             </div>
                             <h2 class="product-name">{{ product.name }}</h2>
                             <div class="wrap-social">
