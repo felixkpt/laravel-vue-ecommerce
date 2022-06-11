@@ -63,7 +63,7 @@
                         </div>
                         <div class="col-12">
                             <h3>Product Description</h3>
-                            <p>{{ product.description }}</p>
+                            <p v-html="product.description"></p>
                         </div>
                     </div>
                 </div><!--end main product area-->
