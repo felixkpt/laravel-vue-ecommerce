@@ -3,10 +3,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-8 col-lg-9">
-                    <ShopControl />
-                    <ProductsList />
+                    <ProductsList :reload="reload" />
                 </div>
-                <Sidebar />
+                <Sidebar @reload="emitReload()" />
             </div><!--end row-->
         </div><!-- end .container-fluid -->
     </Layout>
@@ -14,15 +13,23 @@
 <script>
 import Layout from '@/Components/Shared/Layout';
 import Sidebar from '@/Components/Shared/Sidebar';
-import ShopControl from '@/Components/Shared/ShopControl';
 import ProductsList from '@/Components/Shared/ProductsList';
 export default  {
     components: {
         Layout,
         Sidebar,
-        ShopControl,
         ProductsList,
     },
+    data() {
+        return {
+            reload: Math.random()
+        }
+    },
+    methods: {
+        emitReload() {
+            this.reload = Math.random()
+        }
+    }
      
 }
 </script>

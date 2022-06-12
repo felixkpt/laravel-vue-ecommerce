@@ -1,7 +1,8 @@
 <template>
+    <ShopControl @reload="getProducts()" @view-type-changed="setViewType()" :viewType="viewType" :category="category" />
     <div class="col-12">
-        <div class="row justify-content-center p-1 w-100 h-100" :class="`${$page.props.viewType == 'grid' ? 'row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3' : 'flex-column align-items-center'}`">
-            <div class="pb-1" :class="`${$page.props.viewType == 'grid' ? 'col' : 'col-12 col-md-6 col-lg-4'}`"  v-for="product in products.data" :key="product.id">
+        <div class="row justify-content-center p-1 w-100 h-100" :class="`${viewType == 'grid' ? 'row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3' : 'flex-column align-items-center'}`" v-if="products">
+            <div class="pb-1" :class="`${viewType == 'grid' ? 'col' : 'col-12 col-md-6 col-lg-4'}`"  v-for="product in products.data" :key="product.id">
                 <div class="d-flex justify-content-center">
                     <div class="product product-style-2 m-1">
                     <div class="product-wish text-end">
@@ -21,20 +22,32 @@
                 </div>
             </div>
         </div>
+        <div v-else class="d-flex justify-content-center">
+            <div class="col-9 col-4 text-center" style="padding-top:30px;">
+                <InlineLoader class="ms-auto" styling="background:inherit;font-size:20px;color:#ff7007;" text="Loading..." />
+            </div>
+        </div>
         <PaginationLinks :links="links" v-if="links.links" />
     </div>
 </template>
 
 <script>
+import ShopControl from '@/Components/Shared/ShopControl';
 import PaginationLinks from '@/Components/Shared/PaginationLinks';
+import InlineLoader from '@/Components/Shared/InlineLoader'
+import axios from 'axios';
 export default {
     components: {
+        ShopControl,
         PaginationLinks,
+        InlineLoader,
     },
+    props: ['category', 'reload'],
     data() {
         return {
-            products: this.$page.props.products,
-            form: {
+            products: null,
+            viewType: 'grid',
+             form: {
                 id: '',
                 name: '',
                 price: '',
@@ -50,6 +63,24 @@ export default {
             this.form.price = price;
             this.$inertia.post(`${this.$page.props.url}shop/cart`, this.form);
         },
+
+        setViewType: function() {
+            const shopControls = JSON.parse(localStorage.getItem('shopControls'))
+            if (shopControls && 'viewType' in shopControls) {
+                this.viewType = shopControls.viewType
+            }
+        },
+        async getProducts() {
+            const shopControls = JSON.parse(localStorage.getItem('shopControls'))
+            const url = new URL(`${this.$page.props.url}api/products`)
+            url.search = new URLSearchParams(shopControls)
+            
+            const resp = await axios.get(url)
+            if (resp.status === 200) {
+                const data = await resp.data
+                this.products = data.products
+            }
+        },
         
     },
     computed: {
@@ -57,6 +88,16 @@ export default {
             return {...this.products, data:{}}
         }
     },
+
+   watch: { 
+        reload: function() {
+            this.getProducts()
+        }
+    },
+    mounted() {
+        this.getProducts()
+        this.setViewType()
+    }
 
 }
 </script>

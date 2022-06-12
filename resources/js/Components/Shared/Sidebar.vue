@@ -21,7 +21,7 @@
         <div class="widget mercado-widget filter-widget price-filter">
             <h2 class="widget-title">Price Range</h2>
             <div class="widget-content">
-                <RangeSlider />
+                <RangeSlider @reload="reload()" />
             </div>
         </div><!-- Price-->
 
@@ -109,6 +109,9 @@ export default {
                 const data = await resp.data
                 this.popular = data
             }
+        },
+        reload() {
+            this.$emit('reload')
         }
     }
 }

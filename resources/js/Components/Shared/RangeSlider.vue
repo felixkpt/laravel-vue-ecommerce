@@ -5,7 +5,7 @@
             <input @click="rangeSlider('max')" type="range" min="1" max="1000" v-model="rangeMax" />
             <span class="range_min light left fw-bold">{{ format_amount(rangeMin) }}</span>
             <span class="text-center" style="right:0">
-                <InlineLoader styling="background:inherit;font-size:12px;color:forestgreen" text="Sorting..." v-if="loading"/>
+                <InlineLoader styling="background:inherit;font-size:12px;color:#ff7007" text="Sorting..." v-if="loading"/>
                 <div class="d-inline" v-else><i class="fa fa-minus" aria-hidden="true"></i></div>
             </span>
             <span class="range_max light right fw-bold">{{ format_amount(rangeMax) }}</span>
@@ -14,7 +14,6 @@
     
 </template>
 <script>
-import axios from 'axios';
 import InlineLoader from '@/Components/Shared/InlineLoader'
 export default {
     components: {
@@ -55,23 +54,24 @@ export default {
             this.loading = true;
             this.priceSort();
         },
-        async priceSort(get = false) {
-            const res = await new Promise((resolve, reject) => {
-                this.axiosPriceSort(this.rangeMin, this.rangeMax, get)
-                .then((resp) => {
-                    resolve(resp);
-                    this.loading = false;
-                    this.$inertia.reload();
-                }).catch((err) => {
-                    reject(err);
-                    alert("Whoopsy! Server Error, try again later.");
-                });
-            });
-
-            if (res.data) {
-                this.rangeMin = res.data.min_price;
-                this.rangeMax = res.data.max_price;
+        priceSort() {
+            this.shopControls({min_price: this.rangeMin})
+            this.shopControls({max_price: this.rangeMax})
+            this.$emit('reload')
+            setTimeout(() => {
+                this.loading = false
+            }, 1500);
+        },
+        shopControls(item) {
+            let shopControls = JSON.parse(localStorage.getItem('shopControls'))
+            if (shopControls) {
+                shopControls = {...shopControls, ...item}
+            }else {
+                shopControls = item
             }
+
+            localStorage.setItem('shopControls', JSON.stringify(shopControls))
+            
         },
         addSeparator(nStr) {
             nStr += '';
@@ -87,27 +87,20 @@ export default {
         format_amount(amount, suffix = false) {
             return !suffix ? this.currency + amount : amount + this.currency;
         },
-        async axiosPriceSort(min_price, max_price, get) {
-            return new Promise(
-                (resolve, reject) => {
-                    axios.post(`${this.$page.props.url}shop/price-sort`, 
-                            {
-                                min_price: min_price, 
-                                max_price: max_price,
-                                get: get,
-                            }
-                    )
-                    .then((resp) => {
-                        resolve(resp);
-                    }).then(() => {}).catch((err) => {
-                        reject("Whoop!: " + err);
-                    })
-                }
-            ); 
-        }
+        setRangeVals() {
+            const shopControls = JSON.parse(localStorage.getItem('shopControls'))
+            if (shopControls && 'min_price' in shopControls) {
+                this.rangeMin = shopControls.min_price
+            }
+            if (shopControls && 'max_price' in shopControls) {
+                this.rangeMax = shopControls.max_price
+            }
+        },
+      
     },
+    
     created() {
-        this.priceSort('true');
+        this.setRangeVals();
     }
 }
 </script>

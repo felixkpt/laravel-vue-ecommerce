@@ -22,7 +22,23 @@ class ShopController extends Controller
         $this->min_price = session()->get('min_price') ?? $this->min_price;
         $this->max_price = session()->get('max_price') ?? $this->max_price;
         $this->viewType = session()->get('viewType') ?? $this->viewType;
-
+        
+    }
+    public function products() {
+        $this->mount();
+        $products = Product::where([['regular_price', '>=', $this->min_price], ['regular_price', '<=', $this->max_price]]);
+        if ($this->orderby == 'date') {
+            $products = $products->orderby('created_at', 'DESC');
+        }elseif ($this->orderby == 'price') {
+            $products = $products->orderby('regular_price', 'ASC');
+        }elseif ($this->orderby == 'price-desc') {
+            $products = $products->orderby('regular_price', 'DESC');
+        }
+    
+        $products = $products->paginate($this->perPage);
+        // dd($products);
+    
+        return $products;
     }
 //sitejaba trustpilot
     /**
@@ -67,52 +83,5 @@ class ShopController extends Controller
         // var_dump(Cart::content()[0]);die;
         return redirect()->route('shop.cart');
     }
-    public function orderby(Request $request) {
-        if ($request->get('get') != 'true') {
-            session(['orderby' => $request->get('orderby')]);
-        }
-        $this->mount();
-        return response(['orderby' => $this->orderby], 201);
-    }   
-    public function perPage(Request $request) {
-        if ($request->get('get') != 'true') {
-            session(['perPage' => (int) $request->get('perPage')]);
-        }
-        $this->mount();
-        return response(['perPage' => $this->perPage], 201);
-    }
-
-    public function priceSort(Request $request) {
-        if ($request->get('get') != 'true') {
-            session(['min_price' => (int) $request->get('min_price'), 'max_price' => (int) $request->get('max_price')]);
-        }
-        $this->mount();
-       return response(['min_price' => $this->min_price, 'max_price' => $this->max_price], 201);
-    }
     
-    public function viewType(Request $request) {
-        if ($request->get('get') != 'true') {
-            session(['viewType' => $request->get('viewType')]);
-        }
-
-        $this->mount();
-       return response(['viewType' => $this->viewType], 201);
-    }
-    
-    public function products() {
-        $this->mount();
-        $products = Product::where([['regular_price', '>=', $this->min_price], ['regular_price', '<=', $this->max_price]]);
-        if ($this->orderby == 'date') {
-            $products = $products->orderby('created_at', 'DESC');
-        }elseif ($this->orderby == 'price') {
-            $products = $products->orderby('regular_price', 'ASC');
-        }elseif ($this->orderby == 'price-desc') {
-            $products = $products->orderby('regular_price', 'DESC');
-        }
-
-        $products = $products->paginate($this->perPage);
-        // dd($products);
-
-        return $products;
-    }
 }
