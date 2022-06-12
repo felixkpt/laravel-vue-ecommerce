@@ -36,7 +36,6 @@ class EditProductController extends Controller
         $rules = [
             'name' => 'required|min:3|max:100|unique:products,name,'.$id.',id',
             'slug' => 'required|min:3|max:120|unique:products,slug,'.$id.',id',
-
             'short_description' => ['required', 'string', 
                 function ($attribute, $value, $fail) { if (str_word_count($value) <= 1) { $fail(ucfirst($attribute).' is less than 1 word'); }},
                 function ($attribute, $value, $fail) { if (str_word_count($value) >= $this->max_words_des) { $fail(ucfirst($attribute).' is more than '.$this->max_words_des.' words'); }},
@@ -45,8 +44,14 @@ class EditProductController extends Controller
                 function ($attribute, $value, $fail) { if (str_word_count($value) <= 1) { $fail(ucfirst($attribute).' is less than 1 word'); }},
                 function ($attribute, $value, $fail) { if (str_word_count($value) >= $this->max_words) { $fail(ucfirst($attribute).' is more than '.$this->max_words.' words'); }},
             ],
-
-        ];
+            'regular_price' => 'required|min:1',
+            'sale_price' => 'nullable|number',
+            'SKU' => 'required|min:1',
+            'stock_status' => 'required',
+            'quantity' => 'required|min:1',
+            'image' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            ];
+    
         $image_name = 'default.jpg';
         if ($request->hasFile('image')) {
             $rules = array_merge($rules, ['image' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048']);

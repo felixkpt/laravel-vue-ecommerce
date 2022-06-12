@@ -14,12 +14,14 @@ class ShopController extends Controller
     protected $perPage = 12;
     protected $min_price = 1;
     protected $max_price = 1000;
+    protected $viewType = 'grid';
     public function mount()
     {
         $this->orderby = session()->get('orderby') ?? $this->orderby;
         $this->perPage = session()->get('perPage') ?? $this->perPage;
         $this->min_price = session()->get('min_price') ?? $this->min_price;
         $this->max_price = session()->get('max_price') ?? $this->max_price;
+        $this->viewType = session()->get('viewType') ?? $this->viewType;
 
     }
 //sitejaba trustpilot
@@ -30,17 +32,17 @@ class ShopController extends Controller
      */
     public function index(Request $request) {
         $this->mount();
-        $perPage = $this->perPage ?? $request->perPage;
         
-        $sortings = ['perPage' => $perPage, 'orderby' => $this->orderby];
-        
-        $products = $this->products($perPage);
+        $sortings = ['perPage' => $this->perPage, 'orderby' => $this->orderby, 'viewType' => $this->viewType];
+        // dd($sortings);
+        $products = $this->products();
         
         $categories = Category::all();
         $title = 'Welcome to quick shoppers';
         $description = '';
         $data = ['products' => $products, 'categories' => $categories, 'title' => $title, 'description' => $description,];
         $data = array_merge($data, $sortings);
+        // dd($data);
         return Inertia::render('Shop', $data);
     }
     public function store(Request $request) {
@@ -86,6 +88,15 @@ class ShopController extends Controller
         }
         $this->mount();
        return response(['min_price' => $this->min_price, 'max_price' => $this->max_price], 201);
+    }
+    
+    public function viewType(Request $request) {
+        if ($request->get('get') != 'true') {
+            session(['viewType' => $request->get('viewType')]);
+        }
+
+        $this->mount();
+       return response(['viewType' => $this->viewType], 201);
     }
     
     public function products() {

@@ -6,7 +6,7 @@ import {createInertiaApp, Head, Link} from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 import axios from 'axios';
 
-const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Welcome to quick shoppers';
 // console.log('Still working well without duplicating url.....')
 createInertiaApp({
     id: 'app',

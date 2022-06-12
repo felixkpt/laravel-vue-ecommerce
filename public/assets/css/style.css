@@ -1794,7 +1794,7 @@ li.menu-item .nav-label.sale-label::before{
 .product .product-info .product-rating,
 .wrap-product-detail .detail-info .product-rating{
     display: inline-block;
-    margin-top: 8px;
+    margin-top: 4px;
 }
 
 .product-style-2 .product-info .product-rating{
@@ -1812,7 +1812,7 @@ li.menu-item .nav-label.sale-label::before{
 .product .product-info .product-rating i,
 .product-style-2 .product-info .product-rating i{
     display: inline-block;
-    font-size: 13px;
+    font-size: 14px;
     color: #efce4a;
     line-height: 20px;
 }
@@ -4256,25 +4256,7 @@ article.single-post blockquote p:last-child::after{
     margin-bottom: 0;
     margin-top: 40px;
 }
-.wrap-product-detail .detail-media{
-    display: inline-block;
-    width: 54.0229885057%;
-    float: left;
-    /*padding-right: 3px;*/
-}
-.wrap-product-detail .detail-info{
-    display: inline-block;
-    width: 45.9770114943%;
-    float: left;
-    padding-left: 30px;
-    padding-top: 10px;
-}
-.wrap-product-detail .advance-info{
-    display: block;
-    float: left;
-    width: 100%;
-    margin-top: 65px;
-}
+
 .wrap-product-detail .detail-media .flex-control-thumbs li{
     width: auto;
     float: none;
@@ -4753,9 +4735,6 @@ table.shop_attributes tbody{
 }
 .wrap-product-detail .detail-info .wrap-price{
     margin-top: 29px;
-}
-.wrap-product-detail .detail-info .wrap-social{
-    margin-top: 45px;
 }
 .wrap-product-detail .detail-info .stock-info{
     margin-bottom: 11px;
@@ -6468,17 +6447,6 @@ background-color: #888888;
     .wrap-login-item .form-item.register-form::before{
         left: -14.5px;
     }
-    .wrap-product-detail .detail-media{
-        width: 100%;
-        max-width: 470px;
-        display: block;
-        margin: 0 auto;
-        float: none;
-    }
-    .wrap-product-detail .detail-info{
-        width: 100%;
-        padding-left: 0;
-    }
     .wrap-combined-box .box-item{
         width: 100%;
         padding-left: 0;
@@ -7094,45 +7062,7 @@ background-color: #888888;
     }
 }
 
-@media (max-width: 360px) {
-    .coppy-right-box .coppy-right-text{
-        max-width: 200px;
-        margin: 0 auto;
-        float: none;
-    }
-}
 
-.wrap-special-title {
-	display: block;
-	width: 100%;
-	position: relative;
-	text-align: center;
-	height: 250px;
-	background: url('../../assets/images/2-megamenu_kid_toy_1.jpg') !important;
-	background-size: cover;
-	background-position: center;
-}
- .pb-60{
-     padding-bottom:60px;
- }
-
- .form-stl{
-    border: 1px solid #e6e6e6;
-    padding: 40px 20px;
-    /* box-shadow: 0 8px 6px -6px black; */
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
-    border-radius: .5rem;
- }
-
- .wrap-login-item .form-item.register-form::before {
-	content: '';
-	width: 1px;
-	background: transparent;
-	position: absolute;
-	top: 10px;
-	left: -63px;
-	bottom: 0;
-}
 .wrap-product-detail .detail-info .quantity-input .btn-increase {
 	margin-left: 10px;
 	margin-right: 1px;
@@ -7145,31 +7075,6 @@ background-color: #888888;
 	font-size: 16px;
 }
 
-.btn-submitx {
-	background: #ff2832;
-	font-size: 17px;
-	color: #ffffff;
-	line-height: 19px;
-	border: none;
-	border-radius: 0;
-	padding: 15px 30px;
-	min-width: 119px;
-	text-align: center;
-	margin-top: 28px;
-	-webkit-transition: background 0.3s ease 0s;
-	-o-transition: background 0.3s ease 0s;
-	-moz-transition: background 0.3s ease 0s;
-	transition: background 0.3s ease 0s;
-}
-.btn-submitx:hover {
-	color: #ffffff !important;
-	background: #333333 !important;
-}
-.wrap-login-item .form-item.login-form {
-	padding-right: 40px;
-	margin-bottom: 65px;
-	padding-left: 40px;
-}
 @media(max-width: 574px) {
     .vueperslides__arrow svg {
     fill: #2d2d2d!important;

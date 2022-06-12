@@ -21,8 +21,8 @@
                 </select>
             </div>
             <div class="change-display-mode">
-                <a href="#grid" class="grid-mode display-mode active"><i class="fa fa-th"></i>Grid</a>
-                <a href="#list" class="list-mode display-mode"><i class="fa fa-th-list"></i>List</a>
+                <a href="#grid" @click.prevent="viewTypeUpdate('grid')" class="grid-mode display-mode" :class="`${viewType == 'grid' && 'active'}`"><i class="fa fa-th"></i>Grid</a>
+                <a href="#list" @click.prevent="viewTypeUpdate('list')" class="list-mode display-mode" :class="`${viewType == 'list' && 'active'}`"><i class="fa fa-th-list"></i>List</a>
             </div>
         </div>
     </div><!--end wrap shop control-->
@@ -32,24 +32,24 @@
 export default {
 
     props: {
-        orderby: {
-                type: String,
-                default: 'default'
-            },
-        perPage: {
-            type: Number,
-            default: 15
-        },
         category: {
             type: Object,
             default: {}
         }
     },
+    data() {
+      
+      return {
+        orderby: this.$page.props.orderby,
+        perPage: this.$page.props.perPage,
+        viewType: this.$page.props.viewType,
+      }
+    },
     methods: {
         async orderbyUpdate(event, get = false) {
                 let orderby = event ? event.target.value : null;
                 await axios.post(`${this.$page.props.url}shop/orderby`, {orderby: orderby, get: get})
-                    .then((resp) => {
+                    .then(() => {
                             this.$inertia.reload()
                     }).catch(() => {
                         alert('Whoops! But there was an error.');
@@ -58,8 +58,18 @@ export default {
         async perPageUpdate(event, get = false) {
             let perPage =  event ? event.target.value : null;
             await axios.post(`${this.$page.props.url}shop/per-page`, {perPage: perPage, get: get})
-                .then((resp) => {
-                        this.$inertia.visit('shop');
+                .then(() => {
+                        this.$inertia.reload()
+                }).catch((err) => {
+                    console.log(err)
+                    alert('Whoops! But there was an error.');
+                });
+        },
+        async viewTypeUpdate(event, get = false) {
+            let viewType =  event ? event : null;
+            await axios.post(`${this.$page.props.url}shop/viewType`, {viewType: viewType, get: get})
+                .then(() => {
+                        this.$inertia.reload();
                 }).catch((err) => {
                     console.log(err)
                     alert('Whoops! But there was an error.');
@@ -67,7 +77,7 @@ export default {
         },
     },
      mounted () {
-        // console.log(this.category.name, this.category.name == undefined)
+        console.log(this.perPage)
     }
 
 }

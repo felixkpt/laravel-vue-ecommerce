@@ -3,34 +3,25 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-8 col-lg-9">
-                    <div class="wrap-product-detail">
-                        <div class="detail-media">
+                    <div class="row wrap-product-detail">
+                        <div class="col-12 col-md-6 detail-media">
                             <div class="product-gallery">
-                                <ul class="slides">
-
-                                    <li :data-thumb="`${product.image}`">
-                                        <div class="mx-auto" style="max-width:300px;max-height:300px">
-                                            <img class="mx-auto" style="max-width:300px;max-height:300px" :src="`${product.image}`" :alt="product.name" />
-                                        </div>
-                                    </li>
-
-                                </ul>
+                                <div class="mx-auto" style="max-width:240px;max-height:240px">
+                                    <img class="mx-auto" style="width:100%;height:100%" :src="`${product.image}`" :alt="product.name" />
+                                </div>
                             </div>
                         </div>
-                        <div class="detail-info">
+                        <div class="col-12 col-md-6 detail-info">
                             <div class="product-rating">
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 <i class="fa fa-star" aria-hidden="true"></i>
-                                <a href="#" class="count-review"> (5 reviews)</a>
+                                <a href="#" class="count-review"> (7 reviews)</a>
                             </div>
                             <h2 class="product-name">{{ product.name }}</h2>
-                            <div class="wrap-social">
-                                <a class="link-socail" href="#"><img :src="`${$page.props.url}/public/assets/images/social-list.png`" alt=""></a>
-                            </div>
-
+                 
                             <div class="wrap-price">
                                 <ins>
                                     <span class="product-price" v-if="product.sale_price">{{ product.sale_price }}</span>
@@ -60,7 +51,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="description">
+                        <div class="col-12 description">
                             <h3>Product Description</h3>
                             <p v-html="product.description"></p>
                         </div>

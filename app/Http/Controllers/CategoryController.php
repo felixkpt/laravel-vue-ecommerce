@@ -10,20 +10,36 @@ use App\Models\Product;
 
 class CategoryController extends Controller
 {
-    protected $orderby;
-    protected $postPerPage;
+    protected $orderby = 'default';
+    protected $perPage = 12;
+    protected $min_price = 1;
+    protected $max_price = 1000;
+    protected $viewType = 'grid';
+    public function mount()
+    {
+        $this->orderby = session()->get('orderby') ?? $this->orderby;
+        $this->perPage = session()->get('perPage') ?? $this->perPage;
+        $this->min_price = session()->get('min_price') ?? $this->min_price;
+        $this->max_price = session()->get('max_price') ?? $this->max_price;
+        $this->viewType = session()->get('viewType') ?? $this->viewType;
+
+    }
 //sitejaba trustpilot
     /**
      * Display a listing of the resource.
      *
      * @return \Inertia\Response
      */
-    public function index($slug, Request $request) {
+    public function index($slug) {
+        $this->mount();
+        $sortings = ['perPage' => $this->perPage, 'orderby' => $this->orderby, 'viewType' => $this->viewType];
+
         $category = Category::where('slug', $slug)->first();
         $products = $this->products($category->id);
         $title = 'Welcome to quick shoppers';
         $description = '';
         $data = ['category' => $category, 'products' => $products, 'title' => $title, 'description' => $description,];
+        $data = array_merge($data, $sortings);
         return Inertia::render('Category', $data);
     }
     public function store(Request $request) {
@@ -39,18 +55,18 @@ class CategoryController extends Controller
     }
 
     public function products($category_id) {
-        $this->orderby = session()->get('orderby');
-        $this->postPerPage = session()->get('postPerPage');
-
+        $this->mount();
+        $products = Product::where('category_id', $category_id)->where([['regular_price', '>=', $this->min_price], ['regular_price', '<=', $this->max_price]]);
         if ($this->orderby == 'date') {
-            $products = Product::where('category_id', $category_id)->orderby('created_at', 'DESC')->limit($this->postPerPage)->get();
+            $products = $products->orderby('created_at', 'DESC');
         }elseif ($this->orderby == 'price') {
-            $products = Product::where('category_id', $category_id)->orderby('regular_price', 'ASC')->limit($this->postPerPage)->get();
+            $products = $products->orderby('regular_price', 'ASC');
         }elseif ($this->orderby == 'price-desc') {
-            $products = Product::where('category_id', $category_id)->orderby('regular_price', 'DESC')->limit($this->postPerPage)->get();
-        }else{
-            $products = Product::where('category_id', $category_id)->limit($this->postPerPage)->get();
+            $products = $products->orderby('regular_price', 'DESC');
         }
+
+        $products = $products->paginate($this->perPage);
+        // dd($products);
 
         return $products;
     }

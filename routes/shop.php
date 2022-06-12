@@ -17,6 +17,7 @@ Route::post('/shop/cart', [ShopController::class, 'store']);
 Route::post('/shop/orderby', [ShopController::class, 'orderby']);
 Route::post('/shop/per-page', [ShopController::class, 'perPage']);
 Route::post('/shop/price-sort', [ShopController::class, 'priceSort']);
+Route::post('/shop/viewType', [ShopController::class, 'viewType']);
 
 Route::get('/cart', [CartController::class, 'index'])->name('shop.cart');
 Route::post('/cart/json', [CartController::class, 'json'])->name('shop.cart.json');
