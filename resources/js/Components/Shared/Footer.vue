@@ -66,7 +66,7 @@ export default {
             const resp = await axios.get(`${this.$page.props.url}api/products/popular`)
             if (resp.status == 200) {
                 const data = await resp.data
-                this.popular = data
+                this.popular = data.reverse()
             }
         },
     },
