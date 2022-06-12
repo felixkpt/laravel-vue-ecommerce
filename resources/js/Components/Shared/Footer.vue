@@ -10,10 +10,7 @@
                     <div class="row">
                         <div class="col">
                             <ul class="list-unstyled">
-                                <li><a class="text-white-50 text-decoration-none" href="#">Tecno Pop2</a></li>
-                                <li><a class="text-white-50 text-decoration-none" href="#">Huawei Smart</a></li>
-                                <li><a class="text-white-50 text-decoration-none" href="#">Infinix Hot N</a></li>
-                                <li><a class="text-white-50 text-decoration-none" href="#">Camon V 21.1</a></li>
+                                <li v-for="product in popular" :key="product.id"><a class="text-white-50 text-decoration-none" :href="`${$page.props.url}product/${product.slug}`" :title="product.name">{{ product.name }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -46,7 +43,9 @@
                     <h5 class="text-info">Suggestions</h5>
                     <div class="row">
                         <div class="col">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam tenetur culpa et earum quaerat placeat aliquam at ducimus tempore enim?
+                            <a href="https://legalpremiums.com/companies/state-farm-car-insurance" class="text-decoration-none text-muted">
+                                State Farm's low complaint rate and extremely competitive vehicle insurance premiums make it worthwhile to investigate.AdvantagesPeople who have had an accident or received a speeding ticket have terrible rates. (USAA is a little less expensive, but only military families and veterans are...
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -57,5 +56,22 @@
 <script>
 export default {
 
+    data() {
+        return {
+            popular: null,
+        }
+    },
+    methods: {
+        async getPopular() {
+            const resp = await axios.get(`${this.$page.props.url}api/products/popular`)
+            if (resp.status == 200) {
+                const data = await resp.data
+                this.popular = data
+            }
+        },
+    },
+    mounted() {
+        this.getPopular()
+    },
 }
 </script>

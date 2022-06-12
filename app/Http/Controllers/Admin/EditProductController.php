@@ -45,11 +45,10 @@ class EditProductController extends Controller
                 function ($attribute, $value, $fail) { if (str_word_count($value) >= $this->max_words) { $fail(ucfirst($attribute).' is more than '.$this->max_words.' words'); }},
             ],
             'regular_price' => 'required|min:1',
-            'sale_price' => 'nullable|number',
+            'sale_price' => 'nullable|numeric',
             'SKU' => 'required|min:1',
             'stock_status' => 'required',
             'quantity' => 'required|min:1',
-            'image' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
             ];
     
         $image_name = 'default.jpg';

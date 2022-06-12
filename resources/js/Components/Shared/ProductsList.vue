@@ -71,7 +71,10 @@ export default {
             }
         },
         async getProducts() {
-            const shopControls = JSON.parse(localStorage.getItem('shopControls'))
+            let shopControls = JSON.parse(localStorage.getItem('shopControls'))
+            if (this.category) {
+                shopControls = {...shopControls, 'category': this.category.slug}
+            }
             const url = new URL(`${this.$page.props.url}api/products`)
             url.search = new URLSearchParams(shopControls)
             

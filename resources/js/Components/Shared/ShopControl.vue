@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import InlineLoader from '@/Components/Shared/InlineLoader'
+    import InlineLoader from '@/Components/Shared/InlineLoader'
 export default {
     components: {
         InlineLoader,

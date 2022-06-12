@@ -104,7 +104,7 @@ export default  {
                 stock_status: this.$page.props.product.stock_status,
                 quantity: this.$page.props.product.quantity,
                 image: null,
-                image_url: this.$page.props.asset + 'uploads/' + this.$page.props.product.image,
+                image_url: this.$page.props.product.image,
                 category_id: this.$page.props.product.category_id,
             }
         }

@@ -13,8 +13,12 @@ class ProductController extends Controller
     protected $perPage = 12;
     protected $min_price = 1;
     protected $max_price = 1000;
+    protected $category = null;
     public function products() {
         $products = Product::where([['regular_price', '>=', $this->min_price], ['regular_price', '<=', $this->max_price]]);
+        if ($this->category) {
+            $products->where('category_id', $this->category);  
+        }
         if ($this->orderby == 'date') {
             $products = $products->orderby('created_at', 'DESC');
         }elseif ($this->orderby == 'price') {
@@ -48,6 +52,16 @@ class ProductController extends Controller
         if ($request->get('max_price')) {
             $this->max_price = $request->get('max_price');
         }
+        if ($request->get('category')) {
+            $this->category = $request->get('category');
+        }
+
+        if ($request->get('category')) {
+            $cat = Category::where('slug', $this->category)->first();
+            if ($cat ) {
+                $this->category = $cat->id;
+            }  
+        }
         
         $sortings = ['perPage' => $this->perPage, 'orderby' => $this->orderby];
         
@@ -67,35 +81,5 @@ class ProductController extends Controller
         return response()->json($popular);
     }
 
-    public function orderby(Request $request) {
-        if ($request->get('get') != 'true') {
-            session(['orderby' => $request->get('orderby')]);
-        }
-        $this->mount();
-        return response(['orderby' => $this->orderby], 201);
-    }   
-    public function perPage(Request $request) {
-        if ($request->get('get') != 'true') {
-            session(['perPage' => (int) $request->get('perPage')]);
-        }
-        $this->mount();
-        return response(['perPage' => $this->perPage], 201);
-    }
-
-    public function priceSort(Request $request) {
-        if ($request->get('get') != 'true') {
-            session(['min_price' => (int) $request->get('min_price'), 'max_price' => (int) $request->get('max_price')]);
-        }
-        $this->mount();
-       return response(['min_price' => $this->min_price, 'max_price' => $this->max_price], 201);
-    }
     
-    public function viewType(Request $request) {
-        if ($request->get('get') != 'true') {
-            session(['viewType' => $request->get('viewType')]);
-        }
-
-        $this->mount();
-       return response(['viewType' => $this->viewType], 201);
-    }
 }
