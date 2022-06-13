@@ -18,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Inertia::share('appName', config('app.name'));
         Inertia::share('url', url('').'/');
+        Inertia::share('uri', request()->path().'/');
         Inertia::share('current_url', url()->current());
         Inertia::share('asset', asset(''));
 

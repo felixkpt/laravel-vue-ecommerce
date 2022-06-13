@@ -14,7 +14,7 @@ class ProductController extends Controller
     protected $min_price = 1;
     protected $max_price = 1000;
     protected $category = null;
-    public function products() {
+    public function products($path = null) {
         $products = Product::where([['regular_price', '>=', $this->min_price], ['regular_price', '<=', $this->max_price]]);
         if ($this->category) {
             $products->where('category_id', $this->category);  
@@ -28,7 +28,7 @@ class ProductController extends Controller
         }
     
         $products = $products->paginate($this->perPage);
-        // dd($products);
+        $products->withPath('');
     
         return $products;
     }
@@ -39,7 +39,6 @@ class ProductController extends Controller
      * @return \Inertia\Response
      */
     public function index(Request $request) {
-
         if ($request->get('orderby')) {
             $this->orderby = $request->get('orderby');
         }
@@ -62,10 +61,15 @@ class ProductController extends Controller
                 $this->category = $cat->id;
             }  
         }
+
+        $path = null;
+        if ($request->get('path')) {
+            $path = 'n';
+        }
         
         $sortings = ['perPage' => $this->perPage, 'orderby' => $this->orderby];
         
-        $products = $this->products();
+        $products = $this->products($path);
         
         $categories = Category::all();
         $title = 'Welcome to quick shoppers';

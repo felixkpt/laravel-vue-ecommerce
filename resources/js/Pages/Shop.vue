@@ -3,9 +3,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-8 col-lg-9">
-                    <ProductsList :reload="reload" />
+                    <ProductsList :reload="reload" @reloaded="emitReloaded()" />
                 </div>
-                <Sidebar @reload="emitReload()" />
+                <Sidebar @reload="emitReload()" :reloaded="reloaded" :showPriceRange="true" />
             </div><!--end row-->
         </div><!-- end .container-fluid -->
     </Layout>
@@ -22,12 +22,16 @@ export default  {
     },
     data() {
         return {
-            reload: Math.random()
+            reload: Math.random(),
+            reloaded: Math.random(),
         }
     },
     methods: {
         emitReload() {
             this.reload = Math.random()
+        },
+        emitReloaded() {
+            this.reloaded = Math.random()
         }
     }
      

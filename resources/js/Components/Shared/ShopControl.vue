@@ -4,7 +4,7 @@
         <div class="wrap-right">
             <div classs="sort-item orderby">
                 <div class="d-flex">
-                    <div class="col px-2" v-if="loading">
+                    <div class="col px-2" v-if="loading && !reloaded">
                         <InlineLoader class="ms-auto" styling="background:inherit;font-size:12px;color:#ff7007;" text="" />
                     </div>
                     <div class="col">
@@ -49,21 +49,19 @@ export default {
         viewType: {
             type: String
         },
+        reloaded: {
+            type: Boolean
+        }
     },
     data() {
       
       return {
         loading: false,
-        orderby: this.$page.props.orderby,
-        perPage: this.$page.props.perPage,
       }
     },
     methods: {
         shopControls(item) {
             this.loading = true
-            setTimeout( () => {
-                this.loading = false
-            }, 1500)
 
             let shopControls = JSON.parse(localStorage.getItem('shopControls'))
             if (shopControls) {
@@ -90,9 +88,22 @@ export default {
             this.$emit('view-type-changed')
         },
     },
-     mounted () {
-        // console.log(this.perPage)
-    }
+    computed: {
+        orderby() {
+            const shopControls = JSON.parse(localStorage.getItem('shopControls'))
+            if (shopControls && 'orderby' in shopControls) {
+                return shopControls.orderby
+            }
+            return 'date'
+        },
+        perPage() {
+            const shopControls = JSON.parse(localStorage.getItem('shopControls'))
+            if (shopControls && 'perPage' in shopControls) {
+                return shopControls.perPage
+            }
+            return 12
+        }
+    },
 
 }
 </script>

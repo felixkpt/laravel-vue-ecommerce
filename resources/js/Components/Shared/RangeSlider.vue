@@ -19,6 +19,7 @@ export default {
     components: {
         InlineLoader,
     },
+    props: ['reloaded'],
     data() {
         return {
             loading: false, 
@@ -58,9 +59,6 @@ export default {
             this.shopControls({min_price: this.rangeMin})
             this.shopControls({max_price: this.rangeMax})
             this.$emit('reload')
-            setTimeout(() => {
-                this.loading = false
-            }, 1500);
         },
         shopControls(item) {
             let shopControls = JSON.parse(localStorage.getItem('shopControls'))
@@ -101,6 +99,11 @@ export default {
     
     created() {
         this.setRangeVals();
+    },
+    watch: {
+        reloaded: function() {
+            this.loading = false
+        }
     }
 }
 </script>
