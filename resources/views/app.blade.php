@@ -22,8 +22,19 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/color-01.css') }}">
 
-        @if (11 > 2)
+        @if(Route::is('admin.*') )
           <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/dashboard.css') }}"> 
+        @endif
+        @if ($_SERVER['HTTP_HOST'] !== 'localhost')
+          <!-- Global site tag (gtag.js) - Google Analytics -->
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-E6H7E85R9L"></script>
+          <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-E6H7E85R9L');
+          </script>
         @endif
     </head>
     <body class="font-sans antialiased">
