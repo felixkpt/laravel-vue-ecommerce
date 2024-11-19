@@ -53,7 +53,7 @@
                         </div>
                         <div class="col-12 description">
                             <h3>Product Description</h3>
-                            <p v-html="product.description"></p>
+                            <p v-html="formattedDescription"></p>
                         </div>
                     </div>
                 </div><!--end main product area-->
@@ -69,6 +69,11 @@ export default  {
     components: {
        Layout,
        Sidebar,
+    },
+    computed: {
+    formattedDescription() {
+      return this.product.description.replace(/\n\n/g, '<br>');
+    }
     },
     props: ['product'],
     data() {

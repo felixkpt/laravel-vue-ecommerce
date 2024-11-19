@@ -50,7 +50,7 @@ class ProductFactory extends Factory
             'regular_price' => $reg,
             'sale_price' => $sal,
             'SKU' => 'DIGI'.$this->faker->unique()->numberBetween(100, 500),
-            'stock_status' => 'instock',
+            'stock_status' => 'in_stock',
             'quantity' => $this->faker->numberBetween(100, 200),
             'image' => $this->faker->randomElement($images),
             'category_id' => $cat,

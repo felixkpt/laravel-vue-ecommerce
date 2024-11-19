@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\OrdersController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,5 +37,5 @@ Route::get('/test', function() {
     return view('test');
 });
 
-
-Route::get('/test-post', [App\Http\Controllers\TestController::class, 'index']);
+Route::post('/finalize-checkout', [OrdersController::class, 'finalizeCheckout']);
+Route::get('/checkout-success', [OrdersController::class, 'checkoutSuccess']);

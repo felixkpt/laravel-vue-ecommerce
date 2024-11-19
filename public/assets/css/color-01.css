@@ -48,8 +48,6 @@
 .primary .menu-item.home-icon,
 .center-section .wrap-search-form button,
 .wrap-banner .banner-link,
-.wrap-main-slide .slide-1 .btn-link,
-.wrap-main-slide .slide-3 .btn-link,
 .product-style-2 .product-thumnail .wrap-btn .function-link:hover,
 .wrap-footer-content .wrap-function-info,
 .wrap-newletter-footer .btn-submit,
@@ -83,6 +81,7 @@
 .wrap-pagination-info .page-numbers li .page-number-item:hover{
 	background: #ff2832 !important;
 }
+
 .flex-control-thumbs img.flex-active,
 .wrap-product-detail .advance-info .tab-control a.active,
 .wrap-product-detail .detail-info .quantity-input .btn:hover,
@@ -105,6 +104,20 @@
 .wrap-footer-content .wrap-function-info .fc-info-item{
 	border-color: #ff7007 !important;
 }
+
 .wrap-footer-content .wrap-function-info .fc-info-item .wrap-left-info .fc-desc{
 	color: #ffc2c4 !important;
+}
+
+.wrap-main-slide .slide-1 .btn-link,
+.wrap-main-slide .slide-3 .btn-link{
+	background: #ff2832;
+	border-radius: 5px;
+	
+}
+
+.wrap-main-slide .slide-2 .btn-link
+{
+	background: rgb(13 202 240);
+	border-radius: 5px;
 }

@@ -11,7 +11,7 @@ class DetailsController extends Controller
 {
 
     public function index($slug) {
-        $product = Product::where('slug', $slug)->first();
+        $product = Product::where('slug', $slug)->firstorfail();
         $asd = Cart::content()->where('id', $product->id);
         $cart_data = 0;
         foreach ($asd as $row) {

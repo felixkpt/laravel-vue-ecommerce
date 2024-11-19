@@ -45,7 +45,7 @@
                                         <label for="inStock" class="form-label">In Stock: </label>
                                         <select class="form-select" id="inStock" v-model="form.stock_status">
                                             <option value="0">--Select--</option>
-                                            <option value="instock">Yes</option>
+                                            <option value="in_stock">Yes</option>
                                             <option value="outstock">No</option>
                                         </select>
                                     </div>
