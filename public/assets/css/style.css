@@ -7115,3 +7115,12 @@ background-color: #888888;
     text-overflow: ellipsis; /* Apply ellipsis to truncated text */
 
 }
+
+#mercado_main .nav-item{
+border-radius: 2px;
+min-width: 50px;
+}
+
+#mercado_main .nav-item:hover{
+    background:red!important;
+}

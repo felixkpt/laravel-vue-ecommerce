@@ -176,9 +176,7 @@
                                         </p>
                                     </div>
                                     <div class="summary-item payment-method">
-                                        <h4 class="">
-                                            Payment Method
-                                        </h4>
+                                        <h4 class="">Payment Method</h4>
                                         <div
                                             v-if="formIsValid"
                                             class="choose-payment-methods"
@@ -245,6 +243,9 @@
                                 You have no items in your cart.
                             </div>
                         </div>
+                        <div class="row" v-if="cart_data.count == 0">
+                            <MostViewedProducts/>
+                        </div>
                     </div>
                 </div>
                 <Sidebar />
@@ -257,11 +258,13 @@
 import Layout from "@/Components/Shared/Layout";
 import Sidebar from "@/Components/Shared/Sidebar";
 import PayWithPaystack from "./PayWithPaystack.vue";
+import MostViewedProducts from "../Components/MostViewedProducts.vue";
 
 export default {
     components: {
         Layout,
         Sidebar,
+       MostViewedProducts,
         PayWithPaystack,
     },
     data() {
