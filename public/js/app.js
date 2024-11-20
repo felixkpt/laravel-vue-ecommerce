@@ -22425,15 +22425,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     onPaymentDone: function onPaymentDone(reference) {
-      console.log("Yes!");
-      this.paymentReference = reference; // Store the reference from Paystack
-
       console.log("Payment successful. Reference:", reference);
       this.$inertia.post("".concat(this.$page.props.url, "finalize-checkout"), {
         billing: this.billing,
-        paymentMethod: selectedPaymentMethod,
-        paymentId: this.paymentReference,
+        paymentMethod: this.selectedPaymentMethod,
+        paymentId: reference,
         cart: this.cart_data
+      }).then(function () {
+        console.log("Done!");
+      })["catch"](function (e) {
+        console.log("There was an issue:", e);
       });
     },
     isValidForm: function isValidForm() {

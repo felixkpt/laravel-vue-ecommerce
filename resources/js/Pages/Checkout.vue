@@ -298,18 +298,22 @@ export default {
     },
     methods: {
         onPaymentDone(reference) {
-            console.log("Yes!");
-            this.paymentReference = reference; // Store the reference from Paystack
             console.log("Payment successful. Reference:", reference);
 
-            this.$inertia.post(`${this.$page.props.url}finalize-checkout`, {
-                billing: this.billing,
-                paymentMethod: selectedPaymentMethod,
-                paymentId: this.paymentReference,
-                cart: this.cart_data,
-            });
+            this.$inertia
+                .post(`${this.$page.props.url}finalize-checkout`, {
+                    billing: this.billing,
+                    paymentMethod: this.selectedPaymentMethod,
+                    paymentId: reference,
+                    cart: this.cart_data,
+                })
+                .then(() => {
+                    console.log("Done!");
+                })
+                .catch((e) => {
+                    console.log("There was an issue:", e);
+                });
         },
-
         isValidForm(checkOnly = false, newVal = null) {
             // Clear previous errors
             const errors = {};

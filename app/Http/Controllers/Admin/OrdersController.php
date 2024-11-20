@@ -11,28 +11,27 @@ use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class OrdersController extends Controller
-{/**
- * Finalize Checkout and create an order.
- */
-public function finalizeCheckout(Request $request)
 {
-    Log::info('RW', request()->all());
-    
-    $validated = $request->validate([
-        'billing.fname' => 'required|string|max:255',
-        'billing.lname' => 'required|string|max:255',
-        'billing.email' => 'required|email',
-        'billing.phone' => 'required|string|max:20',
-        'billing.address' => 'required|string',
-        'billing.country' => 'required|string',
-        'billing.zip' => 'required|string|max:10',
-        'billing.city' => 'required|string',
-        'paymentMethod' => 'required|string|in:paypal,paystack',
-        'paymentId' => 'required|string',
-        'cart.cart' => 'required|array',
-    ]);
+    /**
+     * Finalize Checkout and create an order.
+     */
+    public function finalizeCheckout(Request $request)
+    {
 
-    try {
+        $validated = $request->validate([
+            'billing.fname' => 'required|string|max:255',
+            'billing.lname' => 'required|string|max:255',
+            'billing.email' => 'required|email',
+            'billing.phone' => 'required|string|max:20',
+            'billing.address' => 'required|string',
+            'billing.country' => 'required|string',
+            'billing.zip' => 'required|string|max:10',
+            'billing.city' => 'required|string',
+            'paymentMethod' => 'required|string|in:paypal,paystack',
+            'paymentId' => 'required|string',
+            'cart.cart' => 'required|array',
+        ]);
+
         // Create the Order
         $order = Order::create([
             'first_name' => $validated['billing']['fname'],
@@ -74,15 +73,11 @@ public function finalizeCheckout(Request $request)
             'order' => $order,
             'items' => $items,
         ]);
-
-    } catch (\Exception $e) {
-        Log::error('Checkout error: ' . $e->getMessage());
-        return response()->json(['status' => 'error', 'message' => 'Failed to place the order.'], 500);
     }
-}
 
 
-    function checkoutSuccess(){
+    function checkoutSuccess()
+    {
         return Inertia::render('CheckoutSuccess', []);
     }
 
