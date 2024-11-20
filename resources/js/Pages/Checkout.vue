@@ -148,22 +148,41 @@
                                         {{ errors.city }}
                                     </span>
                                 </p>
-                                <div class="summary summary-checkout">
-                                    <div class="summary-item payment-method">
-                                        <h4 class="title-box">
-                                            Payment Method
+
+                                <div
+                                    v-if="!formIsValid"
+                                    class="summary-item text-center"
+                                >
+                                    <a
+                                        href="#"
+                                        class="btn w-50 mx-auto"
+                                        @click.prevent="validateForm()"
+                                    >
+                                        Select Payment method
+                                    </a>
+                                </div>
+                                <div v-else class="summary summary-checkout">
+                                    <div class="summary-item shipping-method">
+                                        <h4 class="title-box f-title">
+                                            Shipping method
                                         </h4>
                                         <p class="summary-info">
-                                            <span class="title"
-                                                >Check / Money order</span
-                                            >
+                                            <span class="title">Flat Rate</span>
                                         </p>
                                         <p class="summary-info">
                                             <span class="title"
-                                                >Credit Cart (saved)</span
+                                                >Fixed $50.00</span
                                             >
                                         </p>
-                                        <div class="choose-payment-methods">
+                                    </div>
+                                    <div class="summary-item payment-method">
+                                        <h4 class="">
+                                            Payment Method
+                                        </h4>
+                                        <div
+                                            v-if="formIsValid"
+                                            class="choose-payment-methods"
+                                        >
                                             <div
                                                 class="payment-methods d-flex"
                                                 style="
@@ -218,37 +237,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="summary-item shipping-method">
-                                        <h4 class="title-box f-title">
-                                            Shipping method
-                                        </h4>
-                                        <p class="summary-info">
-                                            <span class="title">Flat Rate</span>
-                                        </p>
-                                        <p class="summary-info">
-                                            <span class="title"
-                                                >Fixed $50.00</span
-                                            >
-                                        </p>
-                                        <h4 class="title-box">
-                                            Discount Codes
-                                        </h4>
-                                        <p class="row-in-form">
-                                            <label for="coupon-code"
-                                                >Enter Your Coupon code:</label
-                                            >
-                                            <input
-                                                id="coupon-code"
-                                                type="text"
-                                                name="coupon-code"
-                                                value=""
-                                                placeholder=""
-                                            />
-                                        </p>
-                                        <a href="#" class="btn btn-small"
-                                            >Apply</a
-                                        >
-                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -291,7 +279,7 @@ export default {
             },
             errors: {},
             cart_data: this.$page.props.cart_data,
-            selectedPaymentMethod: null, // Tracks the selected payment method
+            selectedPaymentMethod: "paystack", // Tracks the selected payment method
             cart_data: this.$page.props.cart_data,
             paymentReference: null,
         };
@@ -314,8 +302,9 @@ export default {
                     console.log("There was an issue:", e);
                 });
         },
-        isValidForm(checkOnly = false, newVal = null) {
+        validateForm(checkOnly = false, newVal = null) {
             // Clear previous errors
+            this.errors = {};
             const errors = {};
 
             // Validate fields
@@ -341,17 +330,14 @@ export default {
                 this.errors = errors;
             }
 
-            return Object.keys(errors).length === 0;
+            const res = Object.keys(errors).length === 0;
+
+            this.formIsValid = res;
+
+            return res;
         },
     },
-    watch: {
-        billing: {
-            handler(newVal, oldVal) {
-                this.formIsValid = this.isValidForm(true, newVal);
-            },
-            deep: true,
-        },
-    },
+    watch: {},
 };
 </script>
 
