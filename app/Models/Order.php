@@ -19,6 +19,7 @@ class Order extends Model
         'country',
         'zip',
         'payment_method',
+        'payment_id',
         'total_amount',
     ];
 

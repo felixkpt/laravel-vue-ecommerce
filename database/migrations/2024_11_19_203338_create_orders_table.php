@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
             $table->string('country');
             $table->string('zip');
             $table->string('payment_method');
+            $table->string('payment_id')->nullable();
             $table->decimal('total_amount', 10, 2);
             $table->timestamps();
         });

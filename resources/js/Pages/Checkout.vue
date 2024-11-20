@@ -4,9 +4,12 @@
             <div class="row">
                 <div class="col-12 col-md-8 col-lg-9">
                     <div class="main-content-area">
-                        <div class="wrap-address-billing">
+                        <div
+                            class="wrap-address-billing"
+                            v-if="cart_data.count"
+                        >
                             <h3 class="box-title">Billing Address</h3>
-                            <form @submit.prevent="finalizeCheckout">
+                            <form @submit.prevent="">
                                 <p
                                     class="row-in-form"
                                     :class="{ 'has-errors': errors.fname }"
@@ -161,54 +164,59 @@
                                             >
                                         </p>
                                         <div class="choose-payment-methods">
-                                            <label class="payment-method">
-                                                <input
-                                                    name="payment-method"
-                                                    id="payment-method-paypal"
-                                                    value="paypal"
-                                                    type="radio"
-                                                />
-                                                <span>Paypal</span>
-                                                <span class="payment-desc"
-                                                    >You can pay with your
-                                                    credit</span
-                                                >
-                                                <span class="payment-desc"
-                                                    >card if you don't have a
-                                                    paypal account</span
-                                                >
-                                            </label>
-                                            <label class="payment-method">
-                                                <input
-                                                    name="payment-method"
-                                                    id="payment-method-paypal"
-                                                    value="paypal"
-                                                    type="radio"
-                                                />
-                                                <span>Stripe</span>
-                                                <span class="payment-desc"
-                                                    >You can pay with
-                                                    stripe</span
-                                                >
-                                                <span class="payment-desc"
-                                                    >card if you don't have a
-                                                    paypal account</span
-                                                >
-                                            </label>
-                                        </div>
-                                        <p class="summary-info grand-total">
-                                            <span>Grand Total</span>
-                                            <span class="grand-total-price"
-                                                >${{ cart_data.subtotal }}</span
+                                            <div
+                                                class="payment-methods d-flex"
+                                                style="
+                                                    flex-direction: column;
+                                                    gap: 5px;
+                                                "
                                             >
-                                        </p>
-                                        <a
-                                            href="#"
-                                            class="btn btn-medium"
-                                            @click.prevent="finalizeCheckout"
-                                        >
-                                            Place order now
-                                        </a>
+                                                <label>
+                                                    <input
+                                                        type="radio"
+                                                        value="paystack"
+                                                        v-model="
+                                                            selectedPaymentMethod
+                                                        "
+                                                        :disabled="!formIsValid"
+                                                    />
+                                                    Pay with Paystack
+                                                </label>
+                                            </div>
+                                            <p class="summary-info grand-total">
+                                                <span>Grand Total</span>
+                                                <span class="grand-total-price"
+                                                    >${{
+                                                        cart_data.subtotal
+                                                    }}</span
+                                                >
+                                            </p>
+
+                                            <!-- Paystack Payment Form (Conditionally Rendered) -->
+                                            <div
+                                                v-if="
+                                                    selectedPaymentMethod ===
+                                                    'paystack'
+                                                "
+                                            >
+                                                <pay-with-paystack
+                                                    @paymentDone="onPaymentDone"
+                                                />
+                                            </div>
+
+                                            <!-- Placeholder for Other Payment Method -->
+                                            <div
+                                                v-else-if="
+                                                    selectedPaymentMethod ===
+                                                    'other'
+                                                "
+                                            >
+                                                <p>
+                                                    Select another payment
+                                                    method.
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="summary-item shipping-method">
                                         <h4 class="title-box f-title">
@@ -244,6 +252,11 @@
                                 </div>
                             </form>
                         </div>
+                        <div v-else>
+                            <div class="alert alert-info">
+                                You have no items in your cart.
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <Sidebar />
@@ -255,13 +268,17 @@
 <script>
 import Layout from "@/Components/Shared/Layout";
 import Sidebar from "@/Components/Shared/Sidebar";
+import PayWithPaystack from "./PayWithPaystack.vue";
+
 export default {
     components: {
         Layout,
         Sidebar,
+        PayWithPaystack,
     },
     data() {
         return {
+            formIsValid: false,
             billing: {
                 fname: "",
                 lname: "",
@@ -274,12 +291,28 @@ export default {
             },
             errors: {},
             cart_data: this.$page.props.cart_data,
+            selectedPaymentMethod: null, // Tracks the selected payment method
+            cart_data: this.$page.props.cart_data,
+            paymentReference: null,
         };
     },
     methods: {
-        finalizeCheckout() {
+        onPaymentDone(reference) {
+            console.log("Yes!");
+            this.paymentReference = reference; // Store the reference from Paystack
+            console.log("Payment successful. Reference:", reference);
+
+            this.$inertia.post(`${this.$page.props.url}finalize-checkout`, {
+                billing: this.billing,
+                paymentMethod: selectedPaymentMethod,
+                paymentId: this.paymentReference,
+                cart: this.cart_data,
+            });
+        },
+
+        isValidForm(checkOnly = false, newVal = null) {
             // Clear previous errors
-            this.errors = {};
+            const errors = {};
 
             // Validate fields
             const requiredFields = [
@@ -293,28 +326,26 @@ export default {
                 "city",
             ];
             requiredFields.forEach((field) => {
-                if (!this.billing[field]) {
-                    this.errors[field] = `The ${field} field is required.`;
+                const billing = newVal || this.billing;
+
+                if (!billing[field]) {
+                    errors[field] = `The ${field} field is required.`;
                 }
             });
 
-            // Stop if validation fails
-            if (Object.keys(this.errors).length > 0) return;
-
-            // Proceed with the checkout
-            const paymentMethod = document.querySelector(
-                'input[name="payment-method"]:checked'
-            )?.value;
-            if (!paymentMethod) {
-                alert("Please select a payment method.");
-                return;
+            if (!checkOnly) {
+                this.errors = errors;
             }
 
-            this.$inertia.post(`${this.$page.props.url}finalize-checkout`, {
-                billing: this.billing,
-                paymentMethod,
-                cart: this.cart_data,
-            });
+            return Object.keys(errors).length === 0;
+        },
+    },
+    watch: {
+        billing: {
+            handler(newVal, oldVal) {
+                this.formIsValid = this.isValidForm(true, newVal);
+            },
+            deep: true,
         },
     },
 };

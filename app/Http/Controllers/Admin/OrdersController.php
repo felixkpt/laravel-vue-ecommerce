@@ -16,6 +16,8 @@ class OrdersController extends Controller
  */
 public function finalizeCheckout(Request $request)
 {
+    Log::info('RW', request()->all());
+    
     $validated = $request->validate([
         'billing.fname' => 'required|string|max:255',
         'billing.lname' => 'required|string|max:255',
@@ -25,7 +27,8 @@ public function finalizeCheckout(Request $request)
         'billing.country' => 'required|string',
         'billing.zip' => 'required|string|max:10',
         'billing.city' => 'required|string',
-        'paymentMethod' => 'required|string|in:paypal,stripe,manual',
+        'paymentMethod' => 'required|string|in:paypal,paystack',
+        'paymentId' => 'required|string',
         'cart.cart' => 'required|array',
     ]);
 
@@ -41,6 +44,7 @@ public function finalizeCheckout(Request $request)
             'zip' => $validated['billing']['zip'],
             'city' => $validated['billing']['city'],
             'payment_method' => $validated['paymentMethod'],
+            'payment_id' => $validated['paymentId'],
             'total_amount' => collect($validated['cart']['cart'])->sum('subtotal'),
         ]);
 
