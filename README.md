@@ -33,11 +33,17 @@ We use an efficient internet security program as this is the best way to be secu
 
 Let the buying spree begin...
 
-Here is the link to the shop: [Link to server](https://shop.onlineserviceslab.com) <---
+## Video Demo
 
-![Product example](https://shop.onlineserviceslab.com/public/uploads/images/home-sliders/blog-article-2.jpg)
+Check out video demo of **QuickShoppers**: [QuickShoppers](https://drive.google.com/file/d/1k_elI3ogYuddiVX2hab_-AXaddd/view)
+
+---
 
 ## License
 
 The this application is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
+## Author
+Felix Kiptoo Biwott
+GitHub: felixkpt
+Email: felixkpt@gmail.com

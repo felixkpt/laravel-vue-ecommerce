@@ -24,6 +24,7 @@ class CreateOrdersTable extends Migration
             $table->string('payment_method');
             $table->string('payment_reference')->nullable();
             $table->decimal('total_amount', 10, 2);
+            $table->string('status')->default('pending');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
