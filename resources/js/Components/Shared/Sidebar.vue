@@ -47,12 +47,12 @@
                     <li class="product-item" v-for="product in popular" :key="product.id">
                         <div class="product product-widget-style">
                             <div class="thumbnnail">
-                                <a :href="`${$page.props.url}product/${product.slug}`" :title="product.name">
+                                <Link :href="`${$page.props.url}product/${product.slug}`" :title="product.name">
                                     <figure><img :src="product.image" alt=""></figure>
-                                </a>
+                                </Link>
                             </div>
                             <div class="product-info">
-                                <a :href="`${$page.props.url}product/${product.slug}`" class="product-name"><span>{{ product.name }}</span></a>
+                                <Link :href="`${$page.props.url}product/${product.slug}`" class="product-name"><span>{{ product.name }}</span></Link>
                                 <div class="wrap-price"><span class="product-price">{{ product.price }}</span></div>
                             </div>
                         </div>
@@ -84,14 +84,14 @@ export default {
     },
     methods: {
         async getCategories() {
-            const resp = await axios.get(`${this.$page.props.url}api/categories/list`)
+            const resp = await axios.get(`${this.$page.props.url}categories/list`)
             if (resp.status == 200) {
                 const data = await resp.data
                 this.categories = data
             }
         },
         async getPopular() {
-            const resp = await axios.get(`${this.$page.props.url}api/products/popular`)
+            const resp = await axios.get(`${this.$page.props.url}products/popular`)
             if (resp.status == 200) {
                 const data = await resp.data
                 this.popular = data

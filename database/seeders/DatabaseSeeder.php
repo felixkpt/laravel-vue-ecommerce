@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         );
 
         // Call other seeders
-        $this->call(CategorySeeder::class);
-        $this->call(ProductSeeder::class);
+        // $this->call(CategorySeeder::class);
+        // $this->call(ProductSeeder::class);
     }
 }

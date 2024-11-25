@@ -14,8 +14,11 @@ class CheckoutController extends Controller
      *
      * @return \Inertia\Response
      */
-    public function index(Request $request)
+    public function index()
     {
+        if (!auth()->id()) {
+            return redirect()->to('login');
+        }
 
         $cart_data = $this->cart();
         $title = 'Welcome to quick shoppers';
@@ -24,7 +27,7 @@ class CheckoutController extends Controller
         $products = Product::where('id', '>', 0)->limit(15)->get();
 
         $data = ['cart_data' => $cart_data, 'most_viewed' => $products, 'title' => $title, 'description' => $description,];
-        //  dd($cart_data->count);
+
         return Inertia::render('Checkout', $data);
     }
 

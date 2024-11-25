@@ -22,13 +22,15 @@ class CreateProductsTable extends Migration
             $table->decimal('regular_price');
             $table->decimal('sale_price')->nullable();
             $table->string('SKU');
-            $table->enum('stock_status', ['in_stock', 'out_of_stock'])->nullable();
+            $table->enum('stock_status', ['in_stock', 'out_of_stock'])->default('in_stock');
             $table->boolean('featured')->default(false);
             $table->unsignedInteger('quantity')->default(10);
             $table->unsignedInteger('sale_quantity')->default(10);
             $table->string('image')->nullable();
             $table->text('images')->nullable();
             $table->bigInteger('category_id')->unsigned()->nullable();
+            $table->integer('rating')->default(0);
+            $table->integer('review_counts')->default(0);
 
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

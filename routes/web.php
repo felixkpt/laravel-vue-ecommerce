@@ -39,3 +39,6 @@ Route::get('/test', function() {
 
 Route::post('/finalize-checkout', [OrdersController::class, 'finalizeCheckout']);
 Route::get('/checkout-success', [OrdersController::class, 'checkoutSuccess']);
+Route::get('/account/orders', [OrdersController::class, 'ordersView']);
+Route::get('/account/orders-list', [OrdersController::class, 'ordersList']);
+Route::get('/account/orders/view/{id}', [OrdersController::class, 'orderView']);

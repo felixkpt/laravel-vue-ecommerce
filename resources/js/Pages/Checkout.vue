@@ -244,7 +244,7 @@
                             </div>
                         </div>
                         <div class="row" v-if="cart_data.count == 0">
-                            <MostViewedProducts/>
+                            <MostViewedProducts />
                         </div>
                     </div>
                 </div>
@@ -264,7 +264,7 @@ export default {
     components: {
         Layout,
         Sidebar,
-       MostViewedProducts,
+        MostViewedProducts,
         PayWithPaystack,
     },
     data() {
@@ -284,20 +284,20 @@ export default {
             cart_data: this.$page.props.cart_data,
             selectedPaymentMethod: "paystack", // Tracks the selected payment method
             cart_data: this.$page.props.cart_data,
-            paymentReference: null,
         };
     },
     methods: {
         onPaymentDone(reference) {
             console.log("Payment successful. Reference:", reference);
+            const payload = {
+                billing: this.billing,
+                payment_method: this.selectedPaymentMethod,
+                payment_reference: reference,
+                cart: this.cart_data,
+            };
 
             this.$inertia
-                .post(`${this.$page.props.url}finalize-checkout`, {
-                    billing: this.billing,
-                    paymentMethod: this.selectedPaymentMethod,
-                    paymentId: reference,
-                    cart: this.cart_data,
-                })
+                .post(`${this.$page.props.url}finalize-checkout`, payload)
                 .then(() => {
                     console.log("Done!");
                 })

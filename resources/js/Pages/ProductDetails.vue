@@ -8,11 +8,11 @@
                             <div class="product-gallery">
                                 <div
                                     class="mx-auto"
-                                    style="max-width: 240px; max-height: 240px"
+                                    style="max-width: 240px;"
                                 >
                                     <img
-                                        class="mx-auto"
-                                        style="width: 100%; height: 100%"
+                                        class="mx-auto product-img"
+                                        style="width: 100%;"
                                         :src="`${product.image}`"
                                         :alt="product.name"
                                     />
@@ -20,15 +20,23 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-6 detail-info">
-                            <div class="product-rating">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <a href="#" class="count-review">
-                                    (7 reviews)</a
-                                >
+                            <div class="product-rating mb-2" style="cursor: default;">
+                                <span class="me-2">
+                                    <i
+                                        v-for="n in 5"
+                                        :key="n"
+                                        class="fa"
+                                        :class="
+                                            n <= product.rating
+                                                ? 'fa-star'
+                                                : 'fa-star-o'
+                                        "
+                                        aria-hidden="true"
+                                    ></i>
+                                </span>
+                                <span class="count-review">
+                                    ({{ product.review_counts }} reviews)
+                                </span>
                             </div>
                             <h2 class="product-name">{{ product.name }}</h2>
 
@@ -52,7 +60,9 @@
                             <div class="stock-info in-stock">
                                 <p class="availability">
                                     Availability:
-                                    <b>{{ product.stock_status.replace(/_/g, ' ') }}</b>
+                                    <b>{{
+                                        product.stock_status.replace(/_/g, " ")
+                                    }}</b>
                                 </p>
                             </div>
                             <div class="quantity">
@@ -119,6 +129,10 @@
                             <p v-html="formattedDescription"></p>
                         </div>
                     </div>
+                    <!--Latest Products-->
+                    <div style="margin-top: 8rem">
+                        <most-viewed-products :title="$page.props.title" />
+                    </div>
                 </div>
                 <!--end main product area-->
                 <Sidebar />
@@ -131,10 +145,12 @@
 <script>
 import Layout from "@/Components/Shared/Layout";
 import Sidebar from "@/Components/Shared/Sidebar";
+import MostViewedProducts from "../Components/MostViewedProducts.vue";
 export default {
     components: {
         Layout,
         Sidebar,
+        MostViewedProducts,
     },
     computed: {
         formattedDescription() {
@@ -170,8 +186,15 @@ export default {
             }
         },
     },
-    mounted() {
-        // console.log(this.$page.props.cart_data)
-    },
 };
 </script>
+
+<style scoped>
+.product-img {
+    min-height: 180px;
+    max-height: 280px;
+    -o-object-fit: contain;
+    object-fit: contain;
+    width: 100%;
+}
+</style>

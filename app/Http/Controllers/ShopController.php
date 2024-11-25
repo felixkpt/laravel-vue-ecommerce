@@ -13,8 +13,9 @@ class ShopController extends Controller
     protected $orderby = 'default';
     protected $perPage = 12;
     protected $min_price = 1;
-    protected $max_price = 1000;
+    protected $max_price = 10000;
     protected $viewType = 'grid';
+
     public function mount()
     {
         $this->orderby = session()->get('orderby') ?? $this->orderby;
@@ -24,6 +25,7 @@ class ShopController extends Controller
         $this->viewType = session()->get('viewType') ?? $this->viewType;
         
     }
+    
     public function products() {
         $this->mount();
         $products = Product::where([['regular_price', '>=', $this->min_price], ['regular_price', '<=', $this->max_price]]);

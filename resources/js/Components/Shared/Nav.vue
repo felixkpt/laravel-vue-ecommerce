@@ -18,9 +18,6 @@
                         <Link :href="`${this.$page.props.url}cart`" class="nav-link">Cart</Link>
                     </li>
                     <li class="nav-item text-md-center">
-                        <Link :href="`${this.$page.props.url}checkout`" class="nav-link">Checkout</Link>
-                    </li>
-                    <li class="nav-item text-md-center">
                         <Link :href="`${this.$page.props.url}about-us`" class="nav-link">About</Link>
                     </li>
                 </ul>

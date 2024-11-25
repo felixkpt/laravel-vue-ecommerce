@@ -4,14 +4,66 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Order; // Assuming you have an Order model
-use App\Models\OrderItem; // Assuming you have an OrderItem model
+use App\Models\Order;
+use App\Models\OrderItem;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class OrdersController extends Controller
 {
+
+    public function index()
+    {
+        $orders = Order::orderby('created_at', 'desc')->paginate(30);
+
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['orders' => $orders, 'title' => $title, 'description' => $description,];
+
+        return Inertia::render('Admin/Orders', $data);
+    }
+
+    function ordersView()
+    {
+        $orders = Order::where('user_id', auth()->id())
+            ->with('items') // Include related order items for better efficiency
+            ->paginate();
+
+        return Inertia::render('Account/Orders/Index', [
+            'orders' => $orders,
+        ]);
+    }
+
+    function ordersList()
+    {
+        $orders = Order::where('user_id', auth()->id())
+            ->with('items') // Include related order items
+            ->paginate();
+
+        return response()->json([
+            'status' => 'success',
+            'orders' => $orders,
+        ]);
+    }
+
+    function orderView($id)
+    {
+        $order = Order::with(['items' => function ($q) {
+            $q->with('product');
+        }])->find($id); // Fetch the order with items
+
+        if (!$order) {
+            return redirect()->route('account.orders')->withErrors([
+                'error' => 'Order not found.',
+            ]);
+        }
+
+        return Inertia::render('Account/Orders/View/Index', [
+            'order' => $order,
+            'items' => $order->items, // Pass related items directly
+        ]);
+    }
+
     /**
      * Finalize Checkout and create an order.
      */
@@ -27,8 +79,8 @@ class OrdersController extends Controller
             'billing.country' => 'required|string',
             'billing.zip' => 'required|string|max:10',
             'billing.city' => 'required|string',
-            'paymentMethod' => 'required|string|in:paypal,paystack',
-            'paymentId' => 'required|string',
+            'payment_method' => 'required|string|in:paypal,paystack',
+            'payment_reference' => 'required|string',
             'cart.cart' => 'required|array',
         ]);
 
@@ -42,9 +94,10 @@ class OrdersController extends Controller
             'country' => $validated['billing']['country'],
             'zip' => $validated['billing']['zip'],
             'city' => $validated['billing']['city'],
-            'payment_method' => $validated['paymentMethod'],
-            'payment_id' => $validated['paymentId'],
+            'payment_method' => $validated['payment_reference'],
+            'payment_reference' => $validated['payment_reference'],
             'total_amount' => collect($validated['cart']['cart'])->sum('subtotal'),
+            'user_id' => auth()->id(),
         ]);
 
         // Create Order Items
@@ -68,11 +121,7 @@ class OrdersController extends Controller
 
         Cart::destroy();
 
-        // Render the Checkout Success page
-        return Inertia::render('CheckoutSuccess', [
-            'order' => $order,
-            'items' => $items,
-        ]);
+        return redirect()->to('account/orders/view/' . $order->id);
     }
 
 

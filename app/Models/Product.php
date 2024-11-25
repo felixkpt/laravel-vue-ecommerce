@@ -22,9 +22,12 @@ class Product extends Model
         'sale_quantity',
         'image',
         'category_id',
+        'rating',
+        'review_counts',
     ];
 
-    public function category() {
+    public function category()
+    {
         return $this->hasMany(Category::class, 'id', 'category_id');
     }
 }

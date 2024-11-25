@@ -147,11 +147,10 @@
                                         type="checkbox"
                                     /><span>I have promo code</span>
                                 </label>
-                                <a
+                                <Link
                                     class="btn btn-checkout"
                                     :href="`${$page.props.url}checkout`"
-                                    >Check out</a
-                                >
+                                    >Check out</Link>
                                 <a
                                     class="link-to-shop"
                                     :href="`${$page.props.url}shop`"

@@ -1,7 +1,9 @@
 <template>
     <div>
-        <h3 class="title-box">Most Viewed Products</h3>
-        <div class="col px-4">
+        <h3 class="title-box" v-if="showTitle">
+            {{ title || "Most Viewed Products" }}
+        </h3>
+        <div class="col px-2">
             <vueper-slides
                 class="no-shadow"
                 :visible-slides="5"
@@ -25,37 +27,42 @@
                     :title="product.name.toString()"
                 >
                     <template #content>
-                        <div class="product product-style-2 px-1 mb-2 h-100">
-                            <div class="product-thumnail">
-                                <a
+                        <div
+                            class="product product-style-2 px-1 mb-2 h-100 d-flex flex-column"
+                        >
+                            <div
+                                class="product-thumnail relative mx-auto d-block w-100"
+                            >
+                                <Link
+                                    class="mx-auto d-block h-100"
                                     :href="`${$page.props.url}product/${product.slug}`"
                                     :title="product.name"
                                 >
-                                    <figure>
+                                    <figure class="mx-auto d-block h-100">
                                         <img
+                                            class="product-img img-fluid mx-auto"
                                             :src="`${product.image}`"
                                             width="214"
-                                            height="214"
                                             :alt="product.name"
                                         />
                                     </figure>
-                                </a>
-                                <div class="group-flash">
-                                    <span class="flash-item new-label"
-                                        >new</span
-                                    >
-                                </div>
-                                <div class="wrap-btn">
-                                    <a href="#" class="function-link"
-                                        >quick view</a
-                                    >
-                                </div>
+                                    <div class="group-flash">
+                                        <span class="flash-item new-label"
+                                            >new</span
+                                        >
+                                    </div>
+                                    <div class="wrap-btn">
+                                        <span class="function-link"
+                                            >quick view</span
+                                        >
+                                    </div>
+                                </Link>
                             </div>
                             <div class="product-info">
-                                <a
+                                <Link
                                     :href="`${$page.props.url}product/${product.slug}`"
                                     class="product-name"
-                                    ><span>{{ product.name }}</span></a
+                                    ><span>{{ product.name }}</span></Link
                                 >
                                 <div class="wrap-price">
                                     <ins>
@@ -91,5 +98,28 @@ export default {
         VueperSlides,
         VueperSlide,
     },
+    props: {
+        showTitle: {
+            type: Boolean,
+            default: true,
+        },
+        title: {
+            type: String,
+            default: null,
+        },
+    },
 };
 </script>
+
+<style scoped>
+.product-thumnail {
+    min-height: 100px;
+}
+.product-img {
+    min-height: 100px;
+    max-height: 180px;
+    -o-object-fit: contain;
+    object-fit: contain;
+    width: 100%;
+}
+</style>
