@@ -46,7 +46,7 @@
                                         <td>{{ order.email }}</td>
                                         <td>{{ order.phone }}</td>
                                         <td>
-                                            ${{ order.total_amount.toFixed(2) }}
+                                            ${{ order.total_amount }}
                                         </td>
                                         <td>
                                             <!-- Dropdown for order status -->
@@ -118,15 +118,8 @@ export default {
         // Method to update the order status
         updateOrderStatus(orderId, status) {
             // Make an API call here to update the order status on the server
-            this.$axios
-                .post(`${this.$page.props.url}admin/orders/update-status/${orderId}`, {
+            this.$inertia.post(`${this.$page.props.url}admin/orders/update-status/${orderId}`, {
                     status: status,
-                })
-                .then((response) => {
-                    console.log("Order status updated successfully");
-                })
-                .catch((error) => {
-                    console.error("Error updating order status", error);
                 });
         },
     },

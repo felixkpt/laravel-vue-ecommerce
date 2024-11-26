@@ -51,7 +51,7 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     // Products Routes
     $subject = 'orders';
     Route::get('/admin/orders', [OrdersController::class, 'index'])->name('admin.' . $subject);
-    Route::get('/admin/orders/update-status/{id}', [OrdersController::class, 'updateStatus'])->name('admin.' . $subject.'.update-status');
+    Route::post('/admin/orders/update-status/{id}', [OrdersController::class, 'updateStatus'])->name('admin.' . $subject.'.update-status');
     
     // Products Routes
     $subject = 'users';

@@ -23,9 +23,26 @@
                             </small>
                         </div>
                         <p class="mb-1">Total: ${{ order.total_amount }}</p>
-                        <small class="text-muted"
-                            >Status: {{ order.status }}</small
-                        >
+                        <small class="text-muted">
+                            Status:
+                            <i
+                                class="fa"
+                                :class="{
+                                    'fa-hourglass-start text-warning':
+                                        order.status === 'pending',
+                                    'fa-spinner text-primary':
+                                        order.status === 'inprogress',
+                                    'fa-check-circle text-success':
+                                        order.status === 'delivered',
+                                    'fa-times-circle text-danger':
+                                        order.status === 'rejected',
+                                    'fa-ban text-muted':
+                                        order.status === 'cancelled',
+                                }"
+                                aria-hidden="true"
+                            ></i>
+                            {{ order.status }}
+                        </small>
                     </InertiaLink>
                 </div>
             </div>

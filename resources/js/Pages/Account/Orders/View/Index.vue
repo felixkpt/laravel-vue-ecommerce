@@ -31,8 +31,31 @@
                             {{ $page.props.order.payment_reference }}
                         </p>
                         <p>
-                            <strong>Status:</strong>
-                            {{ $page.props.order.status || 'Pending' }}
+                            <strong class="me-1">Status:</strong>
+                            <span>
+                                <i
+                                    class="fa"
+                                    :class="{
+                                        'fa-hourglass-start text-warning':
+                                            $page.props.order.status ===
+                                            'pending',
+                                        'fa-spinner text-primary':
+                                            $page.props.order.status ===
+                                            'inprogress',
+                                        'fa-check-circle text-success':
+                                            $page.props.order.status ===
+                                            'delivered',
+                                        'fa-times-circle text-danger':
+                                            $page.props.order.status ===
+                                            'rejected',
+                                        'fa-ban text-muted':
+                                            $page.props.order.status ===
+                                            'cancelled',
+                                    }"
+                                    aria-hidden="true"
+                                ></i>
+                                {{ $page.props.order.status || "Pending" }}
+                            </span>
                         </p>
                     </div>
                 </div>
@@ -54,7 +77,21 @@
                             :key="index"
                         >
                             <td>{{ index + 1 }}</td>
-                            <td>{{ item.product.name }}</td>
+                            <td>
+                                <Link :href="`/product/${item.product.slug}`">
+                                    <img
+                                        :src="item.product.image"
+                                        alt="Product Image"
+                                        class="img-thumbnail me-2"
+                                        style="
+                                            width: 40px;
+                                            height: 40px;
+                                            object-fit: cover;
+                                        "
+                                    />
+                                    {{ item.product.name }}
+                                </Link>
+                            </td>
                             <td>${{ item.price }}</td>
                             <td>{{ item.quantity }}</td>
                             <td>${{ item.price * item.quantity }}</td>

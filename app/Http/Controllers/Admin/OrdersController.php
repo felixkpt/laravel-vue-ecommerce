@@ -158,6 +158,6 @@ class OrdersController extends Controller
     {
         Order::with('items')->findorfail($id)->update(['status' => request()->status]);
 
-        return response()->json(['status' => 'success']);
+        return redirect()->back();
     }
 }
