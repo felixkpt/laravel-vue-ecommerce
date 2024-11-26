@@ -5,9 +5,15 @@ import { createApp, h } from 'vue';
 import {createInertiaApp, Head, Link} from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 import axios from 'axios';
+import '@fortawesome/fontawesome-free/css/all.css';
+import { Inertia } from '@inertiajs/inertia';
+
+Inertia.on('navigate', () => {
+    window.scrollTo(0, 0); // Ensures the page scrolls to top on each navigation
+});
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Welcome to quick shoppers';
-// console.log('Still working well without duplicating url.....')
+
 createInertiaApp({
     id: 'app',
     title: (title) => `${title} - ${appName}`,

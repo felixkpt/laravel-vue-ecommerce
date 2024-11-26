@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Cart;
@@ -13,17 +14,25 @@ class CheckoutController extends Controller
      *
      * @return \Inertia\Response
      */
-    public function index(Request $request){
+    public function index()
+    {
+        if (!auth()->id()) {
+            return redirect()->to('login');
+        }
 
         $cart_data = $this->cart();
         $title = 'Welcome to quick shoppers';
         $description = '';
-        $data = ['cart_data' => $cart_data, 'title' => $title, 'description' => $description,];
-    //  dd($cart_data->count);
+
+        $products = Product::where('id', '>', 0)->limit(15)->get();
+
+        $data = ['cart_data' => $cart_data, 'most_viewed' => $products, 'title' => $title, 'description' => $description,];
+
         return Inertia::render('Checkout', $data);
     }
-    
-    public function cart() {
+
+    public function cart()
+    {
         $cart = json_decode(Cart::content());
         $subtotal = Cart::subtotal();
         $tax = Cart::tax();

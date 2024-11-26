@@ -2,8 +2,8 @@
     <Head :title="$page.props.title" description="Some desc" />
     <Header :cartUpdated="cartUpdated"/>
     <main>
-        <div class="container-fluid px-1" style="min-height: 400px;">
-            <div class="row">
+        <div class="container-fluid px-1 mt-2" style="min-height: 100vh;">
+            <div class="row mt-2">
                 <div class="col-12">
                     <Breadcrumb />
                     <Notification />

@@ -7,24 +7,18 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbar-primary">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0" id="mercado_main" data-menuname="Main menu" >
-                    <li class="nav-item">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0 gap-0 gap-md-3" id="mercado_main" data-menuname="Main menu" >
+                    <li class="nav-item text-md-center">
                         <Link :href="`${this.$page.props.url}`" class="nav-link"><i class="fa fa-home" aria-hidden="true"></i></Link>
                     </li>
-                    <li class="nav-item">
-                        <Link :href="`${this.$page.props.url}about-us`" class="nav-link">About</Link>
-                    </li>
-                    <li class="nav-item">
+                    <li class="nav-item text-md-center">
                         <Link :href="`${this.$page.props.url}shop`" class="nav-link">Shop</Link>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item text-md-center">
                         <Link :href="`${this.$page.props.url}cart`" class="nav-link">Cart</Link>
                     </li>
-                    <li class="nav-item">
-                        <Link :href="`${this.$page.props.url}checkout`" class="nav-link">Checkout</Link>
-                    </li>
-                    <li class="nav-item">
-                        <Link :href="`${this.$page.props.url}contact-us`" class="nav-link">Contact Us</Link>
+                    <li class="nav-item text-md-center">
+                        <Link :href="`${this.$page.props.url}about-us`" class="nav-link">About</Link>
                     </li>
                 </ul>
             </div>

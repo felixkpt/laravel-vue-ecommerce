@@ -52,7 +52,7 @@ Primary use:    Ecommerce
 
 body{
 	font-family: 'Open Sans', sans-serif;
-	font-size: 13px;
+	font-size: 14px;
 	color: #444444;
 	overflow-x: hidden;
 }
@@ -2683,6 +2683,8 @@ li.menu-item .nav-label.sale-label::before{
     max-width: 85px;
     width: 100%;
     height: auto;
+    max-height:200px;
+    object-fit:contain;
     border: 1px solid #efefef;
 }
 .product-widget-style .product-info{
@@ -7114,4 +7116,13 @@ background-color: #888888;
     overflow: hidden;      /* Hide overflow text */
     text-overflow: ellipsis; /* Apply ellipsis to truncated text */
 
+}
+
+#mercado_main .nav-item{
+border-radius: 2px;
+min-width: 50px;
+}
+
+#mercado_main .nav-item:hover{
+    background:red!important;
 }

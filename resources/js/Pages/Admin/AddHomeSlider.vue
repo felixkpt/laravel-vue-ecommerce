@@ -13,13 +13,13 @@
                                 <form @submit.prevent="handleFormSubmit">
                                     <div class="form-group">
                                         <label for="item" class="form-label">Choose products: </label>
-                                        <select name="products[]" id="item" v-model="form.products" multiple="multiple">
+                                        <select name="products[]" class="form-control" id="item" v-model="form.products" multiple="multiple">
                                             <option v-for="product in $page.props.products" :value="product.id" :key="product.id">{{ product.name }}</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="noP">No of Products</label>
-                                        <input type="number" id="noP" class="form-control" v-model="form.no_of_products">
+                                        <input type="number" readonly id="noP" class="form-control" v-model="form.no_of_products">
                                     </div>
                                     <button type="submit" class="mt-3 btn btn-primary">Submit</button>
                                 </form>
@@ -49,7 +49,7 @@ export default  {
         return {
             form: {
                 products: this.$page.props.sel_products,
-                no_of_products: this.$page.props.no_of_products,
+                no_of_products: this.$page.props.no_of_products || 3,
             }
         }
     },

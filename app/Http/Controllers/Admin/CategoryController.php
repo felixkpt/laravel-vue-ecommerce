@@ -17,6 +17,7 @@ class CategoryController extends Controller
         
         return Inertia::render('Admin/Category', $data);
     }
+
     public function delete($id) {
         Category::where('id', $id)->delete();
         return redirect()->back()->with('successMessage', 'Category deleted.');

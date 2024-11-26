@@ -4,32 +4,86 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Order; // Assuming you have an Order model
-use App\Models\OrderItem; // Assuming you have an OrderItem model
+use App\Models\Order;
+use App\Models\OrderItem;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class OrdersController extends Controller
-{/**
- * Finalize Checkout and create an order.
- */
-public function finalizeCheckout(Request $request)
 {
-    $validated = $request->validate([
-        'billing.fname' => 'required|string|max:255',
-        'billing.lname' => 'required|string|max:255',
-        'billing.email' => 'required|email',
-        'billing.phone' => 'required|string|max:20',
-        'billing.address' => 'required|string',
-        'billing.country' => 'required|string',
-        'billing.zip' => 'required|string|max:10',
-        'billing.city' => 'required|string',
-        'paymentMethod' => 'required|string|in:paypal,stripe,manual',
-        'cart.cart' => 'required|array',
-    ]);
 
-    try {
+    public function index()
+    {
+        $orders = Order::orderby('created_at', 'desc')->paginate(30);
+
+        $title = 'Welcome to quick shoppers';
+        $description = '';
+        $data = ['orders' => $orders, 'title' => $title, 'description' => $description,];
+
+        return Inertia::render('Admin/Orders', $data);
+    }
+
+    function ordersView()
+    {
+        $orders = Order::where('user_id', auth()->id())
+            ->with('items') // Include related order items for better efficiency
+            ->paginate();
+
+        return Inertia::render('Account/Orders/Index', [
+            'orders' => $orders,
+        ]);
+    }
+
+    function ordersList()
+    {
+        $orders = Order::where('user_id', auth()->id())
+            ->with('items') // Include related order items
+            ->paginate();
+
+        return response()->json([
+            'status' => 'success',
+            'orders' => $orders,
+        ]);
+    }
+
+    function orderView($id)
+    {
+        $order = Order::with(['items' => function ($q) {
+            $q->with('product');
+        }])->find($id); // Fetch the order with items
+
+        if (!$order) {
+            return redirect()->route('account.orders')->withErrors([
+                'error' => 'Order not found.',
+            ]);
+        }
+
+        return Inertia::render('Account/Orders/View/Index', [
+            'order' => $order,
+            'items' => $order->items, // Pass related items directly
+        ]);
+    }
+
+    /**
+     * Finalize Checkout and create an order.
+     */
+    public function finalizeCheckout(Request $request)
+    {
+
+        $validated = $request->validate([
+            'billing.fname' => 'required|string|max:255',
+            'billing.lname' => 'required|string|max:255',
+            'billing.email' => 'required|email',
+            'billing.phone' => 'required|string|max:20',
+            'billing.address' => 'required|string',
+            'billing.country' => 'required|string',
+            'billing.zip' => 'required|string|max:10',
+            'billing.city' => 'required|string',
+            'payment_method' => 'required|string|in:paypal,paystack',
+            'payment_reference' => 'required|string',
+            'cart.cart' => 'required|array',
+        ]);
+
         // Create the Order
         $order = Order::create([
             'first_name' => $validated['billing']['fname'],
@@ -40,8 +94,10 @@ public function finalizeCheckout(Request $request)
             'country' => $validated['billing']['country'],
             'zip' => $validated['billing']['zip'],
             'city' => $validated['billing']['city'],
-            'payment_method' => $validated['paymentMethod'],
+            'payment_method' => $validated['payment_reference'],
+            'payment_reference' => $validated['payment_reference'],
             'total_amount' => collect($validated['cart']['cart'])->sum('subtotal'),
+            'user_id' => auth()->id(),
         ]);
 
         // Create Order Items
@@ -65,20 +121,12 @@ public function finalizeCheckout(Request $request)
 
         Cart::destroy();
 
-        // Render the Checkout Success page
-        return Inertia::render('CheckoutSuccess', [
-            'order' => $order,
-            'items' => $items,
-        ]);
-
-    } catch (\Exception $e) {
-        Log::error('Checkout error: ' . $e->getMessage());
-        return response()->json(['status' => 'error', 'message' => 'Failed to place the order.'], 500);
+        return redirect()->to('account/orders/view/' . $order->id);
     }
-}
 
 
-    function checkoutSuccess(){
+    function checkoutSuccess()
+    {
         return Inertia::render('CheckoutSuccess', []);
     }
 
@@ -104,5 +152,12 @@ public function finalizeCheckout(Request $request)
         }
 
         return response()->json(['status' => 'success', 'order' => $order]);
+    }
+
+    function updateStatus($id)
+    {
+        Order::with('items')->findorfail($id)->update(['status' => request()->status]);
+
+        return redirect()->back();
     }
 }

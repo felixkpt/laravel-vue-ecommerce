@@ -36,6 +36,7 @@
             gtag('config', 'G-E6H7E85R9L');
           </script>
         @endif
+            <script src="https://js.paystack.co/v1/inline.js"></script>
     </head>
     <body class="font-sans antialiased">
         @inertia

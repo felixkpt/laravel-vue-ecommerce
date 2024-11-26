@@ -4,7 +4,7 @@
     <Header />
     
     <main :id="mainKey">
-        <div class="container-fluid px-1 pt-2" style="min-height: 400px;">
+        <div class="container-fluid px-1 mt-2" style="min-height: 100vh;">
             <div class="row">
                 <div class="col-12">
                     <slot />

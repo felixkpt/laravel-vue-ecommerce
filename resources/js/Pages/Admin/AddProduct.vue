@@ -1,3 +1,4 @@
+<!-- resources/js/Pages/Admin/AddProduct.vue -->
 <template>
     <Layout>
             <div class="container-fluid">

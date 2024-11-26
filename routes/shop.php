@@ -1,15 +1,15 @@
 <?php
 
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\Api\ProductController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\DetailsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HeaderSearchController;
+use App\Http\Controllers\ProductDetailsController;
 use App\Http\Controllers\SearchController;
 
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
@@ -27,8 +27,14 @@ Route::post('/cart/remove', [CartController::class, 'remove'])->name('shop.cart.
 Route::post('/cart/destroy', [CartController::class, 'destroy'])->name('shop.cart.destroy');
 
 Route::get('/checkout', [CheckoutController::class, 'index']);
-Route::get('/product/{slug}', [DetailsController::class, 'index'])->name('product.details');
+Route::get('/product/{slug}', [ProductDetailsController::class, 'index'])->name('product.details');
 Route::get('/product-category/{category_slug}', [CategoryController::class, 'index'])->name('product.category');
 
-Route::post('/search', [HeaderSearchController::class, 'index'])->name('product.header_search');
-Route::get('/search', [SearchController::class, 'index'])->name('product.search');
+Route::get('/search', [SearchController::class, 'index'])->name('product.search.index');
+Route::get('/search/list', [SearchController::class, 'list'])->name('product.search.list');
+Route::post('/search/orderby', [SearchController::class, 'orderby'])->name('product.search.orderby');
+Route::post('/search/post-per-page', [SearchController::class, 'postPerPage'])->name('product.search.postPerPage');
+
+Route::get('products', [ProductController::class, 'index']);
+Route::get('categories/list', [CategoryController::class, 'list'])->name('categories.list');
+Route::get('products/popular', [ProductController::class, 'popular']);

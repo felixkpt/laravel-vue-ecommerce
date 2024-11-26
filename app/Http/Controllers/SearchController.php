@@ -15,21 +15,26 @@ class SearchController extends Controller
     public $search;
     public $product_cat;
     public $product_cat_id;
-//sitejaba trustpilot
+    protected $min_price = 1;
+    protected $max_price = 10000;
+
     /**
      * Display a listing of the resource.
      *
      * @return \Inertia\Response
      */
-    public function index(Request $request) {
-        $products = $this->products($request);
+    public function index(Request $request)
+    {
+
         $categories = Category::all();
         $title = 'Welcome to quick shoppers';
         $description = '';
-        $data = ['products' => $products, 'categories' => $categories, 'title' => $title, 'description' => $description,];
+        $data = ['products' => $this->list($request), 'categories' => $categories, 'title' => $title, 'description' => $description, 'params' => request()->all()];
         return Inertia::render('Search', $data);
     }
-    public function store(Request $request) {
+
+    public function store(Request $request)
+    {
         $product_id = $request->get('id');
         $product_name = $request->get('name');
         $quantity = 1;
@@ -40,43 +45,67 @@ class SearchController extends Controller
         // var_dump(Cart::content()[0]);die;
         return redirect()->route('product.cart');
     }
-    public function orderby(Request $request) {
+
+    public function orderby(Request $request)
+    {
         session(['orderby' => $request->get('orderby')]);
         return redirect()->back();
     }
-    public function postPerPage(Request $request) {
+
+    public function postPerPage(Request $request)
+    {
         session(['postPerPage' => $request->get('postPerPage')]);
         return redirect()->back();
     }
-    public function products(Request $request) {
-        $this->orderby = session()->get('orderby');
-        $this->postPerPage = session()->get('postPerPage');
+
+    public function list(Request $request)
+    {
+        $this->orderby = $request->get('orderby');
+        $this->postPerPage = $request->get('postPerPage');
         $this->search = $request->get('search');
         $this->product_cat = $request->get('product_cat');
         $this->product_cat_id = $request->get('product_cat_id');
+        $this->min_price = $request->get('min_price');
+        $this->max_price = $request->get('max_price');
+
+        $products = Product::when($this->min_price > 0, fn($q) => $q->where('regular_price', '>=', $this->min_price))
+            ->when($this->max_price > 0, fn($q) => $q->where('regular_price', '<=', $this->max_price));
 
         if ($this->product_cat_id) {
             if ($this->orderby == 'date') {
-                $products = Product::where('name','like', '%'.$this->search.'%')->where('category_id', $this->product_cat_id)->orderby('created_at', 'DESC')->limit($this->postPerPage)->get();
-            }elseif ($this->orderby == 'price') {
-                $products = Product::where('name','like', '%'.$this->search.'%')->where('category_id', $this->product_cat_id)->orderby('regular_price', 'ASC')->limit($this->postPerPage)->get();
-            }elseif ($this->orderby == 'price-desc') {
-                $products = Product::where('name','like', '%'.$this->search.'%')->where('category_id', $this->product_cat_id)->orderby('regular_price', 'DESC')->limit($this->postPerPage)->get();
-            }else{
-                $products = Product::where('name','like', '%'.$this->search.'%')->where('category_id', $this->product_cat_id)->limit($this->postPerPage)->get();
+                $products = $products->where('name', 'like', '%' . $this->search . '%')->where('category_id', $this->product_cat_id)->orderby('created_at', 'DESC');
+            } elseif ($this->orderby == 'price') {
+                $products = $products->where('name', 'like', '%' . $this->search . '%')->where('category_id', $this->product_cat_id)->orderby('regular_price', 'ASC');
+            } elseif ($this->orderby == 'price-desc') {
+                $products = $products->where('name', 'like', '%' . $this->search . '%')->where('category_id', $this->product_cat_id)->orderby('regular_price', 'DESC');
+            } else {
+                $products = $products->where('name', 'like', '%' . $this->search . '%')->where('category_id', $this->product_cat_id);
             }
-        }else{
+        } else {
 
             if ($this->orderby == 'date') {
-                $products = Product::where('name','like', '%'.$this->search.'%')->orderby('created_at', 'DESC')->limit($this->postPerPage)->get();
-            }elseif ($this->orderby == 'price') {
-                $products = Product::where('name','like', '%'.$this->search.'%')->orderby('regular_price', 'ASC')->limit($this->postPerPage)->get();
-            }elseif ($this->orderby == 'price-desc') {
-                $products = Product::where('name','like', '%'.$this->search.'%')->orderby('regular_price', 'DESC')->limit($this->postPerPage)->get();
-            }else{
-                $products = Product::where('name','like', '%'.$this->search.'%')->limit($this->postPerPage)->get();
+                $products = $products->where('name', 'like', '%' . $this->search . '%')->orderby('created_at', 'DESC');
+            } elseif ($this->orderby == 'price') {
+                $products = $products->where('name', 'like', '%' . $this->search . '%')->orderby('regular_price', 'ASC');
+            } elseif ($this->orderby == 'price-desc') {
+                $products = $products->where('name', 'like', '%' . $this->search . '%')->orderby('regular_price', 'DESC');
+            } else {
+                $products = $products->where('name', 'like', '%' . $this->search . '%');
             }
         }
+
+         // Paginate the results and append the query parameters
+         $products = $products->paginate($this->postPerPage)
+         ->withPath('/search')
+         ->appends([
+             'orderby' => $this->orderby,
+             'postPerPage' => $this->postPerPage,
+             'search' => $this->search,
+             'product_cat' => $this->product_cat,
+             'product_cat_id' => $this->product_cat_id,
+             'min_price' => $this->min_price,
+             'max_price' => $this->max_price,
+         ]);
 
         return $products;
     }

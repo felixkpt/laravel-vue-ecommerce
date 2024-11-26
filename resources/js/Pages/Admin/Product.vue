@@ -12,7 +12,8 @@
                                         <h4>All Products</h4>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <Link :href="`${$page.props.url}admin/products/add`" class="btn btn-success btn-sm">Add New</Link>
+                                        <Link :href="`${$page.props.url}admin/products/add`" class="btn btn-success btn-sm me-2">Add New</Link>
+                                        <Link :href="`${$page.props.url}admin/products/add-from-json`" class="btn btn-outline-primary btn-sm">Add New from JSON</Link>
                                     </div>
                                 </div>
                             </div>
@@ -53,9 +54,9 @@
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="btnGroupDropActions">
                                                     <li>
-                                                        <Link class="dropdown-item" :href="`${$page.props.url}product/${product.slug}`">
+                                                        <a target="_blank" class="dropdown-item" :href="`${$page.props.url}product/${product.slug}`">
                                                             <span class="fa fa-eye text-dark"></span> View
-                                                        </Link>
+                                                        </a>
                                                     </li>
                                                     <li>
                                                         <Link class="dropdown-item" :href="`${$page.props.url}admin/products/edit/${product.slug}`">

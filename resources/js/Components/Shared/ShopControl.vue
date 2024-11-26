@@ -1,6 +1,6 @@
 <template>
     <div class="wrap-shop-control">
-        <h1 class="shop-title">{{ category.name !== undefined ? category.name : 'Products category' }}</h1>
+        <h1 class="shop-title">{{ title }}</h1>
         <div class="wrap-right">
             <div classs="sort-item orderby">
                 <div class="d-flex">
@@ -42,9 +42,9 @@ export default {
         InlineLoader,
     },
     props: {
-        category: {
+        title: {
             type: Object,
-            default: {}
+            default: 'Products category'
         },
         viewType: {
             type: String
@@ -53,8 +53,7 @@ export default {
             type: Boolean
         }
     },
-    data() {
-      
+    data() {      
       return {
         loading: false,
       }
@@ -107,7 +106,3 @@ export default {
 
 }
 </script>
-
-<style>
-
-</style>

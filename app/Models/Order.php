@@ -19,7 +19,10 @@ class Order extends Model
         'country',
         'zip',
         'payment_method',
+        'payment_reference',
         'total_amount',
+        'status',
+        'user_id',
     ];
 
     public function items()
