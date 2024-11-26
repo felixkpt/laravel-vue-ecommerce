@@ -2683,6 +2683,8 @@ li.menu-item .nav-label.sale-label::before{
     max-width: 85px;
     width: 100%;
     height: auto;
+    max-height:200px;
+    object-fit:contain;
     border: 1px solid #efefef;
 }
 .product-widget-style .product-info{

@@ -48,7 +48,35 @@
                                         <td>
                                             ${{ order.total_amount.toFixed(2) }}
                                         </td>
-                                        <td>{{ order.status }}</td>
+                                        <td>
+                                            <!-- Dropdown for order status -->
+                                            <select
+                                                class="form-select form-select-sm"
+                                                v-model="order.status"
+                                                @change="
+                                                    updateOrderStatus(
+                                                        order.id,
+                                                        order.status
+                                                    )
+                                                "
+                                            >
+                                                <option value="pending">
+                                                    Pending
+                                                </option>
+                                                <option value="inprogress">
+                                                    In Progress
+                                                </option>
+                                                <option value="delivered">
+                                                    Delivered
+                                                </option>
+                                                <option value="rejected">
+                                                    Rejected
+                                                </option>
+                                                <option value="cancelled">
+                                                    Cancelled
+                                                </option>
+                                            </select>
+                                        </td>
                                         <td>
                                             <Link
                                                 :href="`${$page.props.url}admin/orders/view/${order.id}`"
@@ -65,11 +93,7 @@
                     </div>
                 </Content>
             </div>
-            <!--end row-->
         </div>
-        <!--end container-->
-
-        <!-- end .container-fluid -->
     </Layout>
 </template>
 
@@ -90,7 +114,22 @@ export default {
             links: this.$page.props.orders,
         };
     },
-    methods: {},
+    methods: {
+        // Method to update the order status
+        updateOrderStatus(orderId, status) {
+            // Make an API call here to update the order status on the server
+            this.$axios
+                .post(`${this.$page.props.url}admin/orders/update-status/${orderId}`, {
+                    status: status,
+                })
+                .then((response) => {
+                    console.log("Order status updated successfully");
+                })
+                .catch((error) => {
+                    console.error("Error updating order status", error);
+                });
+        },
+    },
     mounted() {
         // console.log(this.$page.props.orders)
     },

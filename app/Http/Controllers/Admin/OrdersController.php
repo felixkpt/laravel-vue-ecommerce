@@ -153,4 +153,11 @@ class OrdersController extends Controller
 
         return response()->json(['status' => 'success', 'order' => $order]);
     }
+
+    function updateStatus($id)
+    {
+        Order::with('items')->findorfail($id)->update(['status' => request()->status]);
+
+        return response()->json(['status' => 'success']);
+    }
 }

@@ -18,16 +18,18 @@
     <div class="wrap-products">
         <div class="wrap-product-tab tab-style-1">
             <div class="tab-control">
-                <a
+                <span
                     :href="`#section_${index + 1}a`"
+                    class="cursor-point"
                     :class="{
                         'tab-control-item': true,
                         active: index == 0,
                     }"
                     v-for="(category, index) in $page.props.categories"
                     :key="category.id"
-                    >{{ category.name }}</a
                 >
+                    {{ category.name }}
+                </span>
             </div>
             <div class="tab-contents">
                 <div
@@ -40,7 +42,7 @@
                     :key="category.id"
                 >
                     <div class="row">
-                        <div class="col-12 px-4">
+                        <div class="col-11 px-4 mx-auto">
                             <vueper-slides
                                 class="no-shadow text-center"
                                 :visible-slides="5"
@@ -171,5 +173,8 @@ export default {
     -o-object-fit: contain;
     object-fit: contain;
     width: 100%;
+}
+.cursor-point{
+    cursor: pointer;
 }
 </style>

@@ -126,24 +126,30 @@ class AddProductController extends Controller
         // Validate the array of products
         $validatedData = $this->validate($request, [
             'products' => 'required|array|min:1', // Ensure the 'products' key exists and is an array
-            'products.*.name' => 'required|min:3|max:255|unique:products,name',
+            'products.*.name' => 'required|min:3|max:255',
             'products.*.images' => 'required|array|min:1',
             'products.*.images.0' => 'required|url', // At least one valid URL in images array
             'products.*.about' => 'required|string|min:10',
             'products.*.rating' => 'required|numeric|min:0|max:5',
             'products.*.review_counts' => 'required|numeric|min:0',
-            'products.*.base_price' => '`nullable`|numeric|min:0',
+            'products.*.base_price' => 'nullable|numeric|min:0',
             'products.*.sale_price' => 'required|numeric|min:0',
             'products.*.category' => 'required|string|max:100',
             'products.*.sub_category' => 'nullable|string|max:100',
         ]);
 
+        $counts = 0;
         // If validation passes, loop through the products and create them
         foreach ($validatedData['products'] as $productData) {
-            $this->createProduct($productData);
+            $exists = Product::where('name', $productData['name'])->first();
+            
+            if (!$exists) {
+                $this->createProduct($productData);
+                $counts++;
+            }
         }
 
-        return redirect()->route('admin.products')->with('successMessage', 'Added Products.');
+        return redirect()->route('admin.products')->with('successMessage', "Added {$counts} Products.");
     }
 
     function createProduct($validatedData)
